@@ -35,6 +35,8 @@ The locally downloaded Firefox executable could not launch on this Windows host 
 
 Playwright WebKit is not a real Safari/iPhone device test. Mobile verification uses a narrow browser viewport. A full screen-reader review, actual mobile-device testing, production hosting/header verification, load testing, and an independent security audit remain future work. Browser workers do not provide a hard memory quota; completion is local, mutable practice feedback.
 
+Automated editor replacement dispatches a synthetic paste payload through Monaco's DOM handler and verifies the saved code exactly. It covers editor changes and persistence, not operating-system clipboard permissions or integration.
+
 The product contains one complete exercise. Other curriculum entries are visibly marked as planned. No account synchronization or public production deployment is included in this milestone.
 
 ## Visual provenance

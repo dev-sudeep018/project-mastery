@@ -14,17 +14,23 @@ async function pasteCode(page: Page, code: string) {
     navigator.userAgent.includes("Macintosh"),
   );
   await page.keyboard.press(isMac ? "Meta+A" : "Control+A");
-  // Exercise Monaco's paste path; insertText simulates typing and auto-indents.
+  // Exercise Monaco's paste handler and onChange rather than its model API.
+  // Firefox strips untrusted DataTransfer payloads, so supply the clipboard
+  // event data explicitly. This does not claim OS clipboard integration coverage.
   await editor.evaluate((element, text) => {
-    const clipboardData = new DataTransfer();
-    clipboardData.setData("text/plain", text);
-    element.dispatchEvent(
-      new ClipboardEvent("paste", {
-        clipboardData,
-        bubbles: true,
-        cancelable: true,
-      }),
-    );
+    const event = new ClipboardEvent("paste", {
+      bubbles: true,
+      cancelable: true,
+    });
+    Object.defineProperty(event, "clipboardData", {
+      value: {
+        types: ["text/plain"],
+        files: [],
+        items: [],
+        getData: (type: string) => (type === "text/plain" ? text : ""),
+      },
+    });
+    element.dispatchEvent(event);
   }, code);
   await expect
     .poll(async () => {
