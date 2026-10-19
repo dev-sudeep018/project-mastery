@@ -2,6 +2,10 @@
 
 Free, open-source AI practice for Python programmers. This repository is the first working milestone: one carefully tested exercise, a real Python editor, isolated browser execution, and useful feedback.
 
+![Exercise, Python editor, and passing public checks](docs/images/workspace.jpg)
+
+The screenshot shows a reference-solution run during local QA. The application starts new learners with incomplete starter code.
+
 ## Local setup
 
 Requires Node.js 22+, pnpm 11.25.0, and Python 3.13+ with NumPy.
@@ -23,7 +27,13 @@ pnpm exec playwright install chromium firefox webkit
 pnpm test:e2e
 ```
 
-The project is in development. See docs/verification.md for what has actually been verified and docs/architecture.md for the execution boundary and limits. Browser results are practice feedback, not tamper-resistant certification.
+The project is in development. See [verification](docs/verification.md) for what has actually been verified and [architecture](docs/architecture.md) for the execution boundary and limits. Browser results are practice feedback, not tamper-resistant certification.
+
+## Contributing and maintenance
+
+Start with [CONTRIBUTING.md](CONTRIBUTING.md). Use a branch and pull request; GitHub Actions checks content, reference solutions, types, formatting, lint, builds, and Chromium/Firefox/WebKit behavior. Dependabot configuration proposes weekly dependency and Actions updates after this milestone reaches the default branch. Report vulnerabilities privately using the repository's Security tab.
+
+The [design record](DESIGN.md) describes the implemented palette, layout, controls, and responsive behavior. The [roadmap](docs/roadmap.md) separates this working exercise from future curriculum and deployment work.
 
 ## Structure
 
