@@ -1,5 +1,6 @@
 node_modules/
 .next/
+next-env.d.ts
 out/
 dist/
 .venv/
@@ -16,7 +17,9 @@ apps/runner/public/runtime/
 apps/runner/public/generated/
 apps/runner/public/*.js
 apps/web/public/monaco/
+apps/web/public/editor.worker.js
 apps/web/src/generated/
 .impeccable/review/
 .impeccable/cache/
+.impeccable/questions/
 work/

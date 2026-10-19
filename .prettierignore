@@ -1,0 +1,15 @@
+node_modules/
+**/.next/
+**/out/
+**/public/
+**/generated/
+**/next-env.d.ts
+**/*.tsbuildinfo
+work/
+test-results/
+playwright-report/
+.impeccable/cache/
+.impeccable/review/
+pnpm-lock.yaml
+LICENSE
+content/LICENSE

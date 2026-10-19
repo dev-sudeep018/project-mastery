@@ -1,0 +1,24 @@
+schema_version: 1
+id: m02
+slug: stable-softmax
+version: 1
+title: Numerically Stable Softmax
+summary: Turn a vector of scores into probabilities, even when the numbers get very large.
+domain: foundations
+difficulty: beginner
+skills: [NumPy, Probability, Numerical stability]
+prerequisites: []
+assumed_knowledge: [Python functions, NumPy arrays, Exponentials]
+runtime:
+  engine: pyodide
+  packages: [numpy]
+evaluation:
+  entrypoint: softmax
+  absolute_tolerance: 1.0e-7
+  relative_tolerance: 1.0e-6
+estimated_minutes: 20
+status: validated
+author: Project Mastery contributors
+license: CC-BY-SA-4.0
+code_license: Apache-2.0
+attribution: []
