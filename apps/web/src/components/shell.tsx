@@ -7,6 +7,10 @@ import {
   Layers3,
   Route,
   Sparkles,
+  House,
+  FlaskConical,
+  FolderOpen,
+  NotebookPen,
 } from "lucide-react";
 
 export function Shell({
@@ -15,7 +19,14 @@ export function Shell({
   workspace = false,
 }: {
   children: React.ReactNode;
-  active?: "practice" | "paths" | "about";
+  active?:
+    | "home"
+    | "practice"
+    | "paths"
+    | "explore"
+    | "projects"
+    | "progress"
+    | "about";
   workspace?: boolean;
 }) {
   return (
@@ -35,18 +46,46 @@ export function Shell({
           <p className="nav-label">Your learning space</p>
           <nav aria-label="Main navigation">
             <Link
+              href="/"
+              aria-current={active === "home" ? "page" : undefined}
+            >
+              <House size={18} />
+              Learning home
+            </Link>
+            <Link
               href="/problems/"
               aria-current={active === "practice" ? "page" : undefined}
             >
               <Braces size={18} />
-              Practice
+              Lesson library
             </Link>
             <Link
               href="/paths/"
               aria-current={active === "paths" ? "page" : undefined}
             >
               <Route size={18} />
-              Learning paths
+              Guided paths
+            </Link>
+            <Link
+              href="/projects/mini-retrieval/"
+              aria-current={active === "projects" ? "page" : undefined}
+            >
+              <FolderOpen size={18} />
+              Projects
+            </Link>
+            <Link
+              href="/explore/"
+              aria-current={active === "explore" ? "page" : undefined}
+            >
+              <FlaskConical size={18} />
+              Open lab
+            </Link>
+            <Link
+              href="/progress/"
+              aria-current={active === "progress" ? "page" : undefined}
+            >
+              <NotebookPen size={18} />
+              Your progress
             </Link>
             <Link
               href="/about/"

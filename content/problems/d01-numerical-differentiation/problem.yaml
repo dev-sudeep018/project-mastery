@@ -1,0 +1,25 @@
+schema_version: 1
+id: "d01"
+slug: "numerical-differentiation"
+version: 1
+title: "Numerical Differentiation"
+summary: "Estimate a derivative and discover why a smaller step is not always better."
+domain: "deep-learning"
+difficulty: "beginner"
+skills: ["Gradients", "Numerical methods"]
+prerequisites: ["m03"]
+assumed_knowledge: ["Python functions", "Lists and NumPy arrays"]
+runtime:
+  engine: "pyodide"
+  packages: ["numpy"]
+evaluation:
+  entrypoint: "numerical_derivative"
+  absolute_tolerance: 1e-07
+  relative_tolerance: 1e-06
+estimated_minutes: 25
+status: "validated"
+author: "Project Mastery contributors"
+license: "CC-BY-SA-4.0"
+code_license: "Apache-2.0"
+attribution: []
+kind: "lesson"

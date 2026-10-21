@@ -1,0 +1,36 @@
+{
+  "target": 2000,
+  "status": "planned",
+  "counting_rule": "Targets are editorial capacity allocations, not published or completed problems. Only validated runnable packages count as available.",
+  "areas": [
+    { "topic": "Python and numerical computing", "target": 100 },
+    { "topic": "Linear algebra and geometry", "target": 100 },
+    { "topic": "Probability and statistics", "target": 100 },
+    { "topic": "Calculus and optimization", "target": 100 },
+    { "topic": "Supervised learning", "target": 100 },
+    { "topic": "Unsupervised learning", "target": 100 },
+    { "topic": "Neural network foundations", "target": 100 },
+    { "topic": "Computer vision", "target": 100 },
+    { "topic": "Sequence models and attention", "target": 100 },
+    { "topic": "Language models and tokenization", "target": 100 },
+    { "topic": "Generative models", "target": 100 },
+    { "topic": "Reinforcement learning", "target": 100 },
+    { "topic": "Retrieval and search", "target": 100 },
+    { "topic": "Data engineering for AI", "target": 100 },
+    { "topic": "Evaluation and experimentation", "target": 100 },
+    { "topic": "Inference and model serving", "target": 100 },
+    { "topic": "Training systems and efficiency", "target": 100 },
+    { "topic": "AI application engineering", "target": 100 },
+    { "topic": "Reliability, privacy, and responsible AI", "target": 100 },
+    { "topic": "Research replication and integrated projects", "target": 100 }
+  ],
+  "learning_formats": [
+    "Explain a result using a concrete example",
+    "Predict and investigate a numerical experiment",
+    "Diagnose a flawed implementation",
+    "Build a reusable operation",
+    "Evaluate competing approaches",
+    "Replicate a small research result",
+    "Integrate components into a useful system"
+  ]
+}

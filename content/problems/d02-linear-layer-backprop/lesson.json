@@ -1,0 +1,50 @@
+{
+  "intro": "A layer receives the gradient of a later computation. The chain rule tells us how that signal changes its inputs, weights, and bias.",
+  "task": "For Y = X @ W + b, return a dictionary containing dx, dw, and db given the incoming gradient grad_output.",
+  "signature": "linear_backward(X, W, grad_output)",
+  "requirements": [
+    "X has shape (n,d), W has shape (d,o), and grad_output has shape (n,o). All dimensions must be positive.",
+    "Return NumPy arrays: dx (n,d), dw (d,o), and db (o,).",
+    "Sum bias and weight contributions over the batch. Do not introduce an additional average.",
+    "Accept numeric lists or arrays. Reject incompatible, non-finite, or non-2D inputs with ValueError; leave inputs unchanged."
+  ],
+  "examples": [
+    {
+      "name": "Batch contributions",
+      "input": "X=[[1,2],[3,4]], W=[[1],[2]], grad_output=[[1],[2]]",
+      "output": "dx=[[1,2],[2,4]], dw=[[7],[10]], db=[3]"
+    },
+    {
+      "name": "Two outputs",
+      "input": "X=[[1,2]], W=[[1,2],[3,4]], grad_output=[[5,6]]",
+      "output": "dx=[[17,39]], dw=[[5,6],[10,12]], db=[5,6]"
+    },
+    {
+      "name": "Zero signal",
+      "input": "X=[[1]], W=[[2]], grad_output=[[0]]",
+      "output": "dx=[[0]], dw=[[0]], db=[0]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Write down shapes",
+      "body": "For dx, combine (n,o) with a transposed (d,o) weight matrix."
+    },
+    {
+      "title": "Accumulate weight contributions",
+      "body": "Each input feature contributes to each output. X.T @ grad_output sums these outer products."
+    },
+    {
+      "title": "Do not average twice",
+      "body": "The incoming gradient already reflects any averaging performed by the loss."
+    }
+  ],
+  "explanation": [
+    "The vector-Jacobian product avoids constructing a large Jacobian explicitly. Matrix multiplication performs the same chain-rule accumulation.",
+    "dx = G @ W.T, dw = X.T @ G, and db = sum(G, axis=0). Each expression can be checked by its shape.",
+    "The batch reduction belongs to the loss definition. Adding a second division by n here would silently shrink every upstream gradient."
+  ],
+  "formula": "dX = G Wᵀ · dW = Xᵀ G · db = Σᵢ Gᵢ",
+  "test_count": 11,
+  "sample_count": 3
+}

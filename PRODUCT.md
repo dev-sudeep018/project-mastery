@@ -20,15 +20,19 @@ Free, open-source practice that connects concepts, implementation, feedback, and
 
 ## Operating Context
 
-First milestone: open Numerically Stable Softmax, edit Python, run tests, understand failures, retain a local draft. Desktop coding and responsive reading. No sign-up, paid API, or hosted GPU requirement.
+Three connected entry points: guided learning, project-first learning, and open exploration. A learner can understand a concept, experiment with it, practise an implementation, interpret feedback, and use it in a project. Desktop coding and responsive reading. No sign-up, paid API, or hosted GPU requirement for the introductory curriculum.
 
 ## Capabilities and Constraints
 
-MVP target: 12 exercises, three paths, and a mini retrieval system. The present milestone ships one complete exercise. Learner code must not access application credentials. Workers alone are not the isolation boundary. Content, reference solutions, schema, and runtime behavior require automated validation. Git and GitHub provide version control, review, and CI.
+The founder's content target is 2,000 problems and learning activities. The platform must not imitate a LeetCode problem queue. The first 12 foundational labs, three paths, and mini retrieval project establish a reusable learning format; they are an initial curriculum, not the final product size. All three entry points share content and progress.
+
+Only implemented and validated activities count as available. Planned content and generated variants must not be presented as 2,000 distinct completed lessons. Per-item content and evaluators load on demand so the browser does not download the whole curriculum.
+
+Learner code must not access application credentials. Workers alone are not the isolation boundary. Content, reference solutions, schema, and runtime behavior require automated validation. Git and GitHub provide version control, review, and CI.
 
 ## Brand Commitments
 
-Project Mastery is the working name, with no OpenAI affiliation. The user selected a dark workspace with restrained green accents. The supplied brief specifies readability, useful feedback, accessibility, and resizable editor panels.
+Project Mastery is the working name, with no OpenAI affiliation. The user's latest palette choice is black and light grey throughout, including the editor and charts. Use tonal contrast for actions and selections, and explicit icons and labels for success and errors. The supplied brief specifies readability, useful feedback, accessibility, and resizable editor panels.
 
 ## Evidence on Hand
 
@@ -36,7 +40,7 @@ The supplied founding conversation establishes scope and decisions. No user coun
 
 ## Product Principles
 
-Free learning; depth before quantity; browser/local computation; reproducible content; contributor-friendly architecture.
+Free learning; explanations and experiments before scoring; connected projects; depth before quantity; browser/local computation; reproducible content; contributor-friendly architecture. Avoid competitive rankings, speed pressure, or accepted/rejected feedback as the organizing experience.
 
 ## Open Decisions
 

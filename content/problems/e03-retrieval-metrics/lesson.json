@@ -1,0 +1,50 @@
+{
+  "intro": "A plausible result is not enough to judge a retrieval system. Relevance labels let us compare behavior across a fixed set of queries.",
+  "task": "Return a dictionary with recall and mrr, averaged across queries, using each ranking's first k distinct document IDs.",
+  "signature": "retrieval_metrics(rankings, relevant, k)",
+  "requirements": [
+    "rankings and relevant are equal-length lists of lists of string IDs. k is a positive integer, excluding booleans.",
+    "Deduplicate a ranking in order before taking k. Treat relevant IDs as a set.",
+    "Recall is relevant retrieved / relevant available. Reciprocal rank is 1 / first relevant position, or zero.",
+    "Queries with no relevant IDs contribute zero to both metrics. An empty query collection returns both zero. Raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two queries",
+      "input": "rankings=[['a','b'],['c','d']], relevant=[['a','x'],['d']], k=2",
+      "output": "{recall:0.75, mrr:0.75}"
+    },
+    {
+      "name": "Miss",
+      "input": "rankings=[['a']], relevant=[['b']], k=1",
+      "output": "{recall:0.0, mrr:0.0}"
+    },
+    {
+      "name": "Duplicate result",
+      "input": "rankings=[['x','x','a']], relevant=[['a']], k=2",
+      "output": "{recall:1.0, mrr:0.5}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Define a per-query result",
+      "body": "Build a relevant set, then the ordered distinct top-k results."
+    },
+    {
+      "title": "Find the first hit",
+      "body": "Enumerate from one, and stop at the first relevant result for reciprocal rank."
+    },
+    {
+      "title": "Average over all queries",
+      "body": "A query with no labels still contributes zero under this exercise's explicit convention."
+    }
+  ],
+  "explanation": [
+    "Recall asks how much relevant material was recovered. MRR asks how far a reader must scan to find the first relevant result.",
+    "The metrics answer different questions. Retrieving one useful item first can yield perfect reciprocal rank while missing most relevant items.",
+    "Scores depend on the labels and query sample. A small teaching dataset supports debugging; it cannot establish production quality."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

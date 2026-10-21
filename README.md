@@ -1,10 +1,12 @@
 # Project Mastery
 
-Free, open-source AI practice for Python programmers. This repository is the first working milestone: one carefully tested exercise, a real Python editor, isolated browser execution, and useful feedback.
+Free, open-source AI learning for Python programmers. Follow connected paths, investigate interactive experiments, or start with a retrieval project and learn the concepts as you build.
 
-![Exercise, Python editor, and passing public checks](docs/images/workspace.jpg)
+The current curriculum contains 12 original lessons, 4 interactive experiments, and a retrieval project with a Python integration checkpoint. The [2,000-problem curriculum plan](docs/curriculum.md) separates the expansion target from published content.
 
-The screenshot shows a reference-solution run during local QA. The application starts new learners with incomplete starter code.
+![Connected learning home in black and light grey](docs/images/learning-home.jpg)
+
+The screenshot shows the locally built learning home. Coding lessons start new learners with incomplete starter code.
 
 ## Local setup
 
@@ -31,9 +33,9 @@ The project is in development. See [verification](docs/verification.md) for what
 
 ## Contributing and maintenance
 
-Start with [CONTRIBUTING.md](CONTRIBUTING.md). Use a branch and pull request; GitHub Actions checks content, reference solutions, types, formatting, lint, builds, and Chromium/Firefox/WebKit behavior. Dependabot configuration proposes weekly dependency and Actions updates after this milestone reaches the default branch. Report vulnerabilities privately using the repository's Security tab.
+Start with [CONTRIBUTING.md](CONTRIBUTING.md). Use a branch and pull request; GitHub Actions checks content, reference solutions, types, formatting, lint, builds, and Chromium/Firefox/WebKit behavior. Dependabot proposes weekly dependency and Actions updates. Report vulnerabilities privately using the repository's Security tab.
 
-The [design record](DESIGN.md) describes the implemented palette, layout, controls, and responsive behavior. The [roadmap](docs/roadmap.md) separates this working exercise from future curriculum and deployment work.
+The [design record](DESIGN.md) describes the implemented palette, layout, controls, and responsive behavior. The [roadmap](docs/roadmap.md) tracks the remaining curriculum, account, and deployment work.
 
 ## Structure
 

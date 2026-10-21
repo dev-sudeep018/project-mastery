@@ -14,8 +14,14 @@ import { loadContent } from "../../scripts/content";
 describe("versioned content", () => {
   it("loads complete content packages", async () => {
     const entries = await loadContent();
-    expect(entries).toHaveLength(1);
-    expect(entries[0].tests).toContain("run_tests");
+    expect(entries.filter((e) => e.problem.kind === "lesson")).toHaveLength(12);
+    expect(entries.filter((e) => e.problem.kind === "project")).toHaveLength(1);
+    for (const entry of entries) {
+      expect(entry.tests).toContain("run_tests");
+      expect(entry.lesson.signature).toContain(
+        entry.problem.evaluation.entrypoint,
+      );
+    }
   });
   it("rejects missing prerequisites and cycles", async () => {
     const [{ problem }] = await loadContent();
@@ -23,7 +29,7 @@ describe("versioned content", () => {
       validateCatalog([{ ...problem, prerequisites: ["m01"] }]),
     ).toThrow("Missing");
     expect(() =>
-      validateCatalog([{ ...problem, prerequisites: ["m02"] }]),
+      validateCatalog([{ ...problem, prerequisites: [problem.id] }]),
     ).toThrow("cycle");
   });
   it("rejects duplicate IDs, unsupported runtime and extra fields", async () => {

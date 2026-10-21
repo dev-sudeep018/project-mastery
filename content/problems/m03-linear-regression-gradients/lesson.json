@@ -1,0 +1,50 @@
+{
+  "intro": "Training starts with a prediction and a direction for improvement. For linear regression, those directions can be computed exactly.",
+  "task": "Return a dictionary with `loss`, `dw`, and `db` for predictions `X @ w + b` and loss `mean((prediction - y)**2) / 2`.",
+  "signature": "linear_gradients(X, y, w, b)",
+  "requirements": [
+    "X has shape (n, d), y has shape (n,), w has shape (d,), and b is a finite scalar.",
+    "Require n >= 1 and d >= 1. Reject non-finite values and incompatible shapes with ValueError.",
+    "Return dw as a NumPy array and loss/db as numeric scalars. Average gradients over the batch.",
+    "Do not modify any input. Evaluation uses moderate finite values."
+  ],
+  "examples": [
+    {
+      "name": "One feature",
+      "input": "X=[[1],[2]], y=[2,4], w=[0], b=0",
+      "output": "{loss: 5.0, dw: [-5.0], db: -3.0}"
+    },
+    {
+      "name": "Perfect prediction",
+      "input": "X=[[1],[2]], y=[2,4], w=[2], b=0",
+      "output": "{loss: 0.0, dw: [0.0], db: 0.0}"
+    },
+    {
+      "name": "Two features",
+      "input": "X=[[1,0],[0,1]], y=[1,2], w=[0,0], b=0",
+      "output": "{loss: 1.25, dw: [-0.5,-1.0], db: -1.5}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Keep the residual",
+      "body": "Let residual = X @ w + b - y. Its sign determines which direction reduces the prediction error."
+    },
+    {
+      "title": "Differentiate each parameter",
+      "body": "For a weight, multiply the residual by that feature. For the bias, its derivative in every prediction is one."
+    },
+    {
+      "title": "Match the loss scaling",
+      "body": "The factor 1/2 cancels the derivative of the square. Divide both gradients by n, not by the number of features."
+    }
+  ],
+  "explanation": [
+    "Each residual contributes to the gradient. Matrix multiplication X.T @ residual adds all feature-weighted residuals in one operation.",
+    "Because the loss averages over examples, its gradient must average too. Using a sum instead changes the effective step size whenever the batch size changes.",
+    "The derivative of a prediction with respect to b is one, so db is simply the mean residual. These gradients can be checked independently by finite differences."
+  ],
+  "formula": "L = Σᵢ (xᵢ · w + b − yᵢ)² / (2n)",
+  "test_count": 12,
+  "sample_count": 3
+}

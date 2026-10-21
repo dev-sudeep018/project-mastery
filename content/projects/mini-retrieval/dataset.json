@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "provenance": "Original teaching documents and manually assigned four-dimensional vectors by Project Mastery contributors. These are synthetic teaching vectors, not embeddings from a trained model.",
+  "documents": [
+    {
+      "id": "chunks",
+      "title": "Keep context at passage boundaries",
+      "text": "Split a document into smaller passages before indexing. Overlap repeats words around a boundary so a sentence is less likely to lose its surrounding context. More overlap also duplicates storage and retrieval results.",
+      "vector": [1, 0.25, 0, 0]
+    },
+    {
+      "id": "vectors",
+      "title": "Compare directions in embedding space",
+      "text": "An embedding represents a document or query as a vector. Cosine similarity compares direction rather than magnitude. Normalize both vectors and rank documents by their dot product. Define an explicit convention for zero vectors.",
+      "vector": [0.2, 1, 0.1, 0]
+    },
+    {
+      "id": "metrics",
+      "title": "Measure retrieval quality",
+      "text": "Recall measures the fraction of relevant documents retrieved. Reciprocal rank measures how early the first relevant document appears. Evaluate across a fixed collection of queries and relevance labels. Inspect failures before changing the system.",
+      "vector": [0, 0.25, 1, 0]
+    },
+    {
+      "id": "privacy",
+      "title": "Keep private text under control",
+      "text": "Local processing can keep private documents on a device. Decide what leaves the device before adding a hosted service. Logs should avoid recording raw queries or source documents when those contain sensitive material.",
+      "vector": [0, 0.05, 0, 1]
+    },
+    {
+      "id": "hybrid",
+      "title": "Combine keyword and vector search",
+      "text": "Keyword search finds exact terms. Vector search can find related concepts even when wording differs. Reciprocal rank fusion combines ranked lists without assuming their scores share a scale. Compare the combined system against each baseline.",
+      "vector": [0.05, 0.9, 0.55, 0]
+    },
+    {
+      "id": "gradients",
+      "title": "Check a derivative numerically",
+      "text": "Evaluate a function on both sides of a point to estimate its derivative. Central differences help check an analytic gradient. Very small steps can amplify rounding error, while large steps introduce approximation error.",
+      "vector": [0.15, 0.1, 0.6, 0.05]
+    }
+  ],
+  "queries": [
+    {
+      "id": "context",
+      "text": "How can I split a document and preserve context?",
+      "vector": [1, 0.2, 0, 0],
+      "relevant": ["chunks"]
+    },
+    {
+      "id": "ranking",
+      "text": "How do I combine keyword and vector search?",
+      "vector": [0.1, 1, 0.15, 0],
+      "relevant": ["hybrid"]
+    },
+    {
+      "id": "evaluation",
+      "text": "How do I measure recall and reciprocal rank?",
+      "vector": [0, 0.1, 1, 0],
+      "relevant": ["metrics"]
+    },
+    {
+      "id": "private",
+      "text": "How can I keep private documents on a device?",
+      "vector": [0, 0, 0, 1],
+      "relevant": ["privacy"]
+    }
+  ]
+}

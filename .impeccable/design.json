@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-19T18:37:03.080557+00:00",
+  "generatedAt": "2026-10-21T07:45:26.383276+00:00",
   "title": "Design System: Project Mastery",
   "extensions": {
     "colorMeta": {
@@ -8,154 +8,294 @@
         "role": "neutral",
         "displayName": "Bg",
         "tonalRamp": [
-          "oklch(15% 0.0089 169.05)",
-          "oklch(26% 0.0089 169.05)",
-          "oklch(38% 0.0089 169.05)",
-          "oklch(49% 0.0089 169.05)",
-          "oklch(61% 0.0089 169.05)",
-          "oklch(72% 0.0089 169.05)",
-          "oklch(84% 0.0089 169.05)",
-          "oklch(95% 0.0089 169.05)"
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
         ]
       },
       "surface": {
         "role": "neutral",
         "displayName": "Surface",
         "tonalRamp": [
-          "oklch(15% 0.0100 173.03)",
-          "oklch(26% 0.0100 173.03)",
-          "oklch(38% 0.0100 173.03)",
-          "oklch(49% 0.0100 173.03)",
-          "oklch(61% 0.0100 173.03)",
-          "oklch(72% 0.0100 173.03)",
-          "oklch(84% 0.0100 173.03)",
-          "oklch(95% 0.0100 173.03)"
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
         ]
       },
       "raised": {
         "role": "neutral",
         "displayName": "Raised",
         "tonalRamp": [
-          "oklch(15% 0.0161 160.52)",
-          "oklch(26% 0.0161 160.52)",
-          "oklch(38% 0.0161 160.52)",
-          "oklch(49% 0.0161 160.52)",
-          "oklch(61% 0.0161 160.52)",
-          "oklch(72% 0.0161 160.52)",
-          "oklch(84% 0.0161 160.52)",
-          "oklch(95% 0.0161 160.52)"
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
         ]
       },
       "hover": {
         "role": "neutral",
         "displayName": "Hover",
         "tonalRamp": [
-          "oklch(15% 0.0210 159.04)",
-          "oklch(26% 0.0210 159.04)",
-          "oklch(38% 0.0210 159.04)",
-          "oklch(49% 0.0210 159.04)",
-          "oklch(61% 0.0210 159.04)",
-          "oklch(72% 0.0210 159.04)",
-          "oklch(84% 0.0210 159.04)",
-          "oklch(95% 0.0210 159.04)"
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
         ]
       },
       "border": {
         "role": "neutral",
         "displayName": "Border",
         "tonalRamp": [
-          "oklch(15% 0.0233 159.73)",
-          "oklch(26% 0.0233 159.73)",
-          "oklch(38% 0.0233 159.73)",
-          "oklch(49% 0.0233 159.73)",
-          "oklch(61% 0.0233 159.73)",
-          "oklch(72% 0.0233 159.73)",
-          "oklch(84% 0.0233 159.73)",
-          "oklch(95% 0.0233 159.73)"
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Border Strong",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
         ]
       },
       "text": {
         "role": "neutral",
         "displayName": "Text",
         "tonalRamp": [
-          "oklch(15% 0.0108 158.83)",
-          "oklch(26% 0.0108 158.83)",
-          "oklch(38% 0.0108 158.83)",
-          "oklch(49% 0.0108 158.83)",
-          "oklch(61% 0.0108 158.83)",
-          "oklch(72% 0.0108 158.83)",
-          "oklch(84% 0.0108 158.83)",
-          "oklch(95% 0.0108 158.83)"
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
         ]
       },
       "muted": {
         "role": "neutral",
         "displayName": "Muted",
         "tonalRamp": [
-          "oklch(15% 0.0274 154.27)",
-          "oklch(26% 0.0274 154.27)",
-          "oklch(38% 0.0274 154.27)",
-          "oklch(49% 0.0274 154.27)",
-          "oklch(61% 0.0274 154.27)",
-          "oklch(72% 0.0274 154.27)",
-          "oklch(84% 0.0274 154.27)",
-          "oklch(95% 0.0274 154.27)"
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
         ]
       },
       "subtle": {
         "role": "neutral",
         "displayName": "Subtle",
         "tonalRamp": [
-          "oklch(15% 0.0325 157.44)",
-          "oklch(26% 0.0325 157.44)",
-          "oklch(38% 0.0325 157.44)",
-          "oklch(49% 0.0325 157.44)",
-          "oklch(61% 0.0325 157.44)",
-          "oklch(72% 0.0325 157.44)",
-          "oklch(84% 0.0325 157.44)",
-          "oklch(95% 0.0325 157.44)"
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
         ]
       },
       "accent": {
         "role": "primary",
         "displayName": "Accent",
         "tonalRamp": [
-          "oklch(15% 0.0879 153.35)",
-          "oklch(26% 0.0879 153.35)",
-          "oklch(38% 0.0879 153.35)",
-          "oklch(49% 0.0879 153.35)",
-          "oklch(61% 0.0879 153.35)",
-          "oklch(72% 0.0879 153.35)",
-          "oklch(84% 0.0879 153.35)",
-          "oklch(95% 0.0879 153.35)"
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
         ]
       },
       "accent-ink": {
         "role": "primary",
         "displayName": "Accent Ink",
         "tonalRamp": [
-          "oklch(15% 0.0310 158.55)",
-          "oklch(26% 0.0310 158.55)",
-          "oklch(38% 0.0310 158.55)",
-          "oklch(49% 0.0310 158.55)",
-          "oklch(61% 0.0310 158.55)",
-          "oklch(72% 0.0310 158.55)",
-          "oklch(84% 0.0310 158.55)",
-          "oklch(95% 0.0310 158.55)"
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Accent Hover",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Accent Soft",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "selection": {
+        "role": "neutral",
+        "displayName": "Selection",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "code": {
+        "role": "neutral",
+        "displayName": "Code",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "success": {
+        "role": "success",
+        "displayName": "Success",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
         ]
       },
       "danger": {
         "role": "error",
         "displayName": "Danger",
         "tonalRamp": [
-          "oklch(15% 0.0921 22.64)",
-          "oklch(26% 0.0921 22.64)",
-          "oklch(38% 0.0921 22.64)",
-          "oklch(49% 0.0921 22.64)",
-          "oklch(61% 0.0921 22.64)",
-          "oklch(72% 0.0921 22.64)",
-          "oklch(84% 0.0921 22.64)",
-          "oklch(95% 0.0921 22.64)"
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "danger-surface": {
+        "role": "error",
+        "displayName": "Danger Surface",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "syntax-keyword": {
+        "role": "neutral",
+        "displayName": "Syntax Keyword",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "syntax-string": {
+        "role": "neutral",
+        "displayName": "Syntax String",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "syntax-number": {
+        "role": "neutral",
+        "displayName": "Syntax Number",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
         ]
       }
     },
@@ -197,6 +337,10 @@
         "value": "1250px"
       },
       {
+        "name": "learning-controls",
+        "value": "1100px"
+      },
+      {
         "name": "icon-rail",
         "value": "950px"
       },
@@ -212,7 +356,7 @@
       "kind": "button",
       "description": "The strongest action beside the editor.",
       "html": "<button class=\"ds-primary\">Check solution</button>",
-      "css": ".ds-primary {display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:6px;font:600 11px/1.6 \"Segoe UI\",system-ui,sans-serif;min-height:35px;padding:8px 12px;cursor:pointer;transition:background .16s,color .16s;border:0;background:var(--accent,#a1dfb3);color:var(--accent-ink,#112319);} .ds-primary:hover:not(:disabled) {background:#b9ecc8;} .ds-primary:focus-visible { outline: 2px solid var(--accent, #a1dfb3); outline-offset: 4px; } .ds-primary:disabled {opacity:.48;cursor:not-allowed;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
+      "css": ".ds-primary {display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:6px;font:600 11px/1.6 \"Segoe UI\",system-ui,sans-serif;min-height:35px;padding:8px 12px;cursor:pointer;transition:background .16s,color .16s;border:0;background:var(--accent,#d4d4d4);color:var(--accent-ink,#101010);} .ds-primary:hover:not(:disabled) {background:var(--accent-hover,#f0f0f0);} .ds-primary:focus-visible { outline: 2px solid var(--accent,#d4d4d4); outline-offset: 4px; } .ds-primary:disabled {opacity:.48;cursor:not-allowed;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
       "refersTo": "button-primary"
     },
     {
@@ -220,7 +364,7 @@
       "kind": "button",
       "description": "Supporting actions keep the work surface dark.",
       "html": "<button class=\"ds-secondary\">Run code</button>",
-      "css": ".ds-secondary {display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:6px;font:600 11px/1.6 \"Segoe UI\",system-ui,sans-serif;min-height:35px;padding:8px 12px;cursor:pointer;transition:background .16s,color .16s;background:var(--hover,#1e2a23);border:1px solid #354b3d;color:#cbdcd1;} .ds-secondary:hover:not(:disabled) {background:#2b3c31;} .ds-secondary:focus-visible { outline: 2px solid var(--accent, #a1dfb3); outline-offset: 4px; } .ds-secondary:disabled {opacity:.48;cursor:not-allowed;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
+      "css": ".ds-secondary {display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:6px;font:600 11px/1.6 \"Segoe UI\",system-ui,sans-serif;min-height:35px;padding:8px 12px;cursor:pointer;transition:background .16s,color .16s;background:var(--hover,#272727);border:1px solid var(--border-strong,#7a7a7a);color:var(--text,#ededed);} .ds-secondary:hover:not(:disabled) {background:var(--hover,#272727);} .ds-secondary:focus-visible { outline: 2px solid var(--accent,#d4d4d4); outline-offset: 4px; } .ds-secondary:disabled {opacity:.48;cursor:not-allowed;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
       "refersTo": "button-secondary"
     },
     {
@@ -228,29 +372,29 @@
       "kind": "input",
       "description": "Whole-field keyboard focus surrounds the input and search icon.",
       "html": "<label class=\"ds-search\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input aria-label=\"Search problems or skills\" placeholder=\"Search problems or skills\"/></label>",
-      "css": ".ds-search {display:flex;align-items:center;gap:9px;border:1px solid var(--border,#2a3830);background:var(--surface,#111715);color:var(--muted,#9aac9f);padding:9px 13px;border-radius:6px;width:300px;max-width:100%;} .ds-search input {min-width:0;width:100%;border:0;background:none;color:var(--text,#e1e9e4);outline:0;font:12px/1.6 \"Segoe UI\",system-ui,sans-serif;} .ds-search input::placeholder {color:#99afa1;} .ds-search:focus-within {outline:2px solid var(--accent,#a1dfb3);outline-offset:2px;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
+      "css": ".ds-search {display:flex;align-items:center;gap:10px;border:1px solid var(--border-strong,#7a7a7a);background:var(--surface,#121212);color:var(--muted,#b8b8b8);padding:11px;border-radius:6px;width:300px;max-width:100%;} .ds-search input {min-width:0;width:100%;border:0;background:none;color:var(--text,#ededed);outline:0;font:13px/1.6 \"Segoe UI\",system-ui,sans-serif;} .ds-search input::placeholder {color:var(--muted,#b8b8b8);} .ds-search:focus-within {outline:2px solid var(--accent,#d4d4d4);outline-offset:2px;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
       "refersTo": "search-field"
     },
     {
       "name": "Navigation",
       "kind": "nav",
       "description": "Current destination stays visibly selected.",
-      "html": "<nav class=\"ds-nav\" aria-label=\"Preview navigation\"><a href=\"#practice\" aria-current=\"page\">Practice</a><a href=\"#paths\">Learning paths</a></nav>",
-      "css": ".ds-nav {display:grid;gap:5px;padding:12px;background:#101813;font:13px/1.6 \"Segoe UI\",system-ui,sans-serif;} .ds-nav a {padding:10px 12px;border-radius:6px;color:#a9bbaf;text-decoration:none;} .ds-nav a:hover {background:var(--raised,#17201b);color:var(--text,#e1e9e4);} .ds-nav a[aria-current=\"page\"] {background:#243b2c;color:#c0e9ce;} .ds-nav a:focus-visible { outline: 2px solid var(--accent, #a1dfb3); outline-offset: 4px; } @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }"
+      "html": "<nav class=\"ds-nav\" aria-label=\"Preview navigation\"><a href=\"#learn\" aria-current=\"page\">Learn</a><a href=\"#paths\">Learning paths</a></nav>",
+      "css": ".ds-nav {display:grid;gap:5px;padding:12px;background:var(--surface,#121212);font:13px/1.6 \"Segoe UI\",system-ui,sans-serif;} .ds-nav a {padding:10px 12px;border-radius:6px;color:var(--muted,#b8b8b8);text-decoration:none;} .ds-nav a:hover {background:var(--raised,#1b1b1b);color:var(--text,#ededed);} .ds-nav a[aria-current=\"page\"] {background:var(--accent-soft,#2b2b2b);color:var(--accent,#d4d4d4);} .ds-nav a:focus-visible { outline: 2px solid var(--accent,#d4d4d4); outline-offset: 4px; } @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }"
     },
     {
       "name": "Difficulty badge",
       "kind": "chip",
       "description": "Passive metadata, without a hover or click affordance.",
       "html": "<span class=\"ds-difficulty\">Beginner</span>",
-      "css": ".ds-difficulty {display:inline-flex;color:#b6e0c2;background:#23392b;padding:2px 8px;border-radius:4px;font:11px/1.6 \"Segoe UI\",system-ui,sans-serif;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }"
+      "css": ".ds-difficulty {display:inline-flex;color:var(--accent,#d4d4d4);background:var(--accent-soft,#2b2b2b);padding:2px 8px;border-radius:4px;font:11px/1.6 \"Segoe UI\",system-ui,sans-serif;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }"
     },
     {
       "name": "Problem card",
       "kind": "card",
       "description": "A flat content container; the real card includes its own primary link.",
       "html": "<article class=\"ds-card\"><div><h2>Numerically Stable Softmax</h2><p>Implement a stable probability distribution with NumPy.</p></div></article>",
-      "css": ".ds-card {display:flex;align-items:center;gap:25px;padding:25px;background:var(--surface,#111715);border:1px solid var(--border,#2a3830);border-radius:10px;font:14px/1.6 \"Segoe UI\",system-ui,sans-serif;color:var(--text,#e1e9e4);} .ds-card h2 {font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-.015em;margin:0 0 8px;} .ds-card p {font-size:12px;max-width:520px;color:#afc0b4;margin:0;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
+      "css": ".ds-card {display:flex;align-items:center;gap:25px;padding:25px;background:var(--surface,#121212);border:1px solid var(--border,#383838);border-radius:10px;font:14px/1.6 \"Segoe UI\",system-ui,sans-serif;color:var(--text,#ededed);} .ds-card h2 {font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-.015em;margin:0 0 8px;} .ds-card p {font-size:12px;max-width:520px;color:var(--muted,#b8b8b8);margin:0;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }",
       "refersTo": "problem-card"
     },
     {
@@ -258,22 +402,29 @@
       "kind": "custom",
       "description": "Result wording and expansion accompany status color.",
       "html": "<details class=\"ds-test\"><summary><span>Basic distribution</span><span>Passed</span><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m9 18 6-6-6-6\"/></svg></summary><p>All probabilities match the expected values.</p></details>",
-      "css": ".ds-test {background:var(--surface,#111715);border-bottom:1px solid #26352c;font:11px/1.6 \"Segoe UI\",system-ui,sans-serif;} .ds-test summary {list-style:none;display:flex;align-items:center;gap:9px;min-height:35px;cursor:pointer;color:#acbfb3;} .ds-test summary::-webkit-details-marker {display:none;} .ds-test summary span:first-child {flex:1;} .ds-test summary span:nth-child(2) {font-size:10px;color:var(--accent,#a1dfb3);} .ds-test summary svg {transition:transform .18s;} .ds-test[open] summary svg {transform:rotate(90deg);} .ds-test summary:focus-visible { outline: 2px solid var(--accent, #a1dfb3); outline-offset: 4px; } .ds-test p {font-size:11px;line-height:1.7;padding:3px 0 13px 24px;color:#afc0b4;margin:0;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }"
+      "css": ".ds-test {background:var(--surface,#121212);border-bottom:1px solid var(--border,#383838);font:11px/1.6 \"Segoe UI\",system-ui,sans-serif;} .ds-test summary {list-style:none;display:flex;align-items:center;gap:9px;min-height:35px;cursor:pointer;color:var(--muted,#b8b8b8);} .ds-test summary::-webkit-details-marker {display:none;} .ds-test summary span:first-child {flex:1;} .ds-test summary span:nth-child(2) {font-size:10px;color:var(--success,#d4d4d4);} .ds-test summary svg {transition:transform .18s;} .ds-test[open] summary svg {transform:rotate(90deg);} .ds-test summary:focus-visible { outline: 2px solid var(--accent,#d4d4d4); outline-offset: 4px; } .ds-test p {font-size:11px;line-height:1.7;padding:3px 0 13px 24px;color:var(--muted,#b8b8b8);margin:0;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }"
+    },
+    {
+      "name": "Experiment panel",
+      "kind": "custom",
+      "description": "Native control, visible measurement, and interpretation share a flat working surface.",
+      "html": "<section class=\"ds-experiment\"><h3>Inspect vector similarity</h3><p>Change the angle and compare the measurement.</p><label>Angle <input type=\"range\" min=\"0\" max=\"180\" value=\"45\" /></label><output>0.7071 cosine similarity</output></section>",
+      "css": ".ds-experiment{background:var(--raised,#1b1b1b);border:1px solid var(--border,#383838);border-radius:12px;padding:26px;color:var(--text,#ededed);font:14px/1.6 \"Segoe UI\",system-ui,sans-serif}.ds-experiment h3{font-size:20px;line-height:1.3;margin:0}.ds-experiment p{color:var(--muted,#b8b8b8);margin:12px 0}.ds-experiment label{display:block;margin:22px 0 12px}.ds-experiment input{display:block;width:100%;min-height:28px;accent-color:var(--accent,#d4d4d4)}.ds-experiment input:focus-visible{outline:2px solid var(--accent,#d4d4d4);outline-offset:4px}.ds-experiment output{color:var(--accent,#d4d4d4);font-variant-numeric:tabular-nums}"
     }
   ],
   "narrative": {
     "northStar": "A clear practice workbench",
-    "overview": "The user-selected dark workspace uses restrained green accents to keep reading, editing, and diagnostic feedback central. Deep green-black grounds and subdued forest surfaces make a compact, familiar tool environment. System UI type is intentional for this code workspace; monospaced code and mathematical notation retain their own functional voices.\n\nThe source is the implemented global stylesheet and workspace, shell, and catalog components. This record captures shipped choices rather than introducing a new identity. Dense controls serve the work, while larger reading regions retain generous line height. Motion is limited to control feedback, expanding results, and running state.",
+    "overview": "The user-selected dark workspace uses restrained light grey accents to keep reading, editing, and diagnostic feedback central. Black grounds and charcoal surfaces make a compact, familiar tool environment. System UI type is intentional for this code workspace; monospaced code and mathematical notation retain their own functional voices.\n\nThe source is the implemented global stylesheet and workspace, shell, learning, experiment, and retrieval-project components. This record captures shipped choices rather than introducing a new identity. Dense controls serve the work, while larger reading regions retain generous line height. Motion is limited to control feedback, expanding results, and running state.",
     "keyCharacteristics": [
-      "Dark forest surfaces with pale green actions and selections.",
+      "Black and charcoal surfaces with light grey actions, selections, and diagnostic labels.",
       "Compact controls, readable prose, and real monospaced code.",
       "Flat bordered panels with feedback adjacent to the editor.",
-      "Responsive navigation and a mobile description/code switch."
+      "Connected reading, experiment, and project surfaces with responsive navigation and a mobile description/code switch."
     ],
     "rules": [
       {
-        "name": "The Meaningful Green Rule",
-        "body": "Use pale green for actionable, selected, focused, or successful states; keep the large working surfaces dark.",
+        "name": "The Explicit State Rule",
+        "body": "Use icons and wording to distinguish diagnostic states; light grey emphasis and tonal surfaces support interaction without relying on hue.",
         "section": "colors"
       },
       {
@@ -288,16 +439,16 @@
       }
     ],
     "dos": [
-      "Do retain dark forest working surfaces and meaningful pale green emphasis.",
-      "Do preserve distinct UI, code, and mathematics type roles.",
-      "Do keep keyboard focus visible and pair result color with explicit status text.",
-      "Do adapt navigation and workspace panels to the available width."
+      "**Do** retain dark charcoal working surfaces and light grey interaction emphasis with explicitly labelled diagnostic states.",
+      "**Do** preserve distinct UI, code, and mathematics type roles.",
+      "**Do** keep keyboard focus visible and pair result color with explicit status text.",
+      "**Do** adapt navigation and workspace panels to the available width."
     ],
     "donts": [
-      "Don't turn restrained accents into large bright decorative panels.",
-      "Don't replace the flat workbench with shadow-heavy floating cards.",
-      "Don't encode success or failure through color alone.",
-      "Don't apply dense toolbar typography to long instructional paragraphs."
+      "**Don't** turn restrained accents into large bright decorative panels.",
+      "**Don't** replace the flat workbench with shadow-heavy floating cards.",
+      "**Don't** encode success or failure through color alone.",
+      "**Don't** apply dense toolbar typography to long instructional paragraphs."
     ]
   }
 }

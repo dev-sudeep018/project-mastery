@@ -1,0 +1,25 @@
+schema_version: 1
+id: "e03"
+slug: "retrieval-metrics"
+version: 1
+title: "Recall@K and Mean Reciprocal Rank"
+summary: "Evaluate how much relevant material was found and how early the first useful result appears."
+domain: "engineering"
+difficulty: "beginner"
+skills: ["Evaluation", "Retrieval", "Metrics"]
+prerequisites: ["e02"]
+assumed_knowledge: ["Python functions", "Lists and NumPy arrays"]
+runtime:
+  engine: "pyodide"
+  packages: ["numpy"]
+evaluation:
+  entrypoint: "retrieval_metrics"
+  absolute_tolerance: 1e-07
+  relative_tolerance: 1e-06
+estimated_minutes: 30
+status: "validated"
+author: "Project Mastery contributors"
+license: "CC-BY-SA-4.0"
+code_license: "Apache-2.0"
+attribution: []
+kind: "lesson"

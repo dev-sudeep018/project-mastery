@@ -4,6 +4,7 @@ import path from "node:path";
 import { parse } from "yaml";
 import {
   ProblemSchema,
+  LessonSchema,
   validateCatalog,
 } from "../packages/problem-schema/src/index";
 
@@ -31,6 +32,9 @@ export async function loadContent() {
           throw new Error(`Empty required file in ${d.name}`);
         return {
           problem,
+          lesson: LessonSchema.parse(
+            JSON.parse(await readFile(path.join(dir, "lesson.json"), "utf8")),
+          ),
           starter: files[0],
           solution: files[1],
           tests: files[2],
@@ -39,5 +43,5 @@ export async function loadContent() {
       }),
   );
   validateCatalog(entries.map((e) => e.problem));
-  return entries;
+  return entries.sort((a, b) => a.problem.id.localeCompare(b.problem.id));
 }

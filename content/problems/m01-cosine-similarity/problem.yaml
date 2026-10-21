@@ -1,0 +1,25 @@
+schema_version: 1
+id: "m01"
+slug: "cosine-similarity"
+version: 1
+title: "Vector Operations and Cosine Similarity"
+summary: "Measure direction rather than magnitude, including very large and very small vectors."
+domain: "foundations"
+difficulty: "beginner"
+skills: ["NumPy", "Vectors", "Similarity"]
+prerequisites: []
+assumed_knowledge: ["Python functions", "Lists and NumPy arrays"]
+runtime:
+  engine: "pyodide"
+  packages: ["numpy"]
+evaluation:
+  entrypoint: "cosine_similarity"
+  absolute_tolerance: 1e-07
+  relative_tolerance: 1e-06
+estimated_minutes: 20
+status: "validated"
+author: "Project Mastery contributors"
+license: "CC-BY-SA-4.0"
+code_license: "Apache-2.0"
+attribution: []
+kind: "lesson"

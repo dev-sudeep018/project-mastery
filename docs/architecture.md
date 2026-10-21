@@ -1,8 +1,8 @@
-# Architecture: first vertical slice
+# Architecture
 
 ## Boundaries
 
-The Next.js application exports static files. A separate static runner origin serves an iframe, a bundled bridge, disposable module workers, Pyodide 314.0.7, NumPy, and one public evaluator. No application authentication exists in this milestone.
+The Next.js application exports static files. A separate static runner origin serves an iframe, a bundled bridge, disposable module workers, Pyodide 314.0.7, NumPy, and versioned public evaluators. No application authentication exists in this milestone.
 
 Locally the application uses `http://localhost:3000` and the runner uses `http://127.0.0.1:4174`. Production must use HTTPS and a separate registrable domain with no application cookies or credentials. Deployment is deferred until its exact hosting headers and origins are tested.
 
@@ -26,11 +26,30 @@ Browser memory usage has no hard per-worker quota. A hostile learner can exhaust
 
 YAML metadata is validated by Zod. Original Python reference solutions and public evaluators run in local/CI Python and browser Python. A problem version is immutable once publicly released; change its version when the grading contract changes. `validated` records automated validation, not external editorial review.
 
+Structured lessons are separately validated. Setup generates a metadata catalog,
+per-route content files, and a runner manifest. Both bridge and worker resolve
+the exact ID/version against that manifest; requests never supply evaluator
+paths. Only validated content is published. Shared evaluator helpers are
+prepended identically in native and browser Python.
+
 Client-side grading is formative. Python can modify its own runtime and forge worker results. The platform makes no tamper-resistant completion claim. A future trusted grader would require a separate server isolation design, authorization, quotas, and independently stored results.
 
 ## Persistence
 
 Versioned drafts and completion flags stay in localStorage on the application origin. Storage errors are surfaced. No source-code uploads, tracking, accounts, or paid APIs are present. A completion flag records that the learner passed the full suite at least once; later edits do not erase that history.
+
+The learning record adds visit timestamps and full-check attempt counts.
+Legacy M02 completion remains readable. Progress views listen for cross-tab
+storage changes. Export/import uses a strict versioned JSON schema; import
+preserves completion, takes the latest timestamp and highest attempt count,
+and fills only missing drafts for known content versions. Existing drafts
+are preserved. Project notes and experiment reports are exported separately.
+
+The retrieval workbench uses original documents and manually assigned teaching
+vectors. Chunk controls preview preprocessing; ranking uses whole-document
+vectors and explicitly says so. Its JavaScript baseline is separate from the
+learner's Python implementation checkpoint. Neither is presented as a trained
+embedding model or a production benchmark.
 
 ## References
 

@@ -9,8 +9,8 @@ export const RunRequestSchema = z.strictObject({
   kind: z.literal("run"),
   protocol: z.literal(PROTOCOL_VERSION),
   requestId: id,
-  problemId: z.literal("m02"),
-  problemVersion: z.literal(1),
+  problemId: z.string().regex(/^[mdep][0-9]{2,5}$/),
+  problemVersion: z.number().int().positive(),
   sourceCode: z.string().max(MAX_SOURCE_LENGTH),
   mode: z.enum(["sample", "all"]),
 });

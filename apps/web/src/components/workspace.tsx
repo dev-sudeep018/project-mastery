@@ -24,8 +24,17 @@ import {
   XCircle,
 } from "lucide-react";
 import { MAX_SOURCE_LENGTH } from "@mastery/runner-protocol";
-import data from "@/generated/problem.json";
-import { DRAFT_KEY, PROGRESS_KEY, readDraft } from "@/lib/draft";
+import type { LearningItem } from "@mastery/problem-schema";
+import { domains, itemById, itemHref, pathFor } from "@/lib/curriculum";
+import {
+  draftKey,
+  completionKey,
+  recordVisit,
+  completed as isCompleted,
+  readProgress,
+} from "@/lib/progress";
+import { Experiment } from "./experiment";
+import { readDraft } from "@/lib/draft";
 import { useRunner } from "@/lib/use-runner";
 import { Shell } from "./shell";
 
@@ -34,24 +43,14 @@ const Editor = dynamic(() => import("./python-editor"), {
   loading: () => <div className="editor-loading">Loading code editor…</div>,
 });
 const resourceTabs = ["description", "hints", "solution"] as const;
-const samples = [
-  {
-    name: "Ordinary scores",
-    input: "[1.0, 2.0, 3.0]",
-    output: "[0.090031, 0.244728, 0.665241]",
-  },
-  {
-    name: "Large positive scores",
-    input: "[1000.0, 1001.0, 1002.0]",
-    output: "[0.090031, 0.244728, 0.665241]",
-  },
-  {
-    name: "Equal scores",
-    input: "[7.0, 7.0, 7.0, 7.0]",
-    output: "[0.25, 0.25, 0.25, 0.25]",
-  },
-];
-export function Workspace() {
+export function Workspace({ data }: { data: LearningItem }) {
+  const { problem, lesson } = data;
+  const samples = lesson.examples;
+  const DRAFT_KEY = draftKey(problem.id, problem.version);
+  const PROGRESS_KEY = completionKey(problem.id, problem.version);
+  const learningPath = pathFor(problem.id);
+  const nextId =
+    learningPath?.items[(learningPath.items.indexOf(problem.id) ?? -1) + 1];
   const [tab, setTab] = useState<"description" | "hints" | "solution">(
     "description",
   );
@@ -66,7 +65,7 @@ export function Workspace() {
   const [focus, setFocus] = useState(false);
   const [split, setSplit] = useState(44);
   const [mobileEditor, setMobileEditor] = useState(false);
-  const runner = useRunner();
+  const runner = useRunner(problem.id, problem.version);
   const splitRef = useRef<HTMLDivElement>(null);
   const runRef = useRef<() => void>(() => {});
   const busy = runner.phase !== "idle";
@@ -74,12 +73,18 @@ export function Workspace() {
   useEffect(() => {
     try {
       setCode(readDraft(localStorage.getItem(DRAFT_KEY), data.starter));
-      setComplete(localStorage.getItem(PROGRESS_KEY) === "complete");
+      setComplete(isCompleted(readProgress(), problem.id));
+      recordVisit(problem.id, problem.version);
     } catch {
       setSaveState("Storage unavailable. Copy your code before leaving.");
     }
     setHydrated(true);
-  }, []);
+  }, [DRAFT_KEY, PROGRESS_KEY, data.starter, problem.id, problem.version]);
+  useEffect(() => {
+    const refresh = () => setComplete(isCompleted(readProgress(), problem.id));
+    addEventListener("storage", refresh);
+    return () => removeEventListener("storage", refresh);
+  }, [problem.id]);
   useEffect(() => {
     if (!hydrated) return;
     if (code.length > MAX_SOURCE_LENGTH) {
@@ -92,8 +97,19 @@ export function Workspace() {
     } catch {
       setSaveState("Could not save. Copy your code before leaving.");
     }
-  }, [code, hydrated]);
+  }, [code, hydrated, DRAFT_KEY]);
   useEffect(() => {
+    if (runner.result && runner.mode === "all") {
+      try {
+        recordVisit(
+          problem.id,
+          problem.version,
+          runner.result.status === "passed",
+        );
+      } catch {
+        /* Draft notice handles unavailable storage. */
+      }
+    }
     if (runner.result?.status === "passed" && runner.mode === "all") {
       setComplete(true);
       try {
@@ -102,7 +118,7 @@ export function Workspace() {
         /* Saving status is handled by the draft notice. */
       }
     }
-  }, [runner.result, runner.mode]);
+  }, [runner.result, runner.mode, PROGRESS_KEY, problem.id, problem.version]);
   const checkSolution = useCallback(() => {
     if (!busy && code.length <= MAX_SOURCE_LENGTH) runner.run(code, "all");
   }, [busy, code, runner]);
@@ -121,24 +137,65 @@ export function Workspace() {
     return () => removeEventListener("keydown", handle);
   }, []);
   const mountEditor: OnMount = (editor, monaco) => {
+    // The React wrapper creates the model before editor options are applied.
+    editor.getModel()?.updateOptions({
+      bracketColorizationOptions: {
+        enabled: false,
+        independentColorPoolPerBracketType: false,
+      },
+    });
+    const palette = getComputedStyle(document.documentElement);
+    const color = (name: string) =>
+      palette.getPropertyValue(`--${name}`).trim();
     monaco.editor.defineTheme("mastery", {
       base: "vs-dark",
-      inherit: true,
+      inherit: false,
       rules: [
-        { token: "comment", foreground: "84988B", fontStyle: "italic" },
-        { token: "keyword", foreground: "C4B5FD" },
-        { token: "string", foreground: "B3D69B" },
-        { token: "number", foreground: "E2BF88" },
+        { token: "", foreground: color("text").slice(1) },
+        {
+          token: "comment",
+          foreground: color("subtle").slice(1),
+          fontStyle: "italic",
+        },
+        {
+          token: "keyword",
+          foreground: color("syntax-keyword").slice(1),
+          fontStyle: "bold",
+        },
+        { token: "string", foreground: color("syntax-string").slice(1) },
+        { token: "number", foreground: color("syntax-number").slice(1) },
       ],
       colors: {
-        "editor.background": "#111715",
-        "editor.foreground": "#DCE5DF",
-        "editorLineNumber.foreground": "#667A6E",
-        "editorLineNumber.activeForeground": "#C9D9CF",
-        "editor.lineHighlightBackground": "#19221D",
-        "editor.selectionBackground": "#294C3A",
-        "editorCursor.foreground": "#9DDFB1",
-        "editorIndentGuide.background1": "#27342C",
+        "editor.background": color("surface"),
+        "editor.foreground": color("text"),
+        "editorLineNumber.foreground": color("subtle"),
+        "editorLineNumber.activeForeground": color("text"),
+        "editor.lineHighlightBackground": color("raised"),
+        "editor.selectionBackground": color("selection"),
+        "editorCursor.foreground": color("accent"),
+        "editorIndentGuide.background1": color("border"),
+        "editorBracketMatch.background": color("raised"),
+        "editorBracketMatch.border": color("border-strong"),
+        "editorBracketHighlight.foreground1": color("text"),
+        "editorBracketHighlight.foreground2": color("text"),
+        "editorBracketHighlight.foreground3": color("text"),
+        "editorBracketHighlight.foreground4": color("text"),
+        "editorBracketHighlight.foreground5": color("text"),
+        "editorBracketHighlight.foreground6": color("text"),
+        "editorBracketHighlight.unexpectedBracket.foreground": color("text"),
+        "editorError.foreground": color("danger"),
+        "editorWarning.foreground": color("muted"),
+        "editorInfo.foreground": color("muted"),
+        focusBorder: color("accent"),
+        "editorWidget.background": color("raised"),
+        "editorWidget.border": color("border-strong"),
+        "input.background": color("surface"),
+        "input.foreground": color("text"),
+        "input.border": color("border-strong"),
+        "editorSuggestWidget.background": color("raised"),
+        "editorSuggestWidget.foreground": color("text"),
+        "editorSuggestWidget.selectedBackground": color("selection"),
+        "editorSuggestWidget.highlightForeground": color("accent"),
       },
     });
     monaco.editor.setTheme("mastery");
@@ -171,9 +228,9 @@ export function Workspace() {
     <Shell workspace>
       <header className="topbar">
         <div className="breadcrumb">
-          <Link href="/problems/">Practice</Link>
+          <Link href="/problems/">Explore lessons</Link>
           <ChevronRight size={14} />
-          <span>Foundations</span>
+          <span>{domains[problem.domain]}</span>
         </div>
         <span className="free-label">
           <ShieldCheck size={15} />
@@ -184,14 +241,14 @@ export function Workspace() {
         <div>
           <Link className="back-link" href="/problems/">
             <ArrowLeft size={14} />
-            All problems
+            All lessons
           </Link>
-          <h1>Numerically Stable Softmax</h1>
+          <h1>{problem.title}</h1>
           <div className="problem-meta">
-            <span className="difficulty">Beginner</span>
+            <span className="difficulty">{problem.difficulty}</span>
             <span>
               <Clock3 size={14} />
-              20 min
+              {problem.estimated_minutes} min
             </span>
             <span>NumPy</span>
             <span className={complete ? "complete-label" : ""}>
@@ -201,25 +258,36 @@ export function Workspace() {
                   Completed on this device
                 </>
               ) : (
-                "M02 · Foundations"
+                `${problem.id.toUpperCase()} · ${domains[problem.domain]}`
               )}
             </span>
           </div>
         </div>
-        <Link className="path-link" href="/paths/">
-          Your learning path
+        <Link
+          className="path-link"
+          href={
+            problem.kind === "project"
+              ? "/projects/mini-retrieval/"
+              : `/paths/${learningPath?.slug ?? ""}/`
+          }
+        >
+          {problem.kind === "project"
+            ? "Return to the project"
+            : "Your learning path"}
           <ArrowRight size={16} />
         </Link>
       </div>
       <div className="mobile-switch" role="group" aria-label="Workspace view">
         <button
           className={!mobileEditor ? "selected" : ""}
+          aria-pressed={!mobileEditor}
           onClick={() => setMobileEditor(false)}
         >
           Read exercise
         </button>
         <button
           className={mobileEditor ? "selected" : ""}
+          aria-pressed={mobileEditor}
           onClick={() => setMobileEditor(true)}
         >
           Write Python
@@ -278,82 +346,68 @@ export function Workspace() {
           >
             {tab === "description" && (
               <>
-                <h2>Small function. Essential idea.</h2>
-                <p>
-                  Turn raw model scores into probabilities. Softmax sits at the
-                  heart of classifiers and attention, but a direct
-                  implementation can break on large numbers.
-                </p>
-                <h3>Your task</h3>
-                <p>
-                  Implement <code>softmax(x)</code> for a one-dimensional array
-                  of finite numbers. Return a NumPy array of probabilities
-                  without changing the input.
-                </p>
-                <div
-                  className="formula"
-                  aria-label="Softmax of x i equals exponential of x i minus max x, divided by the sum of exponential of x j minus max x"
-                >
-                  <span>
-                    softmax(x)<sub>i</sub> ={" "}
-                  </span>
-                  <span className="fraction">
-                    <span>
-                      exp(x<sub>i</sub> − max(x))
-                    </span>
-                    <span>
-                      Σ<sub>j</sub> exp(x<sub>j</sub> − max(x))
-                    </span>
-                  </span>
-                </div>
+                <h2>Understand the idea</h2>
+                <p>{lesson.intro}</p>
+                {lesson.formula && (
+                  <div className="formula">{lesson.formula}</div>
+                )}
+                <Experiment itemId={problem.id} compact />
+                <h3>Build it in Python</h3>
+                <p>{lesson.task}</p>
+                <pre className="signature">
+                  <code>def {lesson.signature}:</code>
+                </pre>
                 <h3>See it in numbers</h3>
-                <div className="example-block">
-                  <div>
-                    <span>Input</span>
-                    <code>[1.0, 2.0, 3.0]</code>
+                {lesson.examples.map((example) => (
+                  <div className="example-block" key={example.name}>
+                    <strong>{example.name}</strong>
+                    <div>
+                      <span>Input</span>
+                      <code>{example.input}</code>
+                    </div>
+                    <div>
+                      <span>Output</span>
+                      <code>{example.output}</code>
+                    </div>
                   </div>
-                  <div>
-                    <span>Output</span>
-                    <code>[0.090031, 0.244728, 0.665241]</code>
-                  </div>
-                  <div
-                    className="probability-chart"
-                    aria-label="Probability distribution: score 1 is 9.0 percent, score 2 is 24.5 percent, score 3 is 66.5 percent"
-                  >
-                    {[9, 24.5, 66.5].map((value, index) => (
-                      <div key={value}>
-                        <span>Score {index + 1}</span>
-                        <div className="bar-track">
-                          <i style={{ width: `${value}%` }} />
-                        </div>
-                        <span>{value}%</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <h3>The catch</h3>
-                <p>
-                  <code>[1000, 1001, 1002]</code> should give the same
-                  probabilities. Directly computing <code>exp(1000)</code>{" "}
-                  overflows. Subtracting the largest score keeps the calculation
-                  stable.
-                </p>
+                ))}
                 <h3>Requirements</h3>
                 <ul className="requirements">
-                  <li>Accept a numeric list or a one-dimensional array.</li>
-                  <li>Return finite, nonnegative values that sum to one.</li>
-                  <li>
-                    Raise <code>ValueError</code> for empty, non-finite, or
-                    non-1D input.
-                  </li>
-                  <li>Leave the original input unchanged.</li>
+                  {lesson.requirements.map((text) => (
+                    <li key={text}>{text}</li>
+                  ))}
                 </ul>
                 <p className="muted small">
-                  Absolute tolerance: 1e-7 · Relative tolerance: 1e-6
+                  Absolute tolerance: {problem.evaluation.absolute_tolerance} ·
+                  Relative tolerance: {problem.evaluation.relative_tolerance}
                 </p>
                 <div className="knowledge">
-                  <h3>Before you begin</h3>
-                  <p>Python functions · NumPy arrays · Exponentials</p>
+                  <h3>Connect the idea</h3>
+                  <p>{problem.assumed_knowledge.join(" · ")}</p>
+                  {problem.prerequisites.map((id) => (
+                    <p key={id}>
+                      <Link className="text-link" href={itemHref(id)}>
+                        Revisit {itemById(id)?.title}
+                      </Link>
+                    </p>
+                  ))}
+                  {problem.domain === "engineering" && (
+                    <p>
+                      <Link
+                        className="text-link"
+                        href="/projects/mini-retrieval/"
+                      >
+                        Use this in the retrieval project
+                      </Link>
+                    </p>
+                  )}
+                  {nextId && (
+                    <p>
+                      <Link className="text-link" href={itemHref(nextId)}>
+                        Continue with {itemById(nextId)?.title}
+                      </Link>
+                    </p>
+                  )}
                 </div>
               </>
             )}
@@ -364,20 +418,7 @@ export function Workspace() {
                   Open one hint at a time. Try the next step in your code before
                   continuing.
                 </p>
-                {[
-                  [
-                    "Start with the contract",
-                    "Convert x with np.asarray(x, dtype=np.float64). Check x.ndim, x.size, and np.isfinite(x) before doing any math.",
-                  ],
-                  [
-                    "Keep the exponentials small",
-                    "Subtract np.max(x) from every score. This creates a new array and makes the largest shifted score zero.",
-                  ],
-                  [
-                    "Normalize the weights",
-                    "Compute np.exp(shifted), then divide by its sum. At least one weight is one, so the normalizer is positive.",
-                  ],
-                ].map(([title, body], i) => (
+                {lesson.hints.map(({ title, body }, i) => (
                   <details className="hint" key={title}>
                     <summary>
                       Hint {i + 1}: {title}
@@ -385,18 +426,14 @@ export function Workspace() {
                     <p>{body}</p>
                   </details>
                 ))}
-                <p className="muted small">
-                  Extremely small probabilities may underflow to zero. That is
-                  acceptable for this exercise.
-                </p>
               </>
             )}
             {tab === "solution" && (
               <>
                 <h2>Understand the reference.</h2>
                 <p>
-                  Compare the steps with your approach. The important idea is
-                  subtracting the maximum before exponentiation.
+                  Compare the steps with your approach, then change an input and
+                  predict what will happen.
                 </p>
                 <pre className="reference-code">{data.solution}</pre>
                 <button
@@ -410,11 +447,9 @@ export function Workspace() {
                   Use reference in editor
                 </button>
                 <h3>Why this works</h3>
-                <p>
-                  Subtracting one value from every score multiplies every
-                  exponential by the same factor. That factor cancels during
-                  normalization, so the probabilities stay the same.
-                </p>
+                {lesson.explanation.map((text) => (
+                  <p key={text}>{text}</p>
+                ))}
                 <p className="muted small">
                   All evaluation tests are public. Completion is local practice
                   feedback.
@@ -531,6 +566,7 @@ export function Workspace() {
                 theme="vs-dark"
                 options={{
                   minimap: { enabled: false },
+                  bracketPairColorization: { enabled: false },
                   fontSize: 14,
                   lineHeight: 24,
                   fontFamily: 'Consolas, "Liberation Mono", monospace',
@@ -730,7 +766,8 @@ export function Workspace() {
                     </details>
                   ))}
                   <p className="test-help">
-                    Run examples to explore. Check solution to test all 13
+                    Run examples to explore. Check solution to test all{" "}
+                    {lesson.test_count}
                     cases.
                   </p>
                 </div>

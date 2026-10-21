@@ -1,0 +1,50 @@
+{
+  "intro": "A retrieval system searches passages, not entire books. Chunk size and overlap decide how much context each searchable passage contains.",
+  "task": "Split text on whitespace and return overlapping windows joined with single spaces, preserving word order.",
+  "signature": "chunk_text(text, chunk_size, overlap)",
+  "requirements": [
+    "chunk_size must be a positive integer; overlap must be an integer from 0 through chunk_size-1. Booleans are invalid.",
+    "Advance by chunk_size - overlap words. Stop after emitting a window that reaches the final word.",
+    "Return [] for empty or whitespace-only text. Do not emit a trailing window entirely contained in the previous window.",
+    "Reject non-string text or invalid settings with ValueError. This exercise counts words, not model tokens."
+  ],
+  "examples": [
+    {
+      "name": "Overlap",
+      "input": "text='a b c d e', chunk_size=3, overlap=1",
+      "output": "['a b c','c d e']"
+    },
+    {
+      "name": "No overlap",
+      "input": "text='a b c d e', chunk_size=2, overlap=0",
+      "output": "['a b','c d','e']"
+    },
+    {
+      "name": "Short document",
+      "input": "text='one two', chunk_size=5, overlap=2",
+      "output": "['one two']"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Normalize whitespace",
+      "body": "str.split() without a separator handles spaces, tabs, and newlines."
+    },
+    {
+      "title": "Calculate the stride",
+      "body": "The start position advances by size minus overlap."
+    },
+    {
+      "title": "Stop at the end",
+      "body": "After each chunk, check whether its end reached the word count before advancing."
+    }
+  ],
+  "explanation": [
+    "Overlap gives neighboring chunks shared context. Too much overlap increases duplication and indexing cost.",
+    "Determinism matters: the same text and settings should produce the same chunk boundaries every time.",
+    "Word chunking is a useful baseline. A production system may also need token budgets, sentence boundaries, metadata, and document-specific parsing."
+  ],
+  "formula": null,
+  "test_count": 13,
+  "sample_count": 3
+}

@@ -1,0 +1,25 @@
+schema_version: 1
+id: "d03"
+slug: "layer-normalization"
+version: 1
+title: "Layer Normalization"
+summary: "Normalize each example across its features, then apply a learned scale and shift."
+domain: "deep-learning"
+difficulty: "intermediate"
+skills: ["Normalization", "Broadcasting"]
+prerequisites: ["m01"]
+assumed_knowledge: ["Python functions", "Lists and NumPy arrays"]
+runtime:
+  engine: "pyodide"
+  packages: ["numpy"]
+evaluation:
+  entrypoint: "layer_norm"
+  absolute_tolerance: 1e-07
+  relative_tolerance: 1e-06
+estimated_minutes: 30
+status: "validated"
+author: "Project Mastery contributors"
+license: "CC-BY-SA-4.0"
+code_license: "Apache-2.0"
+attribution: []
+kind: "lesson"
