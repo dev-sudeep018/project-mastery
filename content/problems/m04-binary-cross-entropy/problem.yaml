@@ -1,0 +1,25 @@
+schema_version: 1
+id: "m04"
+slug: "binary-cross-entropy"
+version: 1
+title: "Binary Cross-Entropy from Logits"
+summary: "Measure binary prediction error without unstable sigmoid or logarithm calculations."
+domain: "foundations"
+difficulty: "beginner"
+skills: ["Loss functions", "Numerical stability", "Classification"]
+prerequisites: ["m02"]
+assumed_knowledge: ["Python functions", "Lists and NumPy arrays"]
+runtime:
+  engine: "pyodide"
+  packages: ["numpy"]
+evaluation:
+  entrypoint: "binary_cross_entropy"
+  absolute_tolerance: 1e-07
+  relative_tolerance: 1e-06
+estimated_minutes: 25
+status: "validated"
+author: "Project Mastery contributors"
+license: "CC-BY-SA-4.0"
+code_license: "Apache-2.0"
+attribution: []
+kind: "lesson"

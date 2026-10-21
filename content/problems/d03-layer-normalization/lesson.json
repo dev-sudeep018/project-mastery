@@ -1,0 +1,50 @@
+{
+  "intro": "Hidden activations can drift in scale. Layer normalization centers and scales each example independently, then restores flexibility with gamma and beta.",
+  "task": "Normalize X over its last axis using population variance, add eps inside the square root, and apply gamma and beta.",
+  "signature": "layer_norm(X, gamma, beta, eps=1e-5)",
+  "requirements": [
+    "X is a nonempty 1D or 2D array; gamma and beta have shape (number_of_features,).",
+    "Use population variance (ddof=0), not sample variance.",
+    "Require finite inputs and a positive finite scalar eps; raise ValueError for invalid inputs.",
+    "Return a NumPy array with the same shape as X. Do not modify inputs. Test values are moderate."
+  ],
+  "examples": [
+    {
+      "name": "Centered row",
+      "input": "X=[1,3], gamma=[1,1], beta=[0,0]",
+      "output": "approximately [-0.999995,0.999995]"
+    },
+    {
+      "name": "Constant row",
+      "input": "X=[5,5], gamma=[2,3], beta=[1,2]",
+      "output": "[1,2]"
+    },
+    {
+      "name": "Independent rows",
+      "input": "X=[[1,3],[11,13]], gamma=[1,1], beta=[0,0]",
+      "output": "both rows approximately [-0.999995,0.999995]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Preserve the axis",
+      "body": "Compute mean and variance with axis=-1 and keepdims=True so broadcasting stays aligned."
+    },
+    {
+      "title": "Stabilize constant rows",
+      "body": "The denominator is sqrt(variance + eps), not sqrt(variance) + eps."
+    },
+    {
+      "title": "Apply the affine transform",
+      "body": "Multiply the normalized values by gamma and then add beta."
+    }
+  ],
+  "explanation": [
+    "Every row uses its own statistics. Unlike batch normalization, a row's result does not depend on which other examples share its batch.",
+    "Population variance divides by the feature count. The task is to normalize the observed features, not estimate a population from a statistical sample.",
+    "A constant row becomes zero before the affine transform, so its final value equals beta."
+  ],
+  "formula": "LayerNorm(x) = γ ⊙ (x − μ) / √(σ² + ε) + β",
+  "test_count": 12,
+  "sample_count": 3
+}

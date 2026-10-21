@@ -1,0 +1,52 @@
+{
+  "intro": "The project workbench shows a reference experiment. Here you build the pipeline behind it, joining the operations from the engineering path into one tested function.",
+  "task": "Rank every document for each query by cosine similarity, fuse that full ranking with the supplied keyword ranking using RRF constant 60, keep k results, and return rankings plus mean recall and MRR.",
+  "signature": "retrieval_pipeline(document_ids, document_vectors, query_vectors, lexical_rankings, relevant, k, vector_weight=0.5)",
+  "requirements": [
+    "Return a dictionary with rankings (one list of IDs per query), recall, and mrr.",
+    "document_ids is a nonempty list of unique string IDs. document_vectors is (n,d), query_vectors is (q,d), with n,d,q positive and all values finite.",
+    "lexical_rankings and relevant are lists of q lists containing only known IDs. Deduplicate each list; lexical rankings may omit documents.",
+    "k is an integer 1..n, excluding booleans. vector_weight is a finite numeric scalar in [0,1], excluding booleans. Keyword weight is 1-vector_weight.",
+    "Rank vector ties by document ID; fuse with the same tie rule. A zero vector has similarity zero. Queries with no relevant labels contribute zero metrics.",
+    "Leave inputs unchanged and raise ValueError for invalid inputs. You may reuse your implementations of top_k_cosine, reciprocal_rank_fusion, and retrieval_metrics by including them in this file."
+  ],
+  "examples": [
+    {
+      "name": "Vector baseline",
+      "input": "ids=['a','b'], vectors=[[1,0],[0,1]], queries=[[1,0]], lexical=[['b','a']], relevant=[['b']], k=1, vector_weight=1",
+      "output": "{rankings:[['a']], recall:0, mrr:0}"
+    },
+    {
+      "name": "Keyword baseline",
+      "input": "same inputs, vector_weight=0",
+      "output": "{rankings:[['b']], recall:1, mrr:1}"
+    },
+    {
+      "name": "Retrieve both",
+      "input": "same inputs, k=2, vector_weight=1",
+      "output": "{rankings:[['a','b']], recall:1, mrr:0.5}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Compose the operations",
+      "body": "Rank the full corpus before fusion. Truncating each method to k early can discard useful agreement."
+    },
+    {
+      "title": "Keep IDs and vectors aligned",
+      "body": "Map ranked row indices back to document IDs. Pre-sorting IDs and corresponding vectors gives a consistent tie rule."
+    },
+    {
+      "title": "Evaluate the final ranking",
+      "body": "Use the fused top-k lists for both metrics, and average over every query."
+    }
+  ],
+  "explanation": [
+    "The pipeline makes each boundary explicit: vectors become a ranking, rankings become a fused list, and relevance labels become metrics.",
+    "The provided keyword rankings isolate the fusion and evaluation logic from text tokenization. The project workbench exposes its simple keyword baseline so you can inspect that separate choice.",
+    "A passing pipeline confirms the contract on public examples. Your experiment report should still describe the teaching dataset's limits and identify a next evaluation that could challenge your conclusion."
+  ],
+  "formula": null,
+  "test_count": 13,
+  "sample_count": 3
+}

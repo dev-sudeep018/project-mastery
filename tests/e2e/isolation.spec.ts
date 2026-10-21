@@ -17,7 +17,7 @@ test("runner has restrictive headers and cannot read the parent origin", async (
   expect(policy).not.toContain("'unsafe-eval'");
   expect(response.headers()["access-control-allow-origin"]).toBeUndefined();
   expect((await request.post("http://127.0.0.1:4174/")).status()).toBe(405);
-  await page.goto("/");
+  await page.goto("/problems/stable-softmax/");
   await expect(
     page.getByRole("button", { name: "Check solution", exact: true }),
   ).toBeEnabled();
@@ -57,7 +57,7 @@ print("NO_APP_STORAGE")
       localStorage.setItem(key, JSON.stringify({ version: 1, code })),
     { key: DRAFT_KEY, code: probe },
   );
-  await page.goto("/");
+  await page.goto("/problems/stable-softmax/");
   await page
     .getByRole("button", { name: "Check solution", exact: true })
     .click();
@@ -72,7 +72,7 @@ print("NO_APP_STORAGE")
 test("forged parent messages and malformed run requests are ignored", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/problems/stable-softmax/");
   await expect(
     page.getByRole("button", { name: "Check solution", exact: true }),
   ).toBeEnabled();
@@ -109,4 +109,63 @@ test("forged parent messages and malformed run requests are ignored", async ({
     return messages;
   });
   expect(count).toBe(0);
+});
+
+test("runner rejects unpublished items and unavailable versions before execution", async ({
+  page,
+}) => {
+  await page.goto("/problems/stable-softmax/");
+  await expect(
+    page.getByRole("button", { name: "Check solution", exact: true }),
+  ).toBeEnabled();
+  const results = await page.evaluate(async () => {
+    const frame = document.querySelector("iframe")!.contentWindow!;
+    const requests = [
+      { problemId: "m99999", problemVersion: 1 },
+      { problemId: "m02", problemVersion: 999 },
+    ];
+    return Promise.all(
+      requests.map(
+        (item) =>
+          new Promise<{ status: string; error: string; tests: unknown[] }>(
+            (resolve, reject) => {
+              const requestId = crypto.randomUUID();
+              const timer = setTimeout(() => {
+                removeEventListener("message", listener);
+                reject(new Error("No rejection received"));
+              }, 5000);
+              function listener(event: MessageEvent) {
+                if (
+                  event.source !== frame ||
+                  event.origin !== "http://127.0.0.1:4174" ||
+                  event.data?.requestId !== requestId ||
+                  event.data?.kind !== "result"
+                )
+                  return;
+                clearTimeout(timer);
+                removeEventListener("message", listener);
+                resolve(event.data);
+              }
+              addEventListener("message", listener);
+              frame.postMessage(
+                {
+                  kind: "run",
+                  protocol: 1,
+                  requestId,
+                  ...item,
+                  sourceCode: 'raise Exception("SHOULD NOT EXECUTE")',
+                  mode: "all",
+                },
+                "http://127.0.0.1:4174",
+              );
+            },
+          ),
+      ),
+    );
+  });
+  for (const result of results) {
+    expect(result.status).toBe("error");
+    expect(result.error).toContain("lesson version is unavailable");
+    expect(result.tests).toEqual([]);
+  }
 });

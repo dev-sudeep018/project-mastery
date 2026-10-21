@@ -10,7 +10,7 @@ import {
   type RunResult,
 } from "@mastery/runner-protocol";
 
-export function useRunner() {
+export function useRunner(problemId: string, problemVersion: number) {
   const frame = useRef<HTMLIFrameElement>(null);
   const current = useRef<string | null>(null);
   const watchdog = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -92,8 +92,8 @@ export function useRunner() {
           kind: "run",
           protocol: PROTOCOL_VERSION,
           requestId,
-          problemId: "m02",
-          problemVersion: 1,
+          problemId,
+          problemVersion,
           sourceCode,
           mode: selectedMode,
         },
@@ -121,7 +121,7 @@ export function useRunner() {
         BOOT_TIMEOUT_MS + EXECUTION_TIMEOUT_MS + 3000,
       );
     },
-    [origin, ready],
+    [origin, ready, problemId, problemVersion],
   );
   const cancel = useCallback(() => {
     if (current.current)

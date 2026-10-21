@@ -7,6 +7,7 @@ import {
   type RunRequest,
   type RunResult,
 } from "../../../packages/runner-protocol/src/index";
+import manifest from "./generated/manifest.json";
 
 declare const __APP_ORIGIN__: string;
 const appOrigin = __APP_ORIGIN__;
@@ -53,7 +54,27 @@ addEventListener("message", (event: MessageEvent) => {
     return;
   }
   if (active) return;
-  const worker = new Worker("/worker.js", { type: "module" });
+  const item = manifest.find(
+    (item) =>
+      item.id === message.problemId && item.version === message.problemVersion,
+  );
+  if (!item) {
+    send({
+      kind: "result",
+      protocol: PROTOCOL_VERSION,
+      requestId: message.requestId,
+      status: "error",
+      tests: [],
+      output: "",
+      error: "This lesson version is unavailable. Reload the page.",
+      durationMs: 0,
+    });
+    return;
+  }
+  const worker = new Worker(
+    `/worker.js?item=${item.id}&version=${item.version}`,
+    { type: "module" },
+  );
   const started = performance.now();
   const timer = setTimeout(
     () =>

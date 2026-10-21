@@ -15,14 +15,23 @@ export default function About() {
         </p>
         <h2>Learn, build, understand.</h2>
         <p>
-          We connect explanations, small coding challenges, and increasingly
-          complete projects. The goal is useful engineering ability, supported
-          by clear feedback and reproducible work.
+          We connect guided lessons, open experiments, and projects. The goal is
+          useful engineering ability, supported by clear feedback and
+          reproducible work.
         </p>
         <h2>What works today</h2>
         <ul>
-          <li>One original challenge: Numerically Stable Softmax.</li>
-          <li>A Python editor with example runs and 13 public checks.</li>
+          <li>
+            Twelve original lessons across three connected learning paths.
+          </li>
+          <li>
+            Four interactive experiments and a retrieval project with a Python
+            implementation checkpoint.
+          </li>
+          <li>
+            A Python editor with public examples, edge-case checks, hints, and
+            references.
+          </li>
           <li>
             On-device execution with NumPy, saved drafts, and recovery from
             failed runs.
@@ -32,15 +41,16 @@ export default function About() {
         <p>
           The introductory experience requires no paid API keys, GPU
           subscription, or account. Original software is Apache-2.0; original
-          educational writing is CC BY-SA 4.0. The project is at its first
-          development milestone.
+          educational writing is CC BY-SA 4.0.
         </p>
         <h2>Be honest about progress.</h2>
         <p>
           Local completion is practice feedback. It is not an independently
           verified credential, and completing exercises does not guarantee
-          employment. The full 12-challenge curriculum and account
-          synchronization are future work.
+          employment. The curriculum target is 2,000 learning problems.
+          Published counts reflect working content; the remaining curriculum and
+          account synchronization are still being built. You can export and
+          import your local progress and drafts today.
         </p>
         <a
           className="primary"

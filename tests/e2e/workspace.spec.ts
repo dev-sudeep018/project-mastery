@@ -57,7 +57,7 @@ async function openCode(page: Page, code: string) {
 test("starter fails usefully, reference passes all tests and records local progress", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/problems/stable-softmax/");
   await page
     .getByRole("button", { name: "Check solution", exact: true })
     .click();
@@ -83,7 +83,7 @@ test("starter fails usefully, reference passes all tests and records local progr
 test("real editor changes survive refresh and example mode does not mark complete", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/problems/stable-softmax/");
   await pasteCode(page, reference);
   await page.reload();
   await page.getByRole("button", { name: "Run examples" }).click();
@@ -157,13 +157,13 @@ test("navigation, filtering, hints and panel resizing work", async ({
 }) => {
   await page.goto("/problems/");
   await page
-    .getByRole("textbox", { name: "Search problems or skills" })
+    .getByRole("textbox", { name: "Search lessons" })
     .fill("not-a-problem");
-  await expect(page.getByText("No matching problems")).toBeVisible();
+  await expect(page.getByText("No matching lessons yet.")).toBeVisible();
   await page
-    .getByRole("textbox", { name: "Search problems or skills" })
-    .fill("NumPy");
-  await page.getByRole("link", { name: "Open problem" }).click();
+    .getByRole("textbox", { name: "Search lessons" })
+    .fill("stable softmax");
+  await page.getByRole("link", { name: /Numerically Stable Softmax/ }).click();
   await page.getByRole("tab", { name: "Hints" }).click();
   await page.getByRole("tab", { name: "Hints" }).press("ArrowRight");
   await expect(
@@ -180,14 +180,14 @@ test("navigation, filtering, hints and panel resizing work", async ({
   await divider.focus();
   await page.keyboard.press("ArrowRight");
   await expect(divider).toHaveAttribute("aria-valuenow", "46");
-  await page.getByRole("link", { name: "Learning paths", exact: true }).click();
+  await page.getByRole("link", { name: "Guided paths", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "One idea builds on the next." }),
   ).toBeVisible();
 });
 test("mobile reading and editing fit the viewport", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/problems/stable-softmax/");
   await expect(
     page.getByRole("heading", { name: "Numerically Stable Softmax" }),
   ).toBeVisible();

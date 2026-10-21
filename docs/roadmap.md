@@ -1,15 +1,20 @@
 # Milestones
 
-## First slice
+## Completed foundation
 
-Independent Git repository, contributor foundation, one validated exercise, Next.js workspace, Monaco editor, isolated Pyodide runner, draft persistence, feedback, failure recovery, and CI. See verification.md for evidence.
+The first isolated Python workspace and open-source repository foundation are merged in PR #1. GitHub Actions validates content, code quality, builds, and Chromium/Firefox/WebKit behavior. The protected main branch requires all four checks.
 
-## Next
+## Connected learning release
 
-1. Independent review of the evaluator and isolation model, plus deployment-specific header tests.
-2. Make the runner load a catalog of explicitly validated problems, then add vector operations and cosine similarity.
-3. Build connected progress and the remaining 12-exercise curriculum.
-4. Add optional accounts only after the anonymous learning flow is stable; test database authorization and progress merging.
-5. Build the mini retrieval system project, then private beta with real learner feedback.
+The working branch adds twelve original lessons, three guided paths, four interactive experiments, a retrieval project and Python integration checkpoint, per-lesson drafts, local progress, and backup import/export. The runner resolves explicit versioned content from a generated manifest. See verification.md for the exact checks and limitations.
 
-The three planned paths are Mathematics to Machine Learning, Deep Learning from First Principles, and Practical AI Engineering. Dates and user outcomes are not promised.
+## Continuing work
+
+1. Expand the authored curriculum toward 2,000 problems across the topic map in curriculum.md. Review distinct learning objectives; do not count number-swapped variants as new material.
+2. Extend learning formats with debugging investigations, research replication, and larger projects.
+3. Add optional account synchronization with tested database authorization and explicit local/cloud merging. Anonymous learning remains complete without an account.
+4. Add opt-in measurement only when there is a useful learning question; do not collect source code or raw private queries.
+5. Configure production hosting and independently verify separate credential-free runner domains, headers, caches, and failure recovery.
+6. Obtain independent mathematical/security review and real learner feedback, including screen-reader and physical mobile-device testing.
+
+No production deployment, account synchronization, or 2,000-item completed curriculum is claimed by this release.

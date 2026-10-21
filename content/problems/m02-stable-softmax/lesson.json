@@ -1,0 +1,50 @@
+{
+  "intro": "Turn raw model scores into probabilities. Softmax sits at the heart of classifiers and attention, but a direct implementation can break on large numbers.",
+  "task": "Implement softmax(x) for a one-dimensional array of finite numbers. Return a NumPy array of probabilities without changing the input.",
+  "signature": "softmax(x)",
+  "requirements": [
+    "Accept a numeric list or a nonempty one-dimensional array.",
+    "Return finite, nonnegative probabilities that sum to one.",
+    "Raise ValueError for empty, non-finite, or non-1D input.",
+    "Leave the original input unchanged. Very small probabilities may underflow to zero."
+  ],
+  "examples": [
+    {
+      "name": "Ordinary scores",
+      "input": "[1.0, 2.0, 3.0]",
+      "output": "[0.090031, 0.244728, 0.665241]"
+    },
+    {
+      "name": "Large positive scores",
+      "input": "[1000.0, 1001.0, 1002.0]",
+      "output": "[0.090031, 0.244728, 0.665241]"
+    },
+    {
+      "name": "Equal scores",
+      "input": "[7.0, 7.0, 7.0, 7.0]",
+      "output": "[0.25, 0.25, 0.25, 0.25]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Start with the contract",
+      "body": "Convert x with np.asarray(x, dtype=np.float64). Check dimensions, size, and finiteness before doing any math."
+    },
+    {
+      "title": "Keep exponentials small",
+      "body": "Subtract the largest score. The largest shifted score is zero, so its exponential is one."
+    },
+    {
+      "title": "Normalize the weights",
+      "body": "Compute the exponentials, then divide by their sum. At least one weight is one, so the normalizer is positive."
+    }
+  ],
+  "explanation": [
+    "Subtracting one value from every score multiplies each exponential by the same factor. That factor cancels during normalization, so the probabilities stay the same.",
+    "Subtracting the maximum ensures every exponential is at most one. With extreme finite inputs, a negative shifted score can overflow to negative infinity; its exponential is zero, the appropriate limiting probability.",
+    "Softmax produces relative probabilities. Adding a constant changes no probabilities, while scaling scores changes how concentrated the distribution becomes."
+  ],
+  "formula": "softmax(x)ᵢ = exp(xᵢ − max(x)) / Σⱼ exp(xⱼ − max(x))",
+  "test_count": 13,
+  "sample_count": 3
+}

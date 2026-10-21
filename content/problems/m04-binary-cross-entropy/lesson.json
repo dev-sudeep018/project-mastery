@@ -1,0 +1,50 @@
+{
+  "intro": "A confident wrong prediction should cost more than an uncertain one. Binary cross-entropy captures this, but a direct sigmoid-then-log implementation can overflow.",
+  "task": "Return mean binary cross-entropy for targets `y` in {0, 1} and unbounded raw scores `logits`. Use a stable expression directly from logits.",
+  "signature": "binary_cross_entropy(y, logits)",
+  "requirements": [
+    "Both inputs are nonempty finite one-dimensional arrays of the same shape; lists are accepted.",
+    "Every target must equal 0 or 1. Raise ValueError for invalid targets, shapes, or non-finite inputs.",
+    "Return a finite numeric scalar and do not mutate inputs.",
+    "Compute from logits, not probabilities. Large correct predictions approach zero loss."
+  ],
+  "examples": [
+    {
+      "name": "Uncertain predictions",
+      "input": "y=[0,1], logits=[0,0]",
+      "output": "0.6931471806"
+    },
+    {
+      "name": "Confident and correct",
+      "input": "y=[0,1], logits=[-1000,1000]",
+      "output": "0.0"
+    },
+    {
+      "name": "Confident and wrong",
+      "input": "y=[1,0], logits=[-1000,1000]",
+      "output": "1000.0"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Rewrite the logarithms",
+      "body": "For one target y and logit z, the loss is softplus(z) - y*z."
+    },
+    {
+      "title": "Use the stable form",
+      "body": "Compute max(z, 0) - z*y + log1p(exp(-abs(z))). The exponential never sees a positive argument."
+    },
+    {
+      "title": "Average without a huge intermediate sum",
+      "body": "Divide each nonnegative loss by the batch length before summing. This also handles very large representable losses."
+    }
+  ],
+  "explanation": [
+    "The logit is a raw score. A sigmoid would turn it into a probability, but computing that probability first can round to exactly zero or one.",
+    "The stable logits expression combines the sigmoid and logarithm algebraically. log1p retains precision when the exponential is very small.",
+    "This loss measures prediction quality, not classification accuracy. Two models can make the same binary decisions but express very different confidence."
+  ],
+  "formula": "BCE(y, z) = mean(max(z, 0) − yz + log1p(exp(−|z|)))",
+  "test_count": 12,
+  "sample_count": 3
+}

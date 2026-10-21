@@ -1,0 +1,25 @@
+schema_version: 1
+id: "d04"
+slug: "masked-attention"
+version: 1
+title: "Masked Scaled Dot-Product Attention"
+summary: "Build attention weights while controlling which positions each query may read."
+domain: "deep-learning"
+difficulty: "advanced"
+skills: ["Attention", "Masking", "Softmax"]
+prerequisites: ["m02", "d03"]
+assumed_knowledge: ["Python functions", "Lists and NumPy arrays"]
+runtime:
+  engine: "pyodide"
+  packages: ["numpy"]
+evaluation:
+  entrypoint: "masked_attention"
+  absolute_tolerance: 1e-07
+  relative_tolerance: 1e-06
+estimated_minutes: 45
+status: "validated"
+author: "Project Mastery contributors"
+license: "CC-BY-SA-4.0"
+code_license: "Apache-2.0"
+attribution: []
+kind: "lesson"

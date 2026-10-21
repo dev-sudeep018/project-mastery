@@ -1,0 +1,50 @@
+{
+  "intro": "A derivative measures local change. Evaluating a function just before and after a point gives an independent way to check an analytic gradient.",
+  "task": "Return the central-difference estimate of the derivative of scalar function f at x using step h.",
+  "signature": "numerical_derivative(f, x, h=1e-5)",
+  "requirements": [
+    "Use (f(x+h) - f(x-h)) / (2*h).",
+    "Require a callable f, finite scalar x, and positive finite scalar h. Reject invalid inputs with ValueError.",
+    "Reject steps that round x+h or x-h back to x, or produce non-finite sample points.",
+    "Require both function evaluations to be finite numeric scalars. This exercise uses smooth functions."
+  ],
+  "examples": [
+    {
+      "name": "Quadratic",
+      "input": "f=lambda x: x*x, x=3",
+      "output": "approximately 6.0"
+    },
+    {
+      "name": "Cubic",
+      "input": "f=lambda x: x**3, x=2",
+      "output": "approximately 12.0"
+    },
+    {
+      "name": "Sine",
+      "input": "f=np.sin, x=0",
+      "output": "approximately 1.0"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Sample symmetrically",
+      "body": "Two evaluations on opposite sides cancel the leading one-sided error."
+    },
+    {
+      "title": "Check representability",
+      "body": "Floating-point numbers have finite spacing. An extremely small step may not move the sample at all."
+    },
+    {
+      "title": "Read the discrepancy",
+      "body": "Try several h values. Truncation error grows with large steps; cancellation can dominate tiny ones."
+    }
+  ],
+  "explanation": [
+    "Central differences approximate the tangent using a symmetric secant. For a smooth function, the leading truncation error is proportional to h².",
+    "A gradient check is a diagnostic, not a training algorithm: evaluating every parameter twice is expensive.",
+    "An inaccurate numerical derivative does not automatically prove the analytic gradient wrong. Check step size, precision, and whether the function is differentiable there."
+  ],
+  "formula": "f′(x) ≈ [f(x + h) − f(x − h)] / (2h)",
+  "test_count": 13,
+  "sample_count": 3
+}

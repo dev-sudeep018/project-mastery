@@ -1,0 +1,50 @@
+{
+  "intro": "Embeddings represent items as vectors. Cosine similarity measures whether two vectors point in the same direction, regardless of their length.",
+  "task": "Implement `cosine_similarity(a, b)` for two nonempty, finite, one-dimensional vectors of equal length. Return a scalar between -1 and 1.",
+  "signature": "cosine_similarity(a, b)",
+  "requirements": [
+    "Accept numeric lists or NumPy arrays and leave both inputs unchanged.",
+    "Return 0.0 if either vector is all zeros; zero has no direction.",
+    "Raise ValueError for empty, mismatched, non-1D, or non-finite vectors.",
+    "Handle large and tiny finite values without overflowing the norm."
+  ],
+  "examples": [
+    {
+      "name": "Same direction",
+      "input": "a=[1, 2], b=[2, 4]",
+      "output": "1.0"
+    },
+    {
+      "name": "Orthogonal",
+      "input": "a=[1, 0], b=[0, 1]",
+      "output": "0.0"
+    },
+    {
+      "name": "Opposite direction",
+      "input": "a=[1, 0], b=[-3, 0]",
+      "output": "-1.0"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Validate first",
+      "body": "Convert both inputs to float64 arrays. Check their dimensions, sizes, and finiteness."
+    },
+    {
+      "title": "Scale before taking a norm",
+      "body": "Divide each nonzero vector by its own largest absolute element. This leaves direction unchanged and avoids squared values near 1e616."
+    },
+    {
+      "title": "Normalize and compare",
+      "body": "Normalize the scaled vectors, take their dot product, then clip roundoff to [-1, 1]."
+    }
+  ],
+  "explanation": [
+    "The dot product combines corresponding coordinates. Dividing by both vector lengths removes magnitude, leaving the cosine of the angle between them.",
+    "Scaling a vector by a positive number does not change its direction. Scaling by its largest absolute coordinate before computing a norm keeps arithmetic in a manageable range.",
+    "A zero vector has no angle. This exercise adopts an explicit 0.0 convention so later retrieval code can handle empty representations deterministically."
+  ],
+  "formula": "similarity(a, b) = (a · b) / (‖a‖ ‖b‖)",
+  "test_count": 12,
+  "sample_count": 3
+}

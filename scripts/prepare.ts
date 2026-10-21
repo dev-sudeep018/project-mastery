@@ -4,17 +4,21 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { build } from "esbuild";
 import { loadContent, root } from "./content";
+import { validateCatalog } from "../packages/problem-schema/src/index";
 
 const require = createRequire(import.meta.url);
-const entries = await loadContent();
-const problem = entries.find((e) => e.problem.id === "m02");
-if (!problem) throw new Error("Initial problem m02 missing");
+const entries = (await loadContent()).filter(
+  (entry) => entry.problem.status === "validated",
+);
+validateCatalog(entries.map((entry) => entry.problem));
 const runner = path.join(root, "apps/runner/public");
 const runtime = path.join(runner, "runtime");
 const generated = path.join(root, "apps/web/src/generated");
 await Promise.all([
   mkdir(runtime, { recursive: true }),
   mkdir(generated, { recursive: true }),
+  mkdir(path.join(generated, "items"), { recursive: true }),
+  mkdir(path.join(root, "apps/runner/src/generated"), { recursive: true }),
   mkdir(path.join(runner, "generated"), { recursive: true }),
 ]);
 const pyodideDir = path.dirname(require.resolve("pyodide"));
@@ -78,11 +82,34 @@ await build({
   target: "es2022",
   minify: true,
 });
-await writeFile(
-  path.join(generated, "problem.json"),
-  JSON.stringify(problem, null, 2),
+const helpers = await readFile(
+  path.join(root, "content/evaluator_helpers.py"),
+  "utf8",
 );
-await writeFile(path.join(runner, "generated/evaluator.py"), problem.tests);
+await writeFile(
+  path.join(generated, "catalog.json"),
+  JSON.stringify(entries.map((e) => e.problem)),
+);
+const manifest = entries.map(({ problem }) => ({
+  id: problem.id,
+  version: problem.version,
+  evaluator: `/generated/${problem.id}-v${problem.version}.py`,
+}));
+await writeFile(
+  path.join(root, "apps/runner/src/generated/manifest.json"),
+  JSON.stringify(manifest),
+);
+for (const entry of entries) {
+  const { problem, lesson, starter, solution } = entry;
+  await writeFile(
+    path.join(generated, "items", `${problem.slug}.json`),
+    JSON.stringify({ problem, lesson, starter, solution }),
+  );
+  await writeFile(
+    path.join(runner, `generated/${problem.id}-v${problem.version}.py`),
+    helpers + "\n" + entry.tests,
+  );
+}
 await build({
   entryPoints: [
     path.join(root, "apps/runner/src/bridge.ts"),

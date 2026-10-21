@@ -1,4 +1,9 @@
-import { Workspace } from "@/components/workspace";
+import { LearningHome } from "@/components/learning";
+import { LearningPage } from "@/components/learning-page";
 export default function Home() {
-  return <Workspace />;
+  return (
+    <LearningPage title="Your learning space" active="home">
+      <LearningHome />
+    </LearningPage>
+  );
 }

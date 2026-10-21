@@ -1,0 +1,25 @@
+schema_version: 1
+id: "p01"
+slug: "retrieval-pipeline"
+version: 1
+title: "Build the Retrieval Pipeline"
+summary: "Combine vector ranking, rank fusion, and evaluation into one reproducible retrieval pipeline."
+domain: "engineering"
+difficulty: "advanced"
+skills: ["Integration", "Retrieval", "Evaluation"]
+prerequisites: ["e02", "e03", "e04"]
+assumed_knowledge: ["Python functions", "Lists and NumPy arrays"]
+runtime:
+  engine: "pyodide"
+  packages: ["numpy"]
+evaluation:
+  entrypoint: "retrieval_pipeline"
+  absolute_tolerance: 1e-07
+  relative_tolerance: 1e-06
+estimated_minutes: 60
+status: "validated"
+author: "Project Mastery contributors"
+license: "CC-BY-SA-4.0"
+code_license: "Apache-2.0"
+attribution: []
+kind: "project"

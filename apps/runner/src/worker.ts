@@ -2,6 +2,7 @@ import {
   PROTOCOL_VERSION,
   RunRequestSchema,
 } from "../../../packages/runner-protocol/src/index";
+import manifest from "./generated/manifest.json";
 
 // Kept external by esbuild and served exclusively from the runner origin.
 // @ts-expect-error This module is supplied by the pinned, locally copied runtime.
@@ -13,7 +14,14 @@ const workerScope = globalThis as unknown as {
 };
 const pyodide = await loadPyodide({ indexURL: `${location.origin}/runtime/` });
 await pyodide.loadPackage("numpy");
-const evaluatorResponse = await fetch("/generated/evaluator.py");
+const parameters = new URL(location.href).searchParams;
+const item = manifest.find(
+  (item) =>
+    item.id === parameters.get("item") &&
+    String(item.version) === parameters.get("version"),
+);
+if (!item) throw new Error("Unknown lesson version.");
+const evaluatorResponse = await fetch(item.evaluator);
 if (!evaluatorResponse.ok) throw new Error("Evaluator is unavailable.");
 const evaluator = await evaluatorResponse.text();
 workerScope.onmessage = async (event: MessageEvent) => {
@@ -21,6 +29,8 @@ workerScope.onmessage = async (event: MessageEvent) => {
   if (!parsed.success) return;
   workerScope.onmessage = null;
   const request = parsed.data;
+  if (request.problemId !== item.id || request.problemVersion !== item.version)
+    return;
   const started = performance.now();
   let output = "";
   const append = (line: string) => {

@@ -15,6 +15,7 @@ playwright-report/
 !.env.example
 apps/runner/public/runtime/
 apps/runner/public/generated/
+apps/runner/src/generated/
 apps/runner/public/*.js
 apps/web/public/monaco/
 apps/web/public/editor.worker.js

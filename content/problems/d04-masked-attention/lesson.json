@@ -1,0 +1,50 @@
+{
+  "intro": "Attention turns similarities into a weighted mixture of values. A mask defines which keys a query is allowed to use, such as only earlier tokens.",
+  "task": "Return a dictionary with weights and output for scaled dot-product attention. A True mask entry permits attention.",
+  "signature": "masked_attention(Q, K, V, mask)",
+  "requirements": [
+    "Q has shape (m,d), K (n,d), V (n,v), and boolean mask (m,n), with positive dimensions.",
+    "Scale scores by sqrt(d), apply the mask, and use a numerically stable softmax per row.",
+    "An entirely masked row must have zero weights and zero output.",
+    "Reject incompatible shapes, non-boolean masks, or non-finite inputs with ValueError. Do not mutate inputs; test dot products are representable."
+  ],
+  "examples": [
+    {
+      "name": "Uniform weights",
+      "input": "Q=[[0]], K=[[1],[2]], V=[[2],[6]], mask=[[True,True]]",
+      "output": "weights=[[0.5,0.5]], output=[[4.0]]"
+    },
+    {
+      "name": "One permitted key",
+      "input": "Q=[[1]], K=[[1],[2]], V=[[2],[6]], mask=[[True,False]]",
+      "output": "weights=[[1,0]], output=[[2]]"
+    },
+    {
+      "name": "No permitted key",
+      "input": "Q=[[1]], K=[[1]], V=[[7]], mask=[[False]]",
+      "output": "weights=[[0]], output=[[0]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Separate allowed positions",
+      "body": "Replace disallowed scores with -infinity, then identify rows with at least one permitted key."
+    },
+    {
+      "title": "Stabilize each row",
+      "body": "Subtract a row maximum before exponentiation. Give entirely masked rows a safe maximum such as zero."
+    },
+    {
+      "title": "Divide only where valid",
+      "body": "Use a zero-filled result and divide where the denominator is positive. Multiply the weights by V."
+    }
+  ],
+  "explanation": [
+    "The dot products measure query-key compatibility. Scaling by the square root of the key dimension moderates their growth as the dimension increases.",
+    "Masking happens before normalization. Zeroing probabilities afterward would leave valid rows with weights that no longer sum to one.",
+    "An entirely masked row has no probability distribution. This exercise defines a zero result so downstream code gets an explicit, finite outcome."
+  ],
+  "formula": "Attention(Q, K, V) = softmax(mask(QKᵀ / √d)) V",
+  "test_count": 12,
+  "sample_count": 3
+}

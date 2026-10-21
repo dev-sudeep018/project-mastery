@@ -7,7 +7,7 @@ summary: Turn a vector of scores into probabilities, even when the numbers get v
 domain: foundations
 difficulty: beginner
 skills: [NumPy, Probability, Numerical stability]
-prerequisites: []
+prerequisites: [m01]
 assumed_knowledge: [Python functions, NumPy arrays, Exponentials]
 runtime:
   engine: pyodide

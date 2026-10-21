@@ -11,12 +11,13 @@
   "dependencies": {
     "@mastery/problem-schema": "workspace:*",
     "@mastery/runner-protocol": "workspace:*",
+    "@monaco-editor/react": "4.7.0",
+    "lucide-react": "0.468.0",
+    "monaco-editor": "0.57.0",
     "next": "16.4.2",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "monaco-editor": "0.57.0",
-    "@monaco-editor/react": "4.7.0",
-    "lucide-react": "0.468.0"
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@types/react": "19.2.2",
