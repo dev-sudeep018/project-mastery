@@ -137,6 +137,13 @@ export function Workspace({ data }: { data: LearningItem }) {
     return () => removeEventListener("keydown", handle);
   }, []);
   const mountEditor: OnMount = (editor, monaco) => {
+    // The React wrapper creates the model before editor options are applied.
+    editor.getModel()?.updateOptions({
+      bracketColorizationOptions: {
+        enabled: false,
+        independentColorPoolPerBracketType: false,
+      },
+    });
     const palette = getComputedStyle(document.documentElement);
     const color = (name: string) =>
       palette.getPropertyValue(`--${name}`).trim();
@@ -167,6 +174,15 @@ export function Workspace({ data }: { data: LearningItem }) {
         "editor.selectionBackground": color("selection"),
         "editorCursor.foreground": color("accent"),
         "editorIndentGuide.background1": color("border"),
+        "editorBracketMatch.background": color("raised"),
+        "editorBracketMatch.border": color("border-strong"),
+        "editorBracketHighlight.foreground1": color("text"),
+        "editorBracketHighlight.foreground2": color("text"),
+        "editorBracketHighlight.foreground3": color("text"),
+        "editorBracketHighlight.foreground4": color("text"),
+        "editorBracketHighlight.foreground5": color("text"),
+        "editorBracketHighlight.foreground6": color("text"),
+        "editorBracketHighlight.unexpectedBracket.foreground": color("text"),
         "editorError.foreground": color("danger"),
         "editorWarning.foreground": color("muted"),
         "editorInfo.foreground": color("muted"),
@@ -264,12 +280,14 @@ export function Workspace({ data }: { data: LearningItem }) {
       <div className="mobile-switch" role="group" aria-label="Workspace view">
         <button
           className={!mobileEditor ? "selected" : ""}
+          aria-pressed={!mobileEditor}
           onClick={() => setMobileEditor(false)}
         >
           Read exercise
         </button>
         <button
           className={mobileEditor ? "selected" : ""}
+          aria-pressed={mobileEditor}
           onClick={() => setMobileEditor(true)}
         >
           Write Python
@@ -548,6 +566,7 @@ export function Workspace({ data }: { data: LearningItem }) {
                 theme="vs-dark"
                 options={{
                   minimap: { enabled: false },
+                  bracketPairColorization: { enabled: false },
                   fontSize: 14,
                   lineHeight: 24,
                   fontFamily: 'Consolas, "Liberation Mono", monospace',

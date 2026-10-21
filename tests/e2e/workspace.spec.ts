@@ -188,6 +188,10 @@ test("navigation, filtering, hints and panel resizing work", async ({
 test("mobile reading and editing fit the viewport", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/problems/stable-softmax/");
+  const readPane = page.getByRole("button", { name: "Read exercise" });
+  const writePane = page.getByRole("button", { name: "Write Python" });
+  await expect(readPane).toHaveAttribute("aria-pressed", "true");
+  await expect(writePane).toHaveAttribute("aria-pressed", "false");
   await expect(
     page.getByRole("heading", { name: "Numerically Stable Softmax" }),
   ).toBeVisible();
@@ -202,6 +206,8 @@ test("mobile reading and editing fit the viewport", async ({ page }) => {
     page.getByText("Replace your current code with the reference solution?"),
   ).toBeVisible();
   await page.getByRole("button", { name: "Replace code", exact: true }).click();
+  await expect(readPane).toHaveAttribute("aria-pressed", "false");
+  await expect(writePane).toHaveAttribute("aria-pressed", "true");
   await expect(
     page.getByRole("button", { name: "Check solution", exact: true }),
   ).toBeVisible();
@@ -210,4 +216,10 @@ test("mobile reading and editing fit the viewport", async ({ page }) => {
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
+  await readPane.click();
+  await expect(readPane).toHaveAttribute("aria-pressed", "true");
+  await expect(writePane).toHaveAttribute("aria-pressed", "false");
+  await expect(
+    page.getByRole("region", { name: "Problem information" }),
+  ).toBeVisible();
 });
