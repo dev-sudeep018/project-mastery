@@ -16,8 +16,13 @@ assertion on valid input. Intentional invalid starter/mutant executions can emit
 NumPy warnings; these do not represent reference failures.
 
 The browser suite discovers 67 tests per engine, including all 52 published
-references. A focused local run selects the 30 new references and connected
-navigation/filter flow. GitHub runs the complete suite in Chromium, Firefox, and
+references. All 30 new references passed in local Chromium. The navigation test
+initially used a phrase absent from the actual lesson title; its corrected search
+passed on a focused rerun. Desktop BM25 content at 1440 pixels and mobile Gaussian
+content at 390 pixels were inspected, with no document overflow or page errors.
+Worked examples now display named inputs and numeric results instead of NumPy
+constructor expressions. Metadata validation and the production build also cover
+that presentation update. GitHub runs the complete suite in Chromium, Firefox, and
 WebKit; the pull-request checks record the exact tested commit and results.
 The existing Windows Firefox and physical-device limitations below still apply.
 
