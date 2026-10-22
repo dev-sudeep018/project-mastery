@@ -1,5 +1,6 @@
 import { Github } from "lucide-react";
 import { Shell } from "@/components/shell";
+import { catalog, paths } from "@/lib/curriculum";
 export default function About() {
   return (
     <Shell active="about">
@@ -22,7 +23,8 @@ export default function About() {
         <h2>What works today</h2>
         <ul>
           <li>
-            Twelve original lessons across three connected learning paths.
+            {catalog.length} original lessons across {paths.length} connected
+            learning paths.
           </li>
           <li>
             Four interactive experiments and a retrieval project with a Python

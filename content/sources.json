@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-22",
+  "scope": "Repository metadata, license files and selected official course pages inspected; upstream programs not executed. Decisions are project editorial routing, not blanket clearance of all assets. No material imported yet.",
+  "sources": [
+    {
+      "id": "numpy-tutorials",
+      "name": "NumPy tutorials",
+      "url": "https://github.com/numpy/numpy-tutorials",
+      "revision": "dfc643bd322bbf81fdb3a0b03ce6e48bdd93d10c",
+      "checked_on": "2026-10-22",
+      "license": "BSD-3-Clause",
+      "evidence": [
+        "https://github.com/numpy/numpy-tutorials/blob/dfc643bd322bbf81fdb3a0b03ce6e48bdd93d10c/LICENSE.txt"
+      ],
+      "decision": "adapt-first",
+      "runtime_fit": "NumPy kernels fit; remove plotting, file/network access and external datasets.",
+      "topics": ["arrays", "linear algebra", "numerical computing"],
+      "notes": "Retain copyright, conditions and disclaimer; inspect dataset/image exceptions."
+    },
+    {
+      "id": "numpy-100",
+      "name": "100 NumPy exercises",
+      "url": "https://github.com/rougier/numpy-100",
+      "revision": "8ca28aaefca69a32ad3ccbbd01c7c9a785c2d5c1",
+      "checked_on": "2026-10-22",
+      "license": "MIT",
+      "evidence": [
+        "https://github.com/rougier/numpy-100/blob/8ca28aaefca69a32ad3ccbbd01c7c9a785c2d5c1/LICENSE.txt"
+      ],
+      "decision": "inspect-per-item",
+      "runtime_fit": "Many array exercises fit directly; turn terse prompts into learning investigations.",
+      "topics": ["arrays", "indexing", "broadcasting"],
+      "notes": "Repository says MIT but README identifies mixed origins including Stack Overflow; trace item provenance before copying."
+    },
+    {
+      "id": "d2l",
+      "name": "Dive into Deep Learning",
+      "url": "https://github.com/d2l-ai/d2l-en",
+      "revision": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+      "checked_on": "2026-10-22",
+      "license": "CC-BY-SA-4.0 prose; MIT-0 sample code",
+      "evidence": [
+        "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE",
+        "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE-SAMPLECODE",
+        "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE-SUMMARY"
+      ],
+      "decision": "adapt-first",
+      "runtime_fit": "Adapt small mathematical kernels; full framework/training notebooks require another runtime.",
+      "topics": [
+        "linear algebra",
+        "optimization",
+        "deep learning",
+        "attention"
+      ],
+      "notes": "Keep prose attribution, change notices and share-alike; sample code has its own modified MIT license."
+    },
+    {
+      "id": "ms-ml",
+      "name": "Microsoft ML for Beginners",
+      "url": "https://github.com/microsoft/ML-For-Beginners",
+      "revision": "de2d4e12236445198213a0711855e348e7253cd4",
+      "checked_on": "2026-10-22",
+      "license": "MIT",
+      "evidence": [
+        "https://github.com/microsoft/ML-For-Beginners/blob/de2d4e12236445198213a0711855e348e7253cd4/LICENSE"
+      ],
+      "decision": "adapt-first",
+      "runtime_fit": "Use small datasets and NumPy implementations; full scikit-learn/R projects are outside current runner.",
+      "topics": ["supervised learning", "clustering", "evaluation"],
+      "notes": "Preserve MIT notices; referenced datasets/media have their own terms."
+    },
+    {
+      "id": "ms-ai",
+      "name": "Microsoft AI for Beginners",
+      "url": "https://github.com/microsoft/AI-For-Beginners",
+      "revision": "392d0df1b2647cbee104942390551f1ed9e072c8",
+      "checked_on": "2026-10-22",
+      "license": "MIT",
+      "evidence": [
+        "https://github.com/microsoft/AI-For-Beginners/blob/392d0df1b2647cbee104942390551f1ed9e072c8/LICENSE"
+      ],
+      "decision": "adapt-later",
+      "runtime_fit": "Framework notebooks need PyTorch/TensorFlow; mathematical subactivities can be ported.",
+      "topics": ["computer vision", "NLP", "neural networks"],
+      "notes": "Preserve MIT notices; check external dataset and image licenses."
+    },
+    {
+      "id": "ms-genai",
+      "name": "Microsoft Generative AI for Beginners",
+      "url": "https://github.com/microsoft/generative-ai-for-beginners",
+      "revision": "8e470a863deb9ed9e7cb9bd5e6938e5bf3e0c967",
+      "checked_on": "2026-10-22",
+      "license": "MIT",
+      "evidence": [
+        "https://github.com/microsoft/generative-ai-for-beginners/blob/8e470a863deb9ed9e7cb9bd5e6938e5bf3e0c967/LICENSE"
+      ],
+      "decision": "adapt-later",
+      "runtime_fit": "Cloud/API activities need credentials and may cost money; begin with offline fixtures.",
+      "topics": ["AI applications", "retrieval", "agents"],
+      "notes": "Free curriculum does not imply free model/API execution; retain notices."
+    },
+    {
+      "id": "ms-data",
+      "name": "Microsoft Data Science for Beginners",
+      "url": "https://github.com/microsoft/Data-Science-For-Beginners",
+      "revision": "4d2ac427ad6f022e73a75c4f46a28bbb7978ec3f",
+      "checked_on": "2026-10-22",
+      "license": "MIT",
+      "evidence": [
+        "https://github.com/microsoft/Data-Science-For-Beginners/blob/4d2ac427ad6f022e73a75c4f46a28bbb7978ec3f/LICENSE"
+      ],
+      "decision": "adapt-first",
+      "runtime_fit": "Small data-cleaning and statistics operations can use supplied arrays.",
+      "topics": ["statistics", "data preparation", "experimentation"],
+      "notes": "Preserve MIT notices and separately inspect dataset provenance."
+    },
+    {
+      "id": "hf-llm",
+      "name": "Hugging Face LLM Course",
+      "url": "https://github.com/huggingface/llm-course",
+      "revision": "aaee936e5bbc959b5ab06f9b35406729efe74d1e",
+      "checked_on": "2026-10-22",
+      "license": "Apache-2.0",
+      "evidence": [
+        "https://github.com/huggingface/llm-course/blob/aaee936e5bbc959b5ab06f9b35406729efe74d1e/LICENSE"
+      ],
+      "decision": "adapt-first",
+      "runtime_fit": "Tokenization algorithms fit offline; transformers, model downloads and training do not run unchanged.",
+      "topics": ["tokenization", "language models", "datasets"],
+      "notes": "Retain license/notices and identify modifications; model and dataset licenses are separate."
+    },
+    {
+      "id": "hf-agents",
+      "name": "Hugging Face Agents Course",
+      "url": "https://github.com/huggingface/agents-course",
+      "revision": "3c469e773ec04e5f338b727ff20e3a6ea823ff81",
+      "checked_on": "2026-10-22",
+      "license": "Apache-2.0",
+      "evidence": [
+        "https://github.com/huggingface/agents-course/blob/3c469e773ec04e5f338b727ff20e3a6ea823ff81/LICENSE"
+      ],
+      "decision": "adapt-later",
+      "runtime_fit": "Use simulated tool traces first; real agent frameworks/services need a separate environment.",
+      "topics": ["agents", "tool use", "evaluation"],
+      "notes": "Retain notices; do not make paid services a prerequisite for core lessons."
+    },
+    {
+      "id": "hf-rl",
+      "name": "Hugging Face Deep RL Course",
+      "url": "https://github.com/huggingface/deep-rl-class",
+      "revision": "dbc53d83582884d06fb2a4b9e388405afdd34b18",
+      "checked_on": "2026-10-22",
+      "license": "Apache-2.0",
+      "evidence": [
+        "https://github.com/huggingface/deep-rl-class/blob/dbc53d83582884d06fb2a4b9e388405afdd34b18/LICENSE.md"
+      ],
+      "decision": "adapt-later",
+      "runtime_fit": "Tabular updates fit NumPy; simulator/framework training needs native notebooks.",
+      "topics": ["reinforcement learning", "policy evaluation"],
+      "notes": "Retain license/notices; environment assets may carry separate terms."
+    },
+    {
+      "id": "pytorch",
+      "name": "PyTorch tutorials",
+      "url": "https://github.com/pytorch/tutorials",
+      "revision": "c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6",
+      "checked_on": "2026-10-22",
+      "license": "BSD-3-Clause",
+      "evidence": [
+        "https://github.com/pytorch/tutorials/blob/c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6/LICENSE"
+      ],
+      "decision": "adapt-later",
+      "runtime_fit": "Conceptual kernels can become NumPy lessons; torch itself is not installed in our runner.",
+      "topics": ["autograd", "training", "model serving"],
+      "notes": "Retain copyright, conditions and disclaimer; no endorsement claim."
+    },
+    {
+      "id": "sklearn",
+      "name": "scikit-learn examples",
+      "url": "https://github.com/scikit-learn/scikit-learn",
+      "revision": "289c4d5cfa1b5c74c2c03420ed809c499ddf7287",
+      "checked_on": "2026-10-22",
+      "license": "BSD-3-Clause",
+      "evidence": [
+        "https://github.com/scikit-learn/scikit-learn/blob/289c4d5cfa1b5c74c2c03420ed809c499ddf7287/COPYING"
+      ],
+      "decision": "adapt-first",
+      "runtime_fit": "Use documented algorithms and small offline examples; sklearn/SciPy are not in the current allowlist.",
+      "topics": ["evaluation", "preprocessing", "clustering"],
+      "notes": "Preserve notices for adapted source; inspect per-example and data exceptions."
+    },
+    {
+      "id": "fastbook",
+      "name": "fast.ai book",
+      "url": "https://github.com/fastai/fastbook",
+      "revision": "971f0289c3d0bda81868d3c028a832c6ee380b58",
+      "checked_on": "2026-10-22",
+      "license": "GPL-3.0 code; prose redistribution restricted",
+      "evidence": [
+        "https://github.com/fastai/fastbook/blob/971f0289c3d0bda81868d3c028a832c6ee380b58/LICENSE",
+        "https://github.com/fastai/fastbook/blob/971f0289c3d0bda81868d3c028a832c6ee380b58/README.md"
+      ],
+      "decision": "link-only",
+      "runtime_fit": "Useful project sequence and external reading; full notebooks need native deep-learning tools.",
+      "topics": ["deep learning", "projects", "vision"],
+      "notes": "README prohibits redistribution/change of prose except private notebook copies/forks. Do not import into our content."
+    },
+    {
+      "id": "fastai-course",
+      "name": "fast.ai Practical Deep Learning",
+      "url": "https://github.com/fastai/course22",
+      "revision": "230390584ba5b990e20487d68681a9ec5b258eff",
+      "checked_on": "2026-10-22",
+      "license": "No repository license found by GitHub license endpoint",
+      "evidence": [
+        "https://github.com/fastai/course22/blob/230390584ba5b990e20487d68681a9ec5b258eff/README.md"
+      ],
+      "decision": "link-only",
+      "runtime_fit": "External course/notebook path; do not silently copy course material.",
+      "topics": ["deep learning", "projects", "diffusion"],
+      "notes": "Free access is confirmed on course.fast.ai; copying permission was not established. Link only pending file-specific permission."
+    },
+    {
+      "id": "handson-ml",
+      "name": "Hands-On Machine Learning notebooks",
+      "url": "https://github.com/ageron/handson-ml3",
+      "revision": "ef1c9f5ab11083584635b9b3a7846f49c58a6084",
+      "checked_on": "2026-10-22",
+      "license": "Apache-2.0 repository",
+      "evidence": [
+        "https://github.com/ageron/handson-ml3/blob/ef1c9f5ab11083584635b9b3a7846f49c58a6084/LICENSE"
+      ],
+      "decision": "adapt-later",
+      "runtime_fit": "Repo notebooks require sklearn/TensorFlow; isolate small numerical components.",
+      "topics": ["ML projects", "ensembles", "deep learning"],
+      "notes": "Repository license is not permission to copy the separately published book or third-party datasets."
+    },
+    {
+      "id": "micrograd",
+      "name": "micrograd",
+      "url": "https://github.com/karpathy/micrograd",
+      "revision": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+      "checked_on": "2026-10-22",
+      "license": "MIT",
+      "evidence": [
+        "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/LICENSE"
+      ],
+      "decision": "adapt-first",
+      "runtime_fit": "Small Python scalar-autograd engine is a good fit for chain-rule investigations.",
+      "topics": ["autograd", "backpropagation"],
+      "notes": "Retain MIT copyright/license for adapted code; add independent tests and learning prompts."
+    },
+    {
+      "id": "zero-to-hero",
+      "name": "Neural Networks: Zero to Hero",
+      "url": "https://github.com/karpathy/nn-zero-to-hero",
+      "revision": "73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde",
+      "checked_on": "2026-10-22",
+      "license": "MIT repository",
+      "evidence": [
+        "https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/LICENSE"
+      ],
+      "decision": "adapt-later",
+      "runtime_fit": "Scalar/autograd sections fit; larger language-model training needs native PyTorch.",
+      "topics": ["neural networks", "language models"],
+      "notes": "Keep repository notices; linked videos/media are not automatically covered by the code license."
+    },
+    {
+      "id": "spinning-up",
+      "name": "Spinning Up in Deep RL",
+      "url": "https://github.com/openai/spinningup",
+      "revision": "038665d62d569055401d91856abb287263096178",
+      "checked_on": "2026-10-22",
+      "license": "MIT",
+      "evidence": [
+        "https://github.com/openai/spinningup/blob/038665d62d569055401d91856abb287263096178/LICENSE"
+      ],
+      "decision": "adapt-later",
+      "runtime_fit": "Start with offline returns/Bellman calculations; original training stack needs native tooling.",
+      "topics": ["reinforcement learning", "optimization"],
+      "notes": "Retain MIT notices; review older dependencies before running upstream code."
+    },
+    {
+      "id": "google-mlcc",
+      "name": "Google Machine Learning Crash Course",
+      "url": "https://developers.google.com/machine-learning/crash-course",
+      "revision": null,
+      "checked_on": "2026-10-22",
+      "license": "CC-BY-4.0 text; Apache-2.0 code on pages carrying that notice",
+      "evidence": [
+        "https://developers.google.com/machine-learning/crash-course/linear-regression",
+        "https://developers.google.com/terms/site-policies"
+      ],
+      "decision": "adapt-first",
+      "runtime_fit": "Short concept checks and offline numerical investigations fit; inspect each page and embedded asset separately.",
+      "topics": ["supervised learning", "evaluation", "ML systems"],
+      "notes": "The inspected linear-regression page has the reuse notice; this is not blanket permission for videos, trademarks or third-party material."
+    },
+    {
+      "id": "mit-ocw",
+      "name": "MIT OpenCourseWare",
+      "url": "https://ocw.mit.edu/",
+      "revision": null,
+      "checked_on": "2026-10-22",
+      "license": "CC-BY-NC-SA-4.0 with stated exceptions",
+      "evidence": ["https://ocw.mit.edu/pages/privacy-and-terms-of-use/"],
+      "decision": "link-only",
+      "runtime_fit": "External mathematical background and course assignments.",
+      "topics": ["linear algebra", "probability", "machine learning"],
+      "notes": "Noncommercial/share-alike terms differ from this project's current content license; keep as linked reading rather than relabeling material."
+    },
+    {
+      "id": "uci-iris",
+      "name": "UCI datasets: Iris verified",
+      "url": "https://archive.ics.uci.edu/dataset/53/iris",
+      "revision": null,
+      "checked_on": "2026-10-22",
+      "license": "CC-BY-4.0 for the inspected Iris dataset",
+      "evidence": ["https://archive.ics.uci.edu/dataset/53/iris"],
+      "decision": "adapt-first",
+      "runtime_fit": "150 rows and four numeric features can be bundled for small classification projects after import/provenance checks.",
+      "topics": ["datasets", "classification", "evaluation"],
+      "notes": "Record DOI 10.24432/C56C76 and credit R. A. Fisher. Verify every other dataset independently; repository membership is not a license."
+    }
+  ]
+}

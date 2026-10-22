@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e05",
+  "slug": "tfidf-weighting",
+  "version": 1,
+  "title": "Build a TF-IDF Representation",
+  "summary": "Distinguish document frequency from raw counts and turn a count matrix into normalized retrieval vectors.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Lexical retrieval", "TF-IDF", "Vector normalization"],
+  "prerequisites": ["m01", "e01"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "tfidf_weights",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "TF-IDF convention: https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html",
+    ],
+  "kind": "lesson",
+}

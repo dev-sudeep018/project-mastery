@@ -2,10 +2,12 @@
 
 Confirmed direction: 2,000 learning problems, approached through guided learning, project-first learning, and open exploration. The application supports understanding and building without a competitive coding queue.
 
-The initial workspace is merged in PR #1. Connected learning work is on `codex/full-learning-mvp`.
+The initial workspace is merged in PR #1. Connected learning is ready for review in PR #12. The next curriculum and semantic-color batch is on `codex/curriculum-depth`, based on that branch.
 
 - [x] Per-item lesson packages and an explicitly allowlisted multi-item runner.
-- [x] Twelve foundational lessons with explanations, examples, hints, references, and evaluated edge cases.
+- [x] Twenty-one lessons with explanations, examples, hints, references, and evaluated edge cases, including two debugging investigations.
+- [x] Meaningful status colors and differentiated Python syntax on the black/grey base.
+- [x] A 21-source reuse survey and fast selected-package authoring checks.
 - [x] Three guided paths with prerequisites and next-step links.
 - [x] Open discovery by domain, skill/search, difficulty, and progress; four interactive experiments.
 - [x] Retrieval project with supplied data, measured evaluation, controls, report export, and a tested Python integration task.

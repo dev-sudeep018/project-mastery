@@ -1,0 +1,51 @@
+{
+  "intro": "Two models fit a small training set equally well but use very different weights. Add a penalty that makes weight size part of the objective, then trace exactly which gradients change.",
+  "task": "Return loss, dw, and db for squared-error regression with an L2 weight penalty. Use loss = mean((X @ w + b - y)**2)/2 + strength * sum(w**2)/2. Do not penalize b.",
+  "signature": "ridge_gradients(X, y, w, b, strength)",
+  "requirements": [
+    "X has nonempty shape (n,d), y has shape (n,), and w has shape (d,). b and strength are finite scalars; strength >= 0.",
+    "Return loss/db as numeric scalars and dw as a NumPy array. Reject malformed shapes and non-finite inputs with ValueError.",
+    "Average the data term over n. The penalty is not divided by n and applies to w only. This lesson fixes its own scaling convention.",
+    "Inputs must remain unchanged. Checks use moderate finite values."
+  ],
+  "examples": [
+    {
+      "name": "Fit is perfect, penalty remains",
+      "input": "X=[[1],[2]], y=[2,4], w=[2], b=0, strength=0.5",
+      "output": "{loss:1, dw:[1], db:0}"
+    },
+    {
+      "name": "An unpenalized bias",
+      "input": "X=[[0]], y=[0], w=[0], b=3, strength=10",
+      "output": "{loss:4.5, dw:[0], db:3}"
+    },
+    {
+      "name": "Zero penalty",
+      "input": "X=[[1],[2]], y=[2,4], w=[0], b=0, strength=0",
+      "output": "{loss:5, dw:[-5], db:-3}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Separate the terms",
+      "body": "Compute the original regression loss and gradients first, then add the weight penalty."
+    },
+    {
+      "title": "Differentiate the penalty",
+      "body": "The gradient of strength * sum(w**2)/2 with respect to w is strength*w. It contains no b."
+    },
+    {
+      "title": "Check the convention",
+      "body": "Duplicating every training row should leave this objective and both gradients unchanged."
+    }
+  ],
+  "explanation": [
+    "The data term rewards predictions that match targets. The second term charges for large weights, so even a perfect fit can have a nonzero objective and gradient.",
+    "For the stated convention, dw = X.T @ residual / n + strength*w, while db = mean(residual). The intercept does not appear in the penalty.",
+    "Penalty constants depend on whether a library sums or averages its data loss. Compare the full objective before transferring a strength value between implementations.",
+    "Experiment with a perfect fit and increase strength. Explain why a gradient step can temporarily increase training error while decreasing the regularized objective. Scale features using training statistics before comparing the cost of their coefficients."
+  ],
+  "formula": "L = ||Xw + b − y||² / (2n) + λ||w||² / 2",
+  "test_count": 14,
+  "sample_count": 3
+}

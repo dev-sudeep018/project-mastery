@@ -1,8 +1,54 @@
 # Verification record
 
+## Curriculum depth, semantic colors, and source survey — 22 October 2026
+
+The current branch adds nine distinct lessons, bringing the catalog to 21 lessons
+plus one retrieval checkpoint and 298 public cases. Seven new Python test methods
+check independent numerical properties and reject nine plausible conceptual
+mistakes. They cover training-only scaling, ridge gradients, ReLU, dropout,
+gradient clipping, retrieval representation, and ranking metrics.
+
+Local validation, types, lint, formatting, 16 Vitest tests, 12 Python test
+methods, and the 34-page production export pass. The browser suite has 37 tests per engine. The local Chromium/WebKit
+run passed 72 of 74 initially; two Chromium cases encountered page-load or
+closed-browser timeouts during the long run. Both passed on a focused rerun
+(E07 and M01, 17.1 seconds combined). Subsequent completion-icon and confirmation
+text CSS corrections were checked visually; the GitHub checks on the new commit
+remain authoritative for the full release suite.
+
+The fast `pnpm content:check` command checked the nine-package batch and 137 cases
+in 2.8 seconds of native execution in the recorded run; this excludes metadata
+loading/tool startup and is not a benchmark guarantee. An unknown ID returned
+exit code 1. The full release command still executes every Python test, but no
+longer executes the same suite twice. The batch command is a short feedback loop,
+not a substitute for browser execution, numerical properties, or editorial review.
+
+Semantic feedback uses green success, red failures, amber warnings/timeouts,
+and blue information/cancellation. Python keywords, strings, and numbers have
+separate syntax colors. Text and icons retain state meaning without hue. Checked
+semantic text pairs exceed 6.8:1 against the brightest working surface (#272727);
+syntax pairs exceed 7.8:1. These measurements are not a complete accessibility
+audit. Desktop and mobile captures inspect actual failed/passed runs, replacement
+warnings, stopped runs, syntax, and completion indicators. The first review attempt
+hit a quota interruption and was replaced. The replacement reviewer found two
+remaining neutral states: library completion and backup confirmation text. Both
+were corrected and recaptured; the verdict scored both resolved with
+`disposition: ship`, covering those fixes. The updated design records match the
+final semantic roles. Review scope is also recorded on the pull request.
+
+`images/semantic-workspace.jpg` is an original application capture showing a
+previously completed softmax lesson's existing reference draft passing three
+examples. It does not imply an example-only run grants completion. The earlier
+screenshots and verification sections below record previous milestones.
+
+The [resource survey](source-research.md) and `content/sources.json` record 21
+inspected sources with license evidence and runtime assessments. No third-party
+content was imported and no upstream program was executed. Sources, planned
+adaptations, and linked courses do not count toward published lessons.
+
 ## Connected learning and monochrome palette — 21–22 October 2026
 
-The current release connects three guided paths, four interactive experiments, a searchable lesson library, and a retrieval project. It contains 12 published lessons plus one Python integration checkpoint, with 161 public cases. The 2,000-item curriculum allocation is a target, not an authored-content count.
+That earlier release connected three guided paths, four interactive experiments, a searchable lesson library, and a retrieval project. It contained 12 published lessons plus one Python integration checkpoint, with 161 public cases. The 2,000-item curriculum allocation is a target, not an authored-content count.
 
 Local content validation, TypeScript, ESLint, formatting, 15 Vitest tests, five Python test methods, and the 25-page production export pass. Native validation checks every reference and rejects every incomplete starter and a trivial incorrect implementation. Independent numerical checks cover softmax shift invariance, finite-difference gradients, and attention masking.
 

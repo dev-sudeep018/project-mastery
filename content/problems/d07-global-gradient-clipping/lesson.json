@@ -1,0 +1,51 @@
+{
+  "intro": "An optimizer suddenly takes a huge step. The supplied patch caps each coordinate, but that can rotate the overall update. Repair it so all parameter tensors share one scaling factor.",
+  "task": "Return a dictionary with norm (the original global L2 norm) and grads (a list of NumPy arrays). Scale every tensor by min(1, max_norm / norm), using scale one when norm is zero.",
+  "signature": "clip_gradients(grads, max_norm)",
+  "requirements": [
+    "grads is a nonempty Python list of nonempty numeric arrays, each with at least one axis. Their shapes may differ.",
+    "Treat all entries across the list as one concatenated vector when computing the L2 norm. Do not clip each tensor independently.",
+    "max_norm is a finite nonnegative scalar. Reject malformed inputs and non-finite values with ValueError. Checks use magnitudes up to 1e6.",
+    "Return the original norm before clipping. Preserve shapes, do not mutate inputs, and return new arrays even when no clipping is needed."
+  ],
+  "examples": [
+    {
+      "name": "One shared scale",
+      "input": "grads=[[3,4],[0,12]], max_norm=6.5",
+      "output": "{norm:13, grads:[[1.5,2],[0,6]]}"
+    },
+    {
+      "name": "Below the limit",
+      "input": "grads=[[3,4]], max_norm=10",
+      "output": "{norm:5, grads:[[3,4]]}"
+    },
+    {
+      "name": "Zero gradient",
+      "input": "grads=[[0,0]], max_norm=0",
+      "output": "{norm:0, grads:[[0,0]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Spot the rotation",
+      "body": "Coordinate clipping turns [3,4] into [2,2] at limit 2. Those vectors do not point in the same direction."
+    },
+    {
+      "title": "One norm across parameters",
+      "body": "Add the squared entries from every tensor, then take one square root."
+    },
+    {
+      "title": "Do not amplify",
+      "body": "Cap the multiplier at one. When norm is zero, avoid division and keep the zero arrays."
+    }
+  ],
+  "explanation": [
+    "Global norm clipping changes the update's length while preserving its direction. It multiplies every coordinate of every gradient tensor by the same nonnegative factor.",
+    "Clipping each tensor separately changes the relative contribution of different parameter groups. Clipping individual coordinates can also rotate the update; neither operation is this lesson's contract.",
+    "Returning the norm before clipping lets an experiment record when clipping activated. A small returned clipped norm alone would hide how large the original gradient was.",
+    "Run the flawed starter on the first example and compare coordinate ratios before and after. Clipping can limit a single step, but it does not repair an incorrect derivative or guarantee stable training."
+  ],
+  "formula": "g′ = g · min(1, c / ||g||₂)",
+  "test_count": 15,
+  "sample_count": 3
+}

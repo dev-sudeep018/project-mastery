@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "d06",
+  "slug": "inverted-dropout",
+  "version": 1,
+  "title": "Explain Inverted Dropout",
+  "summary": "Use a supplied keep mask to separate dropout's scaling rule from randomness and compare training with evaluation.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Regularization", "Dropout", "Expected value"],
+  "prerequisites": ["d05"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "inverted_dropout",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Dropout scaling convention: https://docs.pytorch.org/docs/stable/generated/torch.nn.modules.dropout.Dropout.html",
+    ],
+  "kind": "lesson",
+}

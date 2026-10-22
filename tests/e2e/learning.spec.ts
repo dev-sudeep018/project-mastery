@@ -2,15 +2,24 @@ import { test, expect } from "@playwright/test";
 import { readFileSync, readdirSync } from "node:fs";
 import { parse } from "yaml";
 
-const items = readdirSync("content/problems").map((folder) => {
-  const problem = parse(
-    readFileSync(`content/problems/${folder}/problem.yaml`, "utf8"),
-  ) as { id: string; slug: string; title: string };
-  const lesson = JSON.parse(
-    readFileSync(`content/problems/${folder}/lesson.json`, "utf8"),
-  ) as { test_count: number };
-  return { ...problem, ...lesson };
-});
+const items = readdirSync("content/problems")
+  .map((folder) => {
+    const problem = parse(
+      readFileSync(`content/problems/${folder}/problem.yaml`, "utf8"),
+    ) as {
+      id: string;
+      slug: string;
+      title: string;
+      kind: string;
+      status: string;
+    };
+    const lesson = JSON.parse(
+      readFileSync(`content/problems/${folder}/lesson.json`, "utf8"),
+    ) as { test_count: number };
+    return { ...problem, ...lesson };
+  })
+  .filter((item) => item.status === "validated");
+const lessonCount = items.filter((item) => item.kind !== "project").length;
 for (const item of items) {
   test(`published reference runs in isolation: ${item.id}`, async ({
     page,
@@ -67,7 +76,9 @@ test("three learning entry points, filters, and experiments connect", async ({
     .selectOption("foundations");
   await expect(page.getByText("No matching lessons yet.")).toBeVisible();
   await page.getByRole("button", { name: "Reset filters" }).click();
-  await expect(page.locator(".lesson-row")).toHaveCount(12);
+  await expect(page.locator(".lesson-row")).toHaveCount(
+    Math.min(lessonCount, 24),
+  );
 });
 test("project metrics respond, notes persist, and report is downloadable", async ({
   page,
@@ -137,7 +148,7 @@ test("backup import preserves existing drafts and merges completion", async ({
   });
   await page.getByRole("button", { name: "Merge backup" }).click();
   await expect(
-    page.getByText("1 of 12 lessons checked.", { exact: false }),
+    page.getByText(`1 of ${lessonCount} lessons checked.`, { exact: false }),
   ).toBeVisible();
   await expect(
     page.getByText("Retrieval pipeline checked.", { exact: false }),

@@ -16,12 +16,15 @@
   --accent-soft: #2b2b2b;
   --selection: #4a4a4a;
   --code: #d6d6d6;
-  --success: #d4d4d4;
-  --danger: #e0e0e0;
-  --danger-surface: #242424;
-  --syntax-keyword: #e5e5e5;
-  --syntax-string: #c3c3c3;
-  --syntax-number: #d4d4d4;
+  --success: #84dba2;
+  --danger: #ff8f96;
+  --danger-surface: #2a171a;
+  --warning: #f1c979;
+  --warning-surface: #2a2316;
+  --info: #8fbaff;
+  --syntax-keyword: #b4b6ff;
+  --syntax-string: #9ed7bc;
+  --syntax-number: #edc391;
   --radius: 8px;
 }
 
@@ -322,7 +325,7 @@ button svg {
   border-radius: 4px;
 }
 .complete-label {
-  color: var(--accent);
+  color: var(--success);
 }
 .path-link {
   display: flex;
@@ -746,7 +749,7 @@ button svg {
   gap: 13px;
   padding: 30px 7px 16px;
   align-items: flex-start;
-  color: var(--accent);
+  color: var(--info);
 }
 .run-notice strong {
   font-size: 13px;
@@ -768,6 +771,17 @@ button svg {
   color: var(--success);
 }
 .result-summary.failure {
+  color: var(--danger);
+}
+.result-summary.warning,
+.warning-text {
+  color: var(--warning);
+}
+.result-summary.info,
+.info-text {
+  color: var(--info);
+}
+.failure-text {
   color: var(--danger);
 }
 .result-summary strong {
@@ -793,17 +807,29 @@ button svg {
   color: var(--danger);
   background: var(--danger-surface);
 }
+.error-output.warning {
+  color: var(--warning);
+  background: var(--warning-surface);
+}
+.error-output.info {
+  color: var(--info);
+  background: var(--raised);
+}
 .output-label {
   font-size: 11px;
   margin: 12px 0 5px;
 }
 .inline-confirm {
   padding: 10px 16px;
-  background: var(--accent-soft);
+  background: var(--warning-surface);
+  color: var(--warning);
   font-size: 11px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+.inline-confirm p {
+  color: inherit;
 }
 .inline-confirm > span {
   width: 100%;
@@ -1006,6 +1032,9 @@ button svg {
 }
 .path-list .available .step-icon {
   color: var(--accent);
+}
+.path-list .available .step-icon.success-text {
+  color: var(--success);
 }
 .path-list h3 {
   font-size: 15px;
@@ -1616,6 +1645,9 @@ textarea {
   align-items: end;
   font-size: 11px;
   flex-shrink: 0;
+}
+.lesson-state.success-text {
+  color: var(--success);
 }
 .empty-state {
   padding: 45px 0;

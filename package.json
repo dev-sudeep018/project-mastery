@@ -13,6 +13,7 @@
     "build": "pnpm setup && pnpm --filter @mastery/web build",
     "preview": "node scripts/serve.mjs",
     "validate:content": "tsx scripts/validate-content.ts",
+    "content:check": "tsx scripts/check-batch.ts",
     "typecheck": "tsc --noEmit && pnpm --filter @mastery/web typecheck",
     "lint": "eslint .",
     "test": "vitest run",

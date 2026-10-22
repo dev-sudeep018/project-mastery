@@ -1,0 +1,51 @@
+{
+  "intro": "A positive activation can receive a negative gradient from the next layer. Trace the chain rule to see why clipping the upstream gradient itself would destroy useful information.",
+  "task": "Return a dictionary with output = max(x, 0) and dx, the gradient of the downstream scalar loss with respect to x. Use upstream as the supplied gradient with respect to output.",
+  "signature": "relu_backward(x, upstream)",
+  "requirements": [
+    "x and upstream have the same nonempty shape, with at least one axis. Return output and dx as NumPy arrays of that shape.",
+    "Pass upstream through wherever x > 0; return zero elsewhere. This lesson explicitly chooses derivative zero at x = 0.",
+    "Reject non-finite inputs, scalars, empty arrays, and mismatched shapes with ValueError. Do not broadcast a mismatched gradient.",
+    "Do not mutate x or upstream. The sign of upstream is independent of the activation gate."
+  ],
+  "examples": [
+    {
+      "name": "The gate follows x",
+      "input": "x=[-2,0,3], upstream=[5,7,-4]",
+      "output": "{output:[0,0,3], dx:[0,0,-4]}"
+    },
+    {
+      "name": "Matrix activations",
+      "input": "x=[[-1,2],[3,-4]], upstream=[[1,2],[3,4]]",
+      "output": "{output:[[0,2],[3,0]], dx:[[0,2],[3,0]]}"
+    },
+    {
+      "name": "A zero boundary",
+      "input": "x=[0,0], upstream=[1,-1]",
+      "output": "{output:[0,0], dx:[0,0]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Separate forward and backward",
+      "body": "The forward pass depends only on x. The backward pass also uses the downstream gradient."
+    },
+    {
+      "title": "Gate, do not clip",
+      "body": "The local derivative is a mask derived from x > 0, multiplied by upstream."
+    },
+    {
+      "title": "The boundary is a convention",
+      "body": "ReLU is not differentiable at zero. Follow the stated zero-derivative convention rather than estimating it by a symmetric difference there."
+    }
+  ],
+  "explanation": [
+    "The chain rule multiplies the local derivative by the upstream derivative. A positive x opens the gate; it does not force the incoming gradient to be positive.",
+    "At a negative x, a small change leaves the forward output unchanged, so the local derivative is zero. At a positive x, the local derivative is one.",
+    "At exactly zero, the two one-sided slopes disagree. This activity chooses zero for the backward pass. Check finite differences away from that boundary, where a derivative exists.",
+    "Change only the sign of an upstream entry attached to a positive activation. The returned gradient should change sign too. Explain what learning signal would be lost by applying ReLU to upstream itself."
+  ],
+  "formula": "dx = upstream ⊙ 1[x > 0]",
+  "test_count": 12,
+  "sample_count": 3
+}

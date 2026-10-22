@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e07",
+  "slug": "graded-retrieval-quality",
+  "version": 1,
+  "title": "Measure Graded Retrieval Quality",
+  "summary": "Distinguish a perfect answer from a loosely related result and penalize placing the strongest evidence too far down.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Evaluation", "NDCG", "Graded relevance"],
+  "prerequisites": ["e03"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "ndcg_at_k",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Linear-gain NDCG convention: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html",
+    ],
+  "kind": "lesson",
+}

@@ -21,26 +21,28 @@ export const paths = [
     slug: "mathematics-to-ml",
     title: "Mathematics to Machine Learning",
     description:
-      "Connect vectors, probabilities, gradients, and loss to the behavior of a model.",
-    outcome: "Explain what a model measures and how its parameters improve.",
-    items: ["m01", "m02", "m03", "m04"],
+      "Connect vectors, probabilities, gradients, preprocessing, and evaluation to the behavior of a model.",
+    outcome:
+      "Explain model updates, avoid preprocessing leakage, and compare decision thresholds.",
+    items: ["m01", "m02", "m03", "m04", "m05", "m06", "m07"],
   },
   {
     slug: "deep-learning",
     title: "Deep Learning from First Principles",
     description:
-      "Check derivatives, propagate gradients, and construct the operations inside a transformer.",
+      "Check derivatives, trace activation gradients, and inspect the operations and controls used in neural networks.",
     outcome:
-      "Trace a signal through linear layers, normalization, and attention.",
-    items: ["d01", "d02", "d03", "d04"],
+      "Trace forward and backward signals and explain dropout and gradient clipping.",
+    items: ["d01", "d02", "d05", "d06", "d07", "d03", "d04"],
   },
   {
     slug: "ai-engineering",
     title: "Practical AI Engineering",
     description:
-      "Turn documents into a retrieval system, then measure where it works and where it misses.",
-    outcome: "Build and evaluate a small retrieval pipeline.",
-    items: ["e01", "e02", "e03", "e04"],
+      "Turn documents into retrieval vectors, combine and diversify results, then evaluate relevance and ranking quality.",
+    outcome:
+      "Build a retrieval pipeline and explain its relevance, diversity, and evaluation tradeoffs.",
+    items: ["e01", "e02", "e05", "e03", "e04", "e06", "e07"],
   },
 ];
 export function itemById(id: string) {

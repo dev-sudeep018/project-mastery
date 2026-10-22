@@ -17,12 +17,15 @@ colors:
   accent-soft: "#2b2b2b"
   selection: "#4a4a4a"
   code: "#d6d6d6"
-  success: "#d4d4d4"
-  danger: "#e0e0e0"
-  danger-surface: "#242424"
-  syntax-keyword: "#e5e5e5"
-  syntax-string: "#c3c3c3"
-  syntax-number: "#d4d4d4"
+  success: "#84dba2"
+  danger: "#ff8f96"
+  danger-surface: "#2a171a"
+  warning: "#f1c979"
+  warning-surface: "#2a2316"
+  info: "#8fbaff"
+  syntax-keyword: "#b4b6ff"
+  syntax-string: "#9ed7bc"
+  syntax-number: "#edc391"
 typography:
   headline:
     fontFamily: '"Segoe UI", system-ui, sans-serif'
@@ -98,14 +101,14 @@ The source is the implemented global stylesheet and workspace, shell, learning, 
 
 **Key Characteristics:**
 
-- Black and charcoal surfaces with light grey actions, selections, and diagnostic labels.
+- Black and charcoal surfaces with light grey actions and selections, plus distinct semantic feedback colors.
 - Compact controls, readable prose, and real monospaced code.
 - Flat bordered panels with feedback adjacent to the editor.
 - Connected reading, experiment, and project surfaces with responsive navigation and a mobile description/code switch.
 
 ## Colors
 
-The user-selected palette is black and light grey throughout, including syntax, charts, and diagnostics. The frontmatter is the normative primitive source; repeated values represent distinct semantic roles.
+The user-selected black and light grey base uses distinct colors for semantic feedback and Python syntax; ordinary actions and charts retain neutral tones. The frontmatter is the normative primitive source; repeated values represent distinct semantic roles.
 
 ### Primary
 
@@ -121,11 +124,19 @@ The user-selected palette is black and light grey throughout, including syntax, 
 - **Reading white** (`text`), **muted grey** (`muted`), and **subtle grey** (`subtle`): content hierarchy.
 - **Selection grey** (`selection`) and **code grey** (`code`): selected text and code reading.
 
-Diagnostic success uses `success`; errors use `danger` and `danger-surface`. These are monochrome semantic roles: explicit wording and icons communicate the outcome. Syntax uses grey tones, bold keywords, and italic comments.
+### Semantic feedback and syntax
+
+- **Success green** (`success`): passed tests, completion indicators, and successful backup or report notices.
+- **Error red** (`danger`, with `danger-surface`): failed checks, errors, and unexpected brackets.
+- **Warning amber** (`warning`, with `warning-surface`): timeouts, replacement confirmations, and storage cautions.
+- **Information blue** (`info`): running, cancelled, and informational states.
+- **Syntax lavender**, **mint**, and **warm tan** (`syntax-keyword`, `syntax-string`, `syntax-number`): differentiated Python tokens. Keywords remain bold and comments italic.
+
+Explicit wording and icons accompany state colors; color alone does not communicate an outcome.
 
 ### Named Rules
 
-**The Explicit State Rule.** Use icons and wording to distinguish diagnostic states; light grey emphasis and tonal surfaces support interaction without relying on hue.
+**The Explicit State Rule.** Pair semantic colors with icons and wording: green success, red failure, amber caution, and blue information. Keep ordinary actions and working surfaces neutral.
 
 ## Typography
 
@@ -197,9 +208,9 @@ Experiments place native range controls beside visible outputs, explanatory pros
 
 ### Editor and feedback
 
-The Monaco theme shares the charcoal surface with its surrounding workbench. Line numbers, indentation, current line, and selection use distinct subdued tones; syntax uses monochrome tokens with bold keywords and italic comments. Theme inheritance is disabled and the default token uses the neutral text color; editor overlays, selection, cursor, and diagnostics also use the shared grey roles. Minimap, folding, and glyph margin are disabled, with 20px editor top/bottom padding and 4-space tabs.
+The Monaco theme shares the charcoal surface with its surrounding workbench. Line numbers, indentation, current line, and selection use distinct subdued tones; syntax uses differentiated keyword, string, and number colors with bold keywords and italic comments. Theme inheritance is disabled and the default token uses the neutral text color; editor overlays, selection, and cursor use the shared grey roles. Editor errors, warnings, and information use their semantic colors. Bracket colorization is disabled at the editor and model levels; ordinary brackets remain neutral and unexpected brackets use the error role. Minimap, folding, and glyph margin are disabled, with 20px editor top/bottom padding and 4-space tabs.
 
-Run controls sit directly above diagnostic results. Individual test rows are expandable and pair passed/failed wording with icons and color. Result chevrons rotate over 0.18 seconds. A spinner indicates running work. Reduced-motion preference disables CSS transitions and animations. Confirmation prompts for replacing code remain inline and wrap rather than becoming a modal.
+Run controls sit directly above diagnostic results. Individual test rows are expandable and pair passed/failed wording with icons and color. Result chevrons rotate over 0.18 seconds. A spinner indicates running work. Reduced-motion preference disables CSS transitions and animations. Confirmation prompts for replacing code remain inline, use warning tones, and wrap rather than becoming a modal. Timeout feedback uses warning amber; running and cancelled states use information blue. Successful completion and export/import notices use success green, while storage cautions use warning amber.
 
 ## Do's and Don'ts
 

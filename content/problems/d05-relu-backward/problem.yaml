@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "d05",
+  "slug": "relu-backward",
+  "version": 1,
+  "title": "Trace a Gradient Through ReLU",
+  "summary": "Follow positive and negative upstream gradients through an activation gate, including its boundary at zero.",
+  "domain": "deep-learning",
+  "difficulty": "beginner",
+  "skills": ["Backpropagation", "Activations", "Chain rule"],
+  "prerequisites": ["d01", "d02"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "relu_backward",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+  "kind": "lesson",
+}

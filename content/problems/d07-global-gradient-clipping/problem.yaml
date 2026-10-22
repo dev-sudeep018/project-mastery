@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "d07",
+  "slug": "global-gradient-clipping",
+  "version": 1,
+  "title": "Repair Global Gradient Clipping",
+  "summary": "Keep a gradient's direction while limiting its total size across parameter tensors, rather than clipping each coordinate.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Optimization", "Gradient clipping", "Debugging"],
+  "prerequisites": ["d02", "d05"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "clip_gradients",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Global norm definition: https://docs.pytorch.org/docs/stable/generated/torch.nn.utils.clip_grad_norm_.html",
+    ],
+  "kind": "lesson",
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "m05",
+  "slug": "training-only-standardization",
+  "version": 1,
+  "title": "Repair a Leaking Feature Scaler",
+  "summary": "Find why test data changes the training transform, then fit scaling statistics on training rows only.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Data leakage", "Preprocessing", "Debugging"],
+  "prerequisites": ["m03"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "standardize_split",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "StandardScaler conventions: https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html",
+    ],
+  "kind": "lesson",
+}

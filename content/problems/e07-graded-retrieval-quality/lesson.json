@@ -1,0 +1,51 @@
+{
+  "intro": "Recall treats every relevant document alike. When some passages directly answer a question and others only mention the topic, use graded judgments and account for where they appear.",
+  "task": "Return NDCG@k as a numeric scalar using linear relevance gains and discount log2(rank+1), where rank starts at one. Divide by the DCG of the best possible ordering of every judged document.",
+  "signature": "ndcg_at_k(ranked, relevance, k)",
+  "requirements": [
+    "ranked is a Python list of nonempty string IDs. relevance is a dictionary of nonempty string IDs to finite numeric grades in [0,5]. Empty inputs are allowed.",
+    "Keep the first occurrence of each ranked ID, then take the first k. An unjudged ID has gain zero but still occupies a rank position.",
+    "k is a nonnegative Python int; bool is invalid and k may exceed the number of documents. Return zero for k=0 or ideal DCG=0.",
+    "Use grades directly, not 2**grade-1. Ideal DCG uses all relevance judgments, including documents absent from ranked. Reject malformed values with ValueError; preserve inputs."
+  ],
+  "examples": [
+    {
+      "name": "Ideal ordering",
+      "input": "ranked=['a','b'], relevance={'a':3,'b':1}, k=2",
+      "output": "1.0"
+    },
+    {
+      "name": "Weak result in first place",
+      "input": "ranked=['b','a'], relevance={'a':3,'b':1}, k=1",
+      "output": "0.333333"
+    },
+    {
+      "name": "No positive judgments",
+      "input": "ranked=['a'], relevance={'a':0}, k=3",
+      "output": "0.0"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Retain actual rank order",
+      "body": "Never sort the retrieved IDs by their known grades. That would evaluate an oracle ordering rather than the system's output."
+    },
+    {
+      "title": "Build a separate ideal ranking",
+      "body": "Sort all judgment values descending and apply the same cutoff and discount to get the denominator."
+    },
+    {
+      "title": "Deduplicate before cutoff",
+      "body": "Keep the first occurrence using insertion order. A repeated document should not earn its gain twice."
+    }
+  ],
+  "explanation": [
+    "DCG adds a relevance grade at each rank after discounting later positions. NDCG divides by an ideal score, making a perfect ordering score one when any positive judgment exists.",
+    "This lesson uses linear grades. Other implementations use exponential gains, so report the gain convention and cutoff with a metric rather than comparing differently defined numbers.",
+    "The ideal ranking includes relevant documents the system failed to retrieve. Restricting the denominator to the retrieved subset would reward omissions. This activity assigns zero to unjudged IDs; real evaluation must also examine judgment coverage.",
+    "Swap the two documents in the first example, then compare k=1 and k=2. Explain why recall at two can be unchanged while NDCG changes. A metric summarizes these judgments; it cannot prove that generated answers are factual."
+  ],
+  "formula": "DCG@k = Σᵣ≤k gradeᵣ / log₂(r + 1); NDCG = DCG / ideal DCG",
+  "test_count": 18,
+  "sample_count": 3
+}
