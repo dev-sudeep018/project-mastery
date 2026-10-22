@@ -1,0 +1,51 @@
+{
+  "intro": "A classifier assigns scores, but a downstream system must decide which items to flag. Move the decision threshold and inspect the mistakes rather than relying on accuracy alone.",
+  "task": "Return a dictionary with tp, fp, tn, fn, precision, recall, and f1. Predict positive when score >= threshold, including exact ties.",
+  "signature": "binary_metrics(y, scores, threshold)",
+  "requirements": [
+    "y and scores are nonempty one-dimensional arrays of equal length. y contains only 0 or 1; scores and threshold lie in [0,1].",
+    "Reject incompatible shapes, non-finite values, invalid labels, and a non-scalar threshold with ValueError.",
+    "Return numeric counts and metrics. Use zero when a precision, recall, or F1 denominator is zero.",
+    "Compute counts before ratios. Do not modify inputs. Scores are supplied probabilities; this task does not fit or calibrate a classifier."
+  ],
+  "examples": [
+    {
+      "name": "Mixed decisions",
+      "input": "y=[1,0,1,0], scores=[0.9,0.8,0.4,0.1], threshold=0.5",
+      "output": "{tp:1, fp:1, tn:1, fn:1, precision:0.5, recall:0.5, f1:0.5}"
+    },
+    {
+      "name": "Threshold ties are positive",
+      "input": "y=[1,0], scores=[0.5,0.5], threshold=0.5",
+      "output": "{tp:1, fp:1, tn:0, fn:0, precision:0.5, recall:1, f1:0.666667}"
+    },
+    {
+      "name": "No predicted positives",
+      "input": "y=[1,0], scores=[0.2,0.1], threshold=0.9",
+      "output": "{tp:0, fp:0, tn:1, fn:1, precision:0, recall:0, f1:0}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Make two masks",
+      "body": "Compare scores with threshold and compare y with 1. Their intersections identify the four count categories."
+    },
+    {
+      "title": "Ask which denominator",
+      "body": "Precision asks how many flagged items are positive. Recall asks how many actual positives were flagged."
+    },
+    {
+      "title": "Handle an empty denominator",
+      "body": "Use the documented zero convention. F1 can be computed directly as 2*tp/(2*tp+fp+fn)."
+    }
+  ],
+  "explanation": [
+    "The threshold is a decision rule layered on top of the score. With the same scores, reducing it cannot remove a predicted positive; both true-positive and false-positive counts can increase.",
+    "Precision divides true positives by all predicted positives. Recall divides true positives by all actual positives. F1 balances these ratios but does not encode the real cost of either mistake.",
+    "Choose and compare thresholds on validation data using the application's costs, then evaluate the chosen procedure on held-out data. This small example does not establish that a threshold is appropriate for a real deployment.",
+    "Try thresholds 0.3, 0.5, and 0.85 on the first example. Which errors change? Explain why a score of 0.8 is not automatically a trustworthy 80% probability without calibration evidence."
+  ],
+  "formula": "precision = TP / (TP + FP); recall = TP / (TP + FN)",
+  "test_count": 16,
+  "sample_count": 3
+}

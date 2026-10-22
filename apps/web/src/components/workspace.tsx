@@ -69,6 +69,22 @@ export function Workspace({ data }: { data: LearningItem }) {
   const splitRef = useRef<HTMLDivElement>(null);
   const runRef = useRef<() => void>(() => {});
   const busy = runner.phase !== "idle";
+  const resultTone =
+    runner.result?.status === "passed"
+      ? "success"
+      : runner.result?.status === "timeout"
+        ? "warning"
+        : runner.result?.status === "cancelled"
+          ? "info"
+          : "failure";
+  const ResultIcon =
+    runner.result?.status === "passed"
+      ? CheckCircle2
+      : runner.result?.status === "timeout"
+        ? Clock3
+        : runner.result?.status === "cancelled"
+          ? Square
+          : XCircle;
 
   useEffect(() => {
     try {
@@ -182,10 +198,10 @@ export function Workspace({ data }: { data: LearningItem }) {
         "editorBracketHighlight.foreground4": color("text"),
         "editorBracketHighlight.foreground5": color("text"),
         "editorBracketHighlight.foreground6": color("text"),
-        "editorBracketHighlight.unexpectedBracket.foreground": color("text"),
+        "editorBracketHighlight.unexpectedBracket.foreground": color("danger"),
         "editorError.foreground": color("danger"),
-        "editorWarning.foreground": color("muted"),
-        "editorInfo.foreground": color("muted"),
+        "editorWarning.foreground": color("warning"),
+        "editorInfo.foreground": color("info"),
         focusBorder: color("accent"),
         "editorWidget.background": color("raised"),
         "editorWidget.border": color("border-strong"),
@@ -586,7 +602,13 @@ export function Workspace({ data }: { data: LearningItem }) {
             )}
           </div>
           <div className="editor-status">
-            <span>{saveState}</span>
+            <span
+              className={
+                saveState === "Saved on this device" ? "" : "warning-text"
+              }
+            >
+              {saveState}
+            </span>
             <span>
               UTF-8<span className="status-divider">·</span>4 spaces
             </span>
@@ -640,7 +662,11 @@ export function Workspace({ data }: { data: LearningItem }) {
               </span>
               <span
                 className={
-                  runner.result?.status === "passed" ? "success-text" : "muted"
+                  busy
+                    ? "info-text"
+                    : runner.result
+                      ? `${resultTone}-text`
+                      : "muted"
                 }
                 aria-live="polite"
               >
@@ -649,7 +675,13 @@ export function Workspace({ data }: { data: LearningItem }) {
                     ? "Loading Python…"
                     : "Running tests…"
                   : runner.result
-                    ? `${passed}/${runner.result.tests.length} passed`
+                    ? runner.result.status === "timeout"
+                      ? "Timed out"
+                      : runner.result.status === "cancelled"
+                        ? "Stopped"
+                        : runner.result.status === "error"
+                          ? "Python error"
+                          : `${passed}/${runner.result.tests.length} passed`
                     : "Ready for your first run"}
               </span>
             </div>
@@ -687,14 +719,8 @@ export function Workspace({ data }: { data: LearningItem }) {
                 </div>
               ) : runner.result ? (
                 <>
-                  <div
-                    className={`result-summary ${runner.result.status === "passed" ? "success" : "failure"}`}
-                  >
-                    {runner.result.status === "passed" ? (
-                      <CheckCircle2 size={19} />
-                    ) : (
-                      <XCircle size={19} />
-                    )}
+                  <div className={`result-summary ${resultTone}`}>
+                    <ResultIcon size={19} />
                     <div>
                       <strong>
                         {runner.result.status === "passed"
@@ -718,7 +744,9 @@ export function Workspace({ data }: { data: LearningItem }) {
                     </div>
                   </div>
                   {runner.result.error && (
-                    <pre className="error-output">{runner.result.error}</pre>
+                    <pre className={`error-output ${resultTone}`}>
+                      {runner.result.error}
+                    </pre>
                   )}
                   {runner.result.tests.map((test) => (
                     <details

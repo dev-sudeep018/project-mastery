@@ -1,12 +1,12 @@
 # Coding workspace
 
-Mode: Operate. Code-led. The supplied founding brief pins a desktop split workspace with an exercise, persistent editor, run controls, and test feedback. The user's latest palette choice is black and light grey. Product and scope were already confirmed in the supplied conversation.
+Mode: Operate. Code-led. The supplied founding brief pins a desktop split workspace with an exercise, persistent editor, run controls, and test feedback. The user's latest request adds meaningful state colors to the black and light grey base. Product and scope were already confirmed in the supplied conversation.
 
 ## Direction contract
 
 THESIS: A clear practice workbench makes the relationship between numerical behavior and code visible. Keep the real editor and diagnostic feedback central.
 
-OWN-WORLD: Black canvas (#0a0a0a), charcoal surfaces (#121212), light grey actions (#d4d4d4), Segoe UI for reading and Consolas for code. Crisp surfaces, subdued separators, stronger control boundaries, consistent compact buttons. Icons and labels carry diagnostic states without relying on hue.
+OWN-WORLD: Black canvas (#0a0a0a), charcoal surfaces (#121212), light grey actions (#d4d4d4), Segoe UI for reading and Consolas for code. Crisp surfaces, subdued separators, stronger control boundaries, consistent compact buttons. Green success (#84dba2), red errors (#ff8f96), amber warnings (#f1c979), and blue information (#8fbaff) reflect the latest explicit user request. Python keywords, strings, and numbers use distinct lavender, mint, and warm tan tones. Icons and labels still carry diagnostic states without relying on hue. Ordinary brackets remain neutral; error highlights are red.
 
 STORY: Read the contract, inspect a concrete distribution, implement the function, run examples, and interpret all public checks.
 

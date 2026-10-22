@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m06",
+  "slug": "ridge-objective-gradients",
+  "version": 1,
+  "title": "Add Regularization to Linear Regression",
+  "summary": "Separate data fit from a weight penalty and inspect how regularization changes the update direction.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Regularization", "Gradients", "Regression"],
+  "prerequisites": ["m03", "m05"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "ridge_gradients",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+  "kind": "lesson",
+}

@@ -21,6 +21,8 @@ def assert_close(actual, expected, atol=1e-7, rtol=1e-6):
         assert len(actual) == len(expected), f"Expected {len(expected)} items, got {len(actual)}."
         for left, right in zip(actual, expected):
             assert_close(left, right, atol, rtol)
+    elif isinstance(expected, (bool, np.bool_)):
+        assert isinstance(actual, (bool, np.bool_)) and actual == expected, "Return the expected boolean."
     elif isinstance(expected, numbers.Real):
         assert isinstance(actual, numbers.Real) and not isinstance(actual, (bool, np.bool_)), "Return a numeric scalar."
         assert math.isfinite(actual), "Result must be finite."

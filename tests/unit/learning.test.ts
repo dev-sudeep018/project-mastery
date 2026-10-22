@@ -15,6 +15,7 @@ import {
   validateCatalog,
 } from "../../packages/problem-schema/src/index";
 import { loadContent } from "../../scripts/content";
+import { catalog, paths } from "../../apps/web/src/lib/curriculum";
 
 describe("portable progress", () => {
   it("preserves completion and the newer timestamp without inventing added attempts", () => {
@@ -98,6 +99,20 @@ describe("retrieval workbench", () => {
   });
 });
 describe("content capacity", () => {
+  it("connects every published lesson to one path with local prerequisites first", () => {
+    const assigned = paths.flatMap((path) => path.items);
+    expect(new Set(assigned).size).toBe(assigned.length);
+    expect([...assigned].sort()).toEqual(catalog.map((item) => item.id).sort());
+    for (const path of paths) {
+      for (const [index, id] of path.items.entries()) {
+        const item = catalog.find((item) => item.id === id)!;
+        for (const prerequisite of item.prerequisites) {
+          if (path.items.includes(prerequisite))
+            expect(path.items.indexOf(prerequisite)).toBeLessThan(index);
+        }
+      }
+    }
+  });
   it("accepts 2,000 distinct IDs and validates their prerequisite graph", async () => {
     const [entry] = await loadContent();
     const items = Array.from({ length: 2000 }, (_, i) =>

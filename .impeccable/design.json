@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-21T07:45:26.383276+00:00",
+  "generatedAt": "2026-10-22T07:40:12.379437+00:00",
   "title": "Design System: Project Mastery",
   "extensions": {
     "colorMeta": {
@@ -218,84 +218,126 @@
         "role": "success",
         "displayName": "Success",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.1172 154.27)",
+          "oklch(26% 0.1172 154.27)",
+          "oklch(38% 0.1172 154.27)",
+          "oklch(49% 0.1172 154.27)",
+          "oklch(61% 0.1172 154.27)",
+          "oklch(72% 0.1172 154.27)",
+          "oklch(84% 0.1172 154.27)",
+          "oklch(95% 0.1172 154.27)"
         ]
       },
       "danger": {
         "role": "error",
         "displayName": "Danger",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.1353 16.76)",
+          "oklch(26% 0.1353 16.76)",
+          "oklch(38% 0.1353 16.76)",
+          "oklch(49% 0.1353 16.76)",
+          "oklch(61% 0.1353 16.76)",
+          "oklch(72% 0.1353 16.76)",
+          "oklch(84% 0.1353 16.76)",
+          "oklch(95% 0.1353 16.76)"
         ]
       },
       "danger-surface": {
         "role": "error",
         "displayName": "Danger Surface",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0311 9.49)",
+          "oklch(26% 0.0311 9.49)",
+          "oklch(38% 0.0311 9.49)",
+          "oklch(49% 0.0311 9.49)",
+          "oklch(61% 0.0311 9.49)",
+          "oklch(72% 0.0311 9.49)",
+          "oklch(84% 0.0311 9.49)",
+          "oklch(95% 0.0311 9.49)"
         ]
       },
       "syntax-keyword": {
         "role": "neutral",
         "displayName": "Syntax Keyword",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.1029 282.60)",
+          "oklch(26% 0.1029 282.60)",
+          "oklch(38% 0.1029 282.60)",
+          "oklch(49% 0.1029 282.60)",
+          "oklch(61% 0.1029 282.60)",
+          "oklch(72% 0.1029 282.60)",
+          "oklch(84% 0.1029 282.60)",
+          "oklch(95% 0.1029 282.60)"
         ]
       },
       "syntax-string": {
         "role": "neutral",
         "displayName": "Syntax String",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0699 164.01)",
+          "oklch(26% 0.0699 164.01)",
+          "oklch(38% 0.0699 164.01)",
+          "oklch(49% 0.0699 164.01)",
+          "oklch(61% 0.0699 164.01)",
+          "oklch(72% 0.0699 164.01)",
+          "oklch(84% 0.0699 164.01)",
+          "oklch(95% 0.0699 164.01)"
         ]
       },
       "syntax-number": {
         "role": "neutral",
         "displayName": "Syntax Number",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0809 71.25)",
+          "oklch(26% 0.0809 71.25)",
+          "oklch(38% 0.0809 71.25)",
+          "oklch(49% 0.0809 71.25)",
+          "oklch(61% 0.0809 71.25)",
+          "oklch(72% 0.0809 71.25)",
+          "oklch(84% 0.0809 71.25)",
+          "oklch(95% 0.0809 71.25)"
+        ]
+      },
+      "warning": {
+        "role": "warning",
+        "displayName": "Warning",
+        "tonalRamp": [
+          "oklch(15% 0.1087 83.62)",
+          "oklch(26% 0.1087 83.62)",
+          "oklch(38% 0.1087 83.62)",
+          "oklch(49% 0.1087 83.62)",
+          "oklch(61% 0.1087 83.62)",
+          "oklch(72% 0.1087 83.62)",
+          "oklch(84% 0.1087 83.62)",
+          "oklch(95% 0.1087 83.62)"
+        ]
+      },
+      "warning-surface": {
+        "role": "warning",
+        "displayName": "Warning Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0249 82.57)",
+          "oklch(26% 0.0249 82.57)",
+          "oklch(38% 0.0249 82.57)",
+          "oklch(49% 0.0249 82.57)",
+          "oklch(61% 0.0249 82.57)",
+          "oklch(72% 0.0249 82.57)",
+          "oklch(84% 0.0249 82.57)",
+          "oklch(95% 0.0249 82.57)"
+        ]
+      },
+      "info": {
+        "role": "info",
+        "displayName": "Info",
+        "tonalRamp": [
+          "oklch(15% 0.1094 259.63)",
+          "oklch(26% 0.1094 259.63)",
+          "oklch(38% 0.1094 259.63)",
+          "oklch(49% 0.1094 259.63)",
+          "oklch(61% 0.1094 259.63)",
+          "oklch(72% 0.1094 259.63)",
+          "oklch(84% 0.1094 259.63)",
+          "oklch(95% 0.1094 259.63)"
         ]
       }
     },
@@ -402,7 +444,7 @@
       "kind": "custom",
       "description": "Result wording and expansion accompany status color.",
       "html": "<details class=\"ds-test\"><summary><span>Basic distribution</span><span>Passed</span><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m9 18 6-6-6-6\"/></svg></summary><p>All probabilities match the expected values.</p></details>",
-      "css": ".ds-test {background:var(--surface,#121212);border-bottom:1px solid var(--border,#383838);font:11px/1.6 \"Segoe UI\",system-ui,sans-serif;} .ds-test summary {list-style:none;display:flex;align-items:center;gap:9px;min-height:35px;cursor:pointer;color:var(--muted,#b8b8b8);} .ds-test summary::-webkit-details-marker {display:none;} .ds-test summary span:first-child {flex:1;} .ds-test summary span:nth-child(2) {font-size:10px;color:var(--success,#d4d4d4);} .ds-test summary svg {transition:transform .18s;} .ds-test[open] summary svg {transform:rotate(90deg);} .ds-test summary:focus-visible { outline: 2px solid var(--accent,#d4d4d4); outline-offset: 4px; } .ds-test p {font-size:11px;line-height:1.7;padding:3px 0 13px 24px;color:var(--muted,#b8b8b8);margin:0;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }"
+      "css": ".ds-test {background:var(--surface,#121212);border-bottom:1px solid var(--border,#383838);font:11px/1.6 \"Segoe UI\",system-ui,sans-serif;} .ds-test summary {list-style:none;display:flex;align-items:center;gap:9px;min-height:35px;cursor:pointer;color:var(--muted,#b8b8b8);} .ds-test summary::-webkit-details-marker {display:none;} .ds-test summary span:first-child {flex:1;} .ds-test summary span:nth-child(2) {font-size:10px;color:var(--success,#84dba2);} .ds-test summary svg {transition:transform .18s;} .ds-test[open] summary svg {transform:rotate(90deg);} .ds-test summary:focus-visible { outline: 2px solid var(--accent,#d4d4d4); outline-offset: 4px; } .ds-test p {font-size:11px;line-height:1.7;padding:3px 0 13px 24px;color:var(--muted,#b8b8b8);margin:0;} @media (prefers-reduced-motion: reduce) { * {animation:none!important;transition:none!important;} }"
     },
     {
       "name": "Experiment panel",
@@ -416,7 +458,7 @@
     "northStar": "A clear practice workbench",
     "overview": "The user-selected dark workspace uses restrained light grey accents to keep reading, editing, and diagnostic feedback central. Black grounds and charcoal surfaces make a compact, familiar tool environment. System UI type is intentional for this code workspace; monospaced code and mathematical notation retain their own functional voices.\n\nThe source is the implemented global stylesheet and workspace, shell, learning, experiment, and retrieval-project components. This record captures shipped choices rather than introducing a new identity. Dense controls serve the work, while larger reading regions retain generous line height. Motion is limited to control feedback, expanding results, and running state.",
     "keyCharacteristics": [
-      "Black and charcoal surfaces with light grey actions, selections, and diagnostic labels.",
+      "Black and charcoal surfaces with light grey actions and selections, plus distinct semantic feedback colors.",
       "Compact controls, readable prose, and real monospaced code.",
       "Flat bordered panels with feedback adjacent to the editor.",
       "Connected reading, experiment, and project surfaces with responsive navigation and a mobile description/code switch."
@@ -424,7 +466,7 @@
     "rules": [
       {
         "name": "The Explicit State Rule",
-        "body": "Use icons and wording to distinguish diagnostic states; light grey emphasis and tonal surfaces support interaction without relying on hue.",
+        "body": "Pair semantic colors with icons and wording: green success, red failure, amber caution, and blue information. Keep ordinary actions and working surfaces neutral.",
         "section": "colors"
       },
       {

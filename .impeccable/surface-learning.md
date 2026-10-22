@@ -4,7 +4,7 @@ Mode: Operate with Read sections. Code-led extension of the existing workspace, 
 
 THESIS: Make it easy to enter through a question, a sequence, or a useful system and move between them without losing the learning context.
 
-OWN-WORLD: User-selected black canvas (#0a0a0a), charcoal surfaces (#121212), light grey actions (#d4d4d4), Segoe UI reading text, Consolas code and measurements, low-contrast separators, stronger control boundaries, and readable mathematical examples. Syntax and charts use grey tones; explicit icons and text communicate diagnostic states.
+OWN-WORLD: User-selected black canvas (#0a0a0a), charcoal surfaces (#121212), light grey actions (#d4d4d4), Segoe UI reading text, Consolas code and measurements, low-contrast separators, stronger control boundaries, and readable mathematical examples. The latest user request adds semantic color: green success, red failure, amber caution, and blue information. Python syntax has distinct keyword/string/number colors. Explicit icons and text preserve meaning without hue; charts and neutral actions retain the base palette.
 
 STORY: Find a useful idea; inspect behavior; implement it; interpret evidence; connect it to a larger system. Progress supports resuming and exporting work.
 

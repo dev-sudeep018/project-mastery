@@ -1,0 +1,51 @@
+{
+  "intro": "A model evaluation changes when extra test rows arrive, even though the training data is unchanged. Investigate the supplied scaler: which rows are allowed to determine its statistics?",
+  "task": "Repair standardize_split. Return a dictionary containing mean, scale, train, and test as NumPy arrays. Fit feature statistics on train only and apply that same transform to both matrices.",
+  "signature": "standardize_split(train, test)",
+  "requirements": [
+    "train is a nonempty (n, d) matrix. test is an (m, d) matrix; m may be zero. Require d >= 1.",
+    "Use feature-wise population standard deviation (ddof=0). Replace exactly zero standard deviations with one.",
+    "Reject incompatible ranks, feature counts, empty training axes, and non-finite values with ValueError. Checks use moderate finite values.",
+    "Do not modify either input. A feature constant in train can be nonzero after transforming test; do not force that column to zero."
+  ],
+  "examples": [
+    {
+      "name": "Training statistics only",
+      "input": "train=[[1],[3]], test=[[5]]",
+      "output": "{mean:[2], scale:[1], train:[[-1],[1]], test:[[3]]}"
+    },
+    {
+      "name": "A constant training feature",
+      "input": "train=[[2,5],[4,5]], test=[[6,9]]",
+      "output": "{mean:[3,5], scale:[1,1], train:[[-1,0],[1,0]], test:[[3,4]]}"
+    },
+    {
+      "name": "One training row",
+      "input": "train=[[4,8]], test=[[6,5]]",
+      "output": "{mean:[4,8], scale:[1,1], train:[[0,0]], test:[[2,-3]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Identify the leak",
+      "body": "The starter stacks training and test rows before fitting. Predict how adding a test outlier changes its mean."
+    },
+    {
+      "title": "Fit once",
+      "body": "Compute mean and std along axis=0 of train. Reuse those arrays when transforming test."
+    },
+    {
+      "title": "Handle a constant feature",
+      "body": "A zero standard deviation would divide by zero. A scale of one preserves the distance from the training constant."
+    }
+  ],
+  "explanation": [
+    "A preprocessing step learns parameters too. Fitting it on test rows leaks information across the evaluation boundary, even if labels are never used.",
+    "The transform subtracts each training feature's mean and divides by its population standard deviation. Broadcasting applies the same learned arrays to every row.",
+    "Constant features receive a scale of one. If training always observes five but a test row contains nine, the transformed value is four, not zero.",
+    "After repairing the starter, add a distant test row and check that the training transform stays fixed. In a real pipeline, validation and test sets also reuse the training statistics; distribution shift should be observed, not silently normalized away."
+  ],
+  "formula": "zᵢⱼ = (xᵢⱼ − μtrain,j) / strain,j",
+  "test_count": 14,
+  "sample_count": 3
+}

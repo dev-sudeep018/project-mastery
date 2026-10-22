@@ -1,0 +1,51 @@
+{
+  "intro": "A word repeated many times in one document is different from a word appearing in every document. Build a representation that keeps those two kinds of frequency separate.",
+  "task": "Return a dictionary with idf and weights as NumPy arrays. Use idf[j] = log((1+n)/(1+df[j]))+1, raw counts for term frequency, and L2-normalize each weighted document row.",
+  "signature": "tfidf_weights(counts)",
+  "requirements": [
+    "counts has nonempty shape (documents, terms) and contains finite, nonnegative integer-valued counts. Checks use counts up to 1e6.",
+    "df[j] counts documents with a positive count for term j, not the total occurrences of that term. Use the natural logarithm.",
+    "Keep an all-zero document row zero. A vocabulary column absent from the corpus still gets a finite smoothed idf.",
+    "Reject malformed, empty, negative, fractional, and non-finite input with ValueError. Do not modify the count matrix."
+  ],
+  "examples": [
+    {
+      "name": "Equally common terms",
+      "input": "counts=[[1,1],[1,1]]",
+      "output": "{idf:[1,1], weights:[[0.707107,0.707107],[0.707107,0.707107]]}"
+    },
+    {
+      "name": "Separate terms",
+      "input": "counts=[[2,0],[0,1]]",
+      "output": "{idf:[1.405465,1.405465], weights:[[1,0],[0,1]]}"
+    },
+    {
+      "name": "An empty document",
+      "input": "counts=[[0,0],[1,0]]",
+      "output": "{idf:[1.405465,2.098612], weights:[[0,0],[1,0]]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Count documents",
+      "body": "Convert counts > 0 into a presence matrix and sum down its rows to get document frequency."
+    },
+    {
+      "title": "Apply weighting first",
+      "body": "Multiply each column by its idf before computing a row's Euclidean length."
+    },
+    {
+      "title": "Leave empty rows alone",
+      "body": "Use a guarded division so zero-length rows remain zero rather than becoming NaN."
+    }
+  ],
+  "explanation": [
+    "Term frequency measures occurrences within a document; document frequency measures how widely a term is distributed across the corpus. Repeating a term in one document changes the former without changing the latter.",
+    "This activity fixes one explicit convention: natural term counts, smoothed inverse document frequency, then unit L2 row length. Other TF-IDF conventions exist, so compare formulas before comparing numbers.",
+    "Learn a vocabulary and idf on the reference corpus, then reuse them for queries. A zero query vector carries no lexical signal. Do not fit a new idf independently on each query.",
+    "Multiply every count in one document by the same positive integer. The normalized direction stays the same, while repeating just one term changes that direction. Connect these vectors to cosine retrieval and compare where lexical matching misses synonyms."
+  ],
+  "formula": "idfⱼ = ln((1 + n) / (1 + dfⱼ)) + 1",
+  "test_count": 14,
+  "sample_count": 3
+}

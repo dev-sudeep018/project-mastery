@@ -24,7 +24,7 @@ Three connected entry points: guided learning, project-first learning, and open 
 
 ## Capabilities and Constraints
 
-The founder's content target is 2,000 problems and learning activities. The platform must not imitate a LeetCode problem queue. The first 12 foundational labs, three paths, and mini retrieval project establish a reusable learning format; they are an initial curriculum, not the final product size. All three entry points share content and progress.
+The founder's content target is 2,000 problems and learning activities. The platform must not imitate a LeetCode problem queue. The current 21 lessons include two debugging investigations, with three paths and a mini retrieval project. They establish reusable learning formats, not the final product size. All three entry points share content and progress.
 
 Only implemented and validated activities count as available. Planned content and generated variants must not be presented as 2,000 distinct completed lessons. Per-item content and evaluators load on demand so the browser does not download the whole curriculum.
 
@@ -32,7 +32,7 @@ Learner code must not access application credentials. Workers alone are not the 
 
 ## Brand Commitments
 
-Project Mastery is the working name, with no OpenAI affiliation. The user's latest palette choice is black and light grey throughout, including the editor and charts. Use tonal contrast for actions and selections, and explicit icons and labels for success and errors. The supplied brief specifies readability, useful feedback, accessibility, and resizable editor panels.
+Project Mastery is the working name, with no OpenAI affiliation. Retain the user's black and light grey base. The latest user request adds distinct colors according to meaning: green for success, red for errors, amber for warnings, and blue for information or running/stopped states. Use differentiated Python syntax colors. Keep explicit icons and labels so color is not the only signal. The supplied brief specifies readability, useful feedback, accessibility, and resizable editor panels.
 
 ## Evidence on Hand
 

@@ -10,6 +10,8 @@ The working branch adds twelve original lessons, three guided paths, four intera
 
 ## Continuing work
 
+The curriculum-depth batch extends the three paths to seven lessons each, adds nine distinct learning objectives, and includes two debugging investigations. There are 21 lessons plus one project checkpoint, with 298 public cases. The user's latest color request adds semantic feedback and syntax colors while preserving the black/grey surfaces. Full verification is recorded in verification.md.
+
 1. Expand the authored curriculum toward 2,000 problems across the topic map in curriculum.md. Review distinct learning objectives; do not count number-swapped variants as new material.
 2. Extend learning formats with debugging investigations, research replication, and larger projects.
 3. Add optional account synchronization with tested database authorization and explicit local/cloud merging. Anonymous learning remains complete without an account.

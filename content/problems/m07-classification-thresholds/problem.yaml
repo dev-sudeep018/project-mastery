@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "m07",
+  "slug": "classification-thresholds",
+  "version": 1,
+  "title": "Investigate a Classification Threshold",
+  "summary": "Turn probabilities into decisions and explain the tradeoff between missed positives and false alarms.",
+  "domain": "foundations",
+  "difficulty": "beginner",
+  "skills": ["Evaluation", "Classification", "Decision thresholds"],
+  "prerequisites": ["m04"],
+  "assumed_knowledge": ["Python functions", "NumPy arrays and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "binary_metrics",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution": [],
+  "kind": "lesson",
+}

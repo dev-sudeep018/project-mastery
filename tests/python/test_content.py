@@ -1,5 +1,6 @@
 import pathlib
 import json
+import os
 import unittest
 import numpy as np
 
@@ -10,9 +11,16 @@ HELPERS = (ROOT / "content" / "evaluator_helpers.py").read_text(encoding="utf-8"
 
 class ContentTests(unittest.TestCase):
     def test_every_reference_passes(self):
-        for folder in PROBLEMS.iterdir():
-            if not folder.is_dir():
-                continue
+        folders = sorted(folder for folder in PROBLEMS.iterdir() if folder.is_dir())
+        selection = os.environ.get("MASTERY_CONTENT_FOLDERS")
+        if selection is not None:
+            names = json.loads(selection)
+            self.assertIsInstance(names, list)
+            self.assertTrue(names, "A batch must select at least one package")
+            known = {folder.name for folder in folders}
+            self.assertTrue(all(name in known for name in names), "Unknown package in batch")
+            folders = [folder for folder in folders if folder.name in names]
+        for folder in folders:
             with self.subTest(problem=folder.name):
                 evaluator, reference = {}, {}
                 exec(HELPERS + "\n" + (folder / "tests_public.py").read_text(encoding="utf-8"), evaluator)

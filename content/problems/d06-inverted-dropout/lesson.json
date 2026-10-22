@@ -1,0 +1,51 @@
+{
+  "intro": "Zeroing random activations also changes their average magnitude. This activity supplies the mask so you can study the scaling rule without guessing which random numbers were drawn.",
+  "task": "Return a NumPy array equal to x * keep / (1-p) during training and an unchanged-value copy of x during evaluation. Here p is the probability of dropping an entry; keep is a supplied boolean mask, not a probability.",
+  "signature": "inverted_dropout(x, keep, p, training)",
+  "requirements": [
+    "x is a nonempty array with at least one axis. keep has exactly the same shape and boolean dtype; True means keep.",
+    "p is a finite scalar with 0 <= p < 1. training must be a Python bool. Reject malformed inputs with ValueError, including during evaluation.",
+    "Require finite x. Do not generate random numbers or infer p from how many entries are True in this particular mask.",
+    "Do not modify inputs or return an alias of x. A supplied mask is applied literally during training, even when p is zero. Checks use moderate values and p away from one."
+  ],
+  "examples": [
+    {
+      "name": "Half kept",
+      "input": "x=[2,4], keep=[True,False], p=0.5, training=True",
+      "output": "[4,0]"
+    },
+    {
+      "name": "Evaluation bypasses the mask",
+      "input": "x=[2,4], keep=[False,False], p=0.5, training=False",
+      "output": "[2,4]"
+    },
+    {
+      "name": "Drop probability, not keep probability",
+      "input": "x=[3,6], keep=[True,True], p=0.25, training=True",
+      "output": "[4,8]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Name the probability",
+      "body": "p is the chance of dropping. The chance of keeping is 1-p, which belongs in the denominator."
+    },
+    {
+      "title": "Do not estimate the keep rate",
+      "body": "A small random mask need not have exactly its expected fraction of True values. Use the supplied p."
+    },
+    {
+      "title": "Test the expectation",
+      "body": "For one input value with p=0.5, average the two equally likely masks [True] and [False]."
+    }
+  ],
+  "explanation": [
+    "A Bernoulli keep mask is one with probability 1-p. Dividing a kept activation by 1-p makes the expected training output equal to the input.",
+    "The supplied mask makes this lesson deterministic. A real dropout layer samples masks, but the scaling is based on the distribution's keep probability rather than the observed fraction kept in one batch.",
+    "Evaluation returns the input values because the training-time rescaling already accounts for missing activations. This is the inverted-dropout convention.",
+    "Compare a mask that keeps every entry with one that drops every entry. Neither outcome invalidates the expectation rule: it describes an average over random masks, not every individual pass. The expectation statement assumes masks are sampled with the stated probability."
+  ],
+  "formula": "train(x) = x ⊙ keep / (1 − p); eval(x) = x",
+  "test_count": 16,
+  "sample_count": 3
+}

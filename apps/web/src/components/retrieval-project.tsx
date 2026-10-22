@@ -16,6 +16,7 @@ export function RetrievalProject() {
   const [notes, setNotes] = useState(""),
     [hydrated, setHydrated] = useState(false),
     [notice, setNotice] = useState("");
+  const [noticeTone, setNoticeTone] = useState("info");
   const report = evaluateProject(k, weight),
     selected = report.rows[query];
   useEffect(() => {
@@ -23,6 +24,7 @@ export function RetrievalProject() {
       const saved = localStorage.getItem(NOTES_KEY);
       if (saved && saved.length <= 8000) setNotes(saved);
     } catch {
+      setNoticeTone("warning");
       setNotice("Storage is unavailable. Export your report before leaving.");
     }
     setHydrated(true);
@@ -32,6 +34,7 @@ export function RetrievalProject() {
     try {
       localStorage.setItem(NOTES_KEY, notes);
     } catch {
+      setNoticeTone("warning");
       setNotice("Could not save notes. Export your report before leaving.");
     }
   }, [notes, hydrated]);
@@ -266,6 +269,7 @@ export function RetrievalProject() {
                 },
                 findings: notes,
               });
+              setNoticeTone("success");
               setNotice(
                 "Report exported with the current settings, rankings, metrics, and findings.",
               );
@@ -281,7 +285,9 @@ export function RetrievalProject() {
             Download dataset
           </button>
         </div>
-        <p role="status">{notice}</p>
+        <p role="status" className={`${noticeTone}-text`}>
+          {notice}
+        </p>
         <p className="muted small">
           The workbench calculates its reference results in your browser.
           Implement the Python pipeline to check your own ranking, fusion, and

@@ -31,6 +31,7 @@ export async function loadContent() {
         if (files.some((f) => !f.trim()))
           throw new Error(`Empty required file in ${d.name}`);
         return {
+          folder: d.name,
           problem,
           lesson: LessonSchema.parse(
             JSON.parse(await readFile(path.join(dir, "lesson.json"), "utf8")),

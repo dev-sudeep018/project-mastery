@@ -153,7 +153,10 @@ export function PathList({ slug }: { slug?: string }) {
                     return (
                       <li key={id} className="available">
                         {completed(state, id) ? (
-                          <CheckCircle2 className="step-icon" size={18} />
+                          <CheckCircle2
+                            className="step-icon success-text"
+                            size={18}
+                          />
                         ) : (
                           <Circle className="step-icon" size={18} />
                         )}
@@ -285,7 +288,9 @@ export function LessonCatalog() {
               <p>{item.summary}</p>
               <span className="small muted">{item.skills.join(" · ")}</span>
             </div>
-            <span className="lesson-state">
+            <span
+              className={`lesson-state${completed(state, item.id) ? " success-text" : ""}`}
+            >
               {completed(state, item.id) ? (
                 <CheckCircle2 size={18} />
               ) : (
@@ -394,6 +399,7 @@ export function downloadJson(filename: string, value: unknown) {
 export function ProgressView() {
   const state = useProgress();
   const [notice, setNotice] = useState("");
+  const [noticeTone, setNoticeTone] = useState("info");
   const [pending, setPending] = useState<Backup | null>(null);
   const count = catalog.filter((item) => completed(state, item.id)).length;
   async function readImport(event: ChangeEvent<HTMLInputElement>) {
@@ -408,6 +414,7 @@ export function ProgressView() {
       setPending(parsed);
       setNotice("");
     } catch {
+      setNoticeTone("failure");
       setNotice(
         "That file is not a supported Project Mastery backup, or exceeds 8 MB. Choose an exported JSON backup.",
       );
@@ -449,10 +456,12 @@ export function ProgressView() {
             onClick={() => {
               try {
                 downloadJson("project-mastery-backup.json", exportBackup());
+                setNoticeTone("success");
                 setNotice(
                   "Backup prepared with your lesson progress and code drafts.",
                 );
               } catch {
+                setNoticeTone("failure");
                 setNotice(
                   "Could not read storage. Copy important code from the editor.",
                 );
@@ -484,8 +493,10 @@ export function ProgressView() {
                 try {
                   importBackup(pending);
                   setPending(null);
+                  setNoticeTone("success");
                   setNotice("Backup merged. Existing drafts were preserved.");
                 } catch {
+                  setNoticeTone("warning");
                   setNotice(
                     "Storage is full or unavailable. Some records may have been imported; keep your backup.",
                   );
@@ -497,7 +508,9 @@ export function ProgressView() {
             <button onClick={() => setPending(null)}>Cancel import</button>
           </div>
         )}
-        <p role="status">{notice}</p>
+        <p role="status" className={`${noticeTone}-text`}>
+          {notice}
+        </p>
         <p className="muted small">
           No account or cloud sync is active. Clearing browser storage removes
           local work; exporting a backup lets you move it to another device.
