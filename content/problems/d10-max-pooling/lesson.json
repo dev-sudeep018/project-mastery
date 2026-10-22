@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Non-overlapping blocks",
-      "input": "[[1,4,2,3],[5,0,9,1]], (2,2), 2",
-      "output": "array([[5,9]])"
+      "input": "image = [[1, 4, 2, 3], [5, 0, 9, 1]]\nwindow = (2, 2)\nstride = 2",
+      "output": "[[5, 9]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Negative activations",
-      "input": "[[-4,-2],[-7,-3]], (2,2), 1",
-      "output": "array([[-2]])"
+      "input": "image = [[-4, -2], [-7, -3]]\nwindow = (2, 2)\nstride = 1",
+      "output": "[[-2]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Drop trailing partial window",
-      "input": "[[1,2,3,4,99]], (1,2), 2",
-      "output": "array([[2,4]])"
+      "input": "image = [[1, 2, 3, 4, 99]]\nwindow = (1, 2)\nstride = 2",
+      "output": "[[2, 4]]\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

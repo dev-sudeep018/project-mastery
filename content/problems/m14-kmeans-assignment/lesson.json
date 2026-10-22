@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Two groups",
-      "input": "[[0],[2],[9]], [[0],[10]]",
-      "output": "{'labels':array([0,0,1]), 'inertia':5.}"
+      "input": "X = [[0], [2], [9]]\ncenters = [[0], [10]]",
+      "output": "{'labels': [0, 0, 1], 'inertia': 5.0}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Tie chooses first center",
-      "input": "[[1]], [[0],[2]]",
-      "output": "{'labels':array([0]), 'inertia':1.}"
+      "input": "X = [[1]]\ncenters = [[0], [2]]",
+      "output": "{'labels': [0], 'inertia': 1.0}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Squared rather than raw distance",
-      "input": "[[3,4]], [[0,0]]",
-      "output": "{'labels':array([0]), 'inertia':25.}"
+      "input": "X = [[3, 4]]\ncenters = [[0, 0]]",
+      "output": "{'labels': [0], 'inertia': 25.0}\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Repeated tokens",
-      "input": "[[1,2],[3,4],[5,6]], [2,0,2]",
-      "output": "array([[5,6],[1,2],[5,6]])"
+      "input": "table = [[1, 2], [3, 4], [5, 6]]\ntoken_ids = [2, 0, 2]",
+      "output": "[[5, 6], [1, 2], [5, 6]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "One token",
-      "input": "[[-1,.5]], [0]",
-      "output": "array([[-1,.5]])"
+      "input": "table = [[-1, 0.5]]\ntoken_ids = [0]",
+      "output": "[[-1.0, 0.5]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Order matters",
-      "input": "[[10],[20]], [1,0]",
-      "output": "array([[20],[10]])"
+      "input": "table = [[10], [20]]\ntoken_ids = [1, 0]",
+      "output": "[[20], [10]]\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

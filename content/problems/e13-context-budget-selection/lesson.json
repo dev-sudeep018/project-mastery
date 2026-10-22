@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Skip oversized best passage",
-      "input": "[8,3,2], [10,8,7], 5",
-      "output": "[1,2]"
+      "input": "costs = [8, 3, 2]\nscores = [10, 8, 7]\nbudget = 5",
+      "output": "[1, 2]"
     },
     {
       "name": "Relevance beats score per token",
-      "input": "[5,2,2], [9,6,5], 5",
+      "input": "costs = [5, 2, 2]\nscores = [9, 6, 5]\nbudget = 5",
       "output": "[0]"
     },
     {
       "name": "Stable score ties",
-      "input": "[3,3,2], [5,5,5], 5",
-      "output": "[0,2]"
+      "input": "costs = [3, 3, 2]\nscores = [5, 5, 5]\nbudget = 5",
+      "output": "[0, 2]"
     }
   ],
   "hints": [

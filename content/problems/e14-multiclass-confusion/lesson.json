@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Directed mistakes",
-      "input": "[0,0,1,2], [1,1,1,0], 3",
-      "output": "array([[0,2,0],[0,1,0],[1,0,0]])"
+      "input": "actual = [0, 0, 1, 2]\npredicted = [1, 1, 1, 0]\nnum_classes = 3",
+      "output": "[[0, 2, 0], [0, 1, 0], [1, 0, 0]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Absent classes retain axes",
-      "input": "[1,1], [1,1], 3",
-      "output": "array([[0,0,0],[0,2,0],[0,0,0]])"
+      "input": "actual = [1, 1]\npredicted = [1, 1]\nnum_classes = 3",
+      "output": "[[0, 0, 0], [0, 2, 0], [0, 0, 0]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Perfect predictions",
-      "input": "[0,1,2], [0,1,2], 3",
-      "output": "np.eye(3,dtype=int)"
+      "input": "actual = [0, 1, 2]\npredicted = [0, 1, 2]\nnum_classes = 3",
+      "output": "[[1, 0, 0], [0, 1, 0], [0, 0, 1]]\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

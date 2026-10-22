@@ -11,17 +11,17 @@
   "examples": [
     {
       "name": "Weighted repeated words",
-      "input": "[['a','b'],['a','b','c']], [3,2]",
-      "output": "{('a','b'):5,('b','c'):2}"
+      "input": "words = [['a', 'b'], ['a', 'b', 'c']]\nfrequencies = [3, 2]",
+      "output": "{('a', 'b'): 5, ('b', 'c'): 2}"
     },
     {
       "name": "Overlapping pair observations",
-      "input": "[['a','a','a']], [2]",
-      "output": "{('a','a'):4}"
+      "input": "words = [['a', 'a', 'a']]\nfrequencies = [2]",
+      "output": "{('a', 'a'): 4}"
     },
     {
       "name": "Respect word boundaries",
-      "input": "[['a'],['b']], [10,10]",
+      "input": "words = [['a'], ['b']]\nfrequencies = [10, 10]",
       "output": "{}"
     }
   ],

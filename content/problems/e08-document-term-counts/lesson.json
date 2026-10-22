@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Shared vocabulary with repeats",
-      "input": "[['cat','cat','dog'], ['dog','bird']]",
-      "output": "{'vocabulary':['bird','cat','dog'],'counts':array([[0,2,1],[1,0,1]])}"
+      "input": "documents = [['cat', 'cat', 'dog'], ['dog', 'bird']]",
+      "output": "{'vocabulary': ['bird', 'cat', 'dog'],\n 'counts': [[0, 2, 1], [1, 0, 1]]}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Empty document retains its row",
-      "input": "[[], ['x']]",
-      "output": "{'vocabulary':['x'],'counts':array([[0],[1]])}"
+      "input": "documents = [[], ['x']]",
+      "output": "{'vocabulary': ['x'], 'counts': [[0], [1]]}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Case is preserved",
-      "input": "[['a','A']]",
-      "output": "{'vocabulary':['A','a'],'counts':array([[1,1]])}"
+      "input": "documents = [['a', 'A']]",
+      "output": "{'vocabulary': ['A', 'a'], 'counts': [[1, 1]]}\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

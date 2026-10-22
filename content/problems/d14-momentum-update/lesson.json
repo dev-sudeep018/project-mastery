@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "First step",
-      "input": "[1,2], [2,-4], [0,0], .1, .9",
-      "output": "{'parameters':array([.8,2.4]),'velocity':array([2,-4])}"
+      "input": "parameters = [1, 2]\ngradient = [2, -4]\nvelocity = [0, 0]\nlearning_rate = 0.1\nbeta = 0.9",
+      "output": "{'parameters': [0.8, 2.4], 'velocity': [2, -4]}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "History moves without a new gradient",
-      "input": "[1], [0], [2], .1, .5",
-      "output": "{'parameters':array([.9]),'velocity':array([1])}"
+      "input": "parameters = [1]\ngradient = [0]\nvelocity = [2]\nlearning_rate = 0.1\nbeta = 0.5",
+      "output": "{'parameters': [0.9], 'velocity': [1]}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Opposite gradients cancel",
-      "input": "[1], [-1], [2], .1, .5",
-      "output": "{'parameters':array([1]),'velocity':array([0])}"
+      "input": "parameters = [1]\ngradient = [-1]\nvelocity = [2]\nlearning_rate = 0.1\nbeta = 0.5",
+      "output": "{'parameters': [1], 'velocity': [0]}\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

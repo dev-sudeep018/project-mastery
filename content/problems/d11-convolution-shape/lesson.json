@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Valid convolution",
-      "input": "(5,7), (3,3), (1,1), (0,0), (1,1)",
-      "output": "(3,5)"
+      "input": "shape = (5, 7)\nkernel = (3, 3)\nstride = (1, 1)\npadding = (0, 0)\ndilation = (1, 1)",
+      "output": "(3, 5)"
     },
     {
       "name": "Padding preserves shape",
-      "input": "(5,7), (3,3), (1,1), (1,1), (1,1)",
-      "output": "(5,7)"
+      "input": "shape = (5, 7)\nkernel = (3, 3)\nstride = (1, 1)\npadding = (1, 1)\ndilation = (1, 1)",
+      "output": "(5, 7)"
     },
     {
       "name": "Dilation expands the kernel",
-      "input": "(7,9), (3,3), (2,2), (0,0), (2,2)",
-      "output": "(2,3)"
+      "input": "shape = (7, 9)\nkernel = (3, 3)\nstride = (2, 2)\npadding = (0, 0)\ndilation = (2, 2)",
+      "output": "(2, 3)"
     }
   ],
   "hints": [

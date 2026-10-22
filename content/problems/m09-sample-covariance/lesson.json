@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Positive relationship",
-      "input": "[[1,2], [3,4]]",
-      "output": "array([[2.,2.],[2.,2.]])"
+      "input": "X = [[1, 2], [3, 4]]",
+      "output": "[[2.0, 2.0], [2.0, 2.0]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Opposing movement",
-      "input": "[[0,2], [1,1], [2,0]]",
-      "output": "array([[1.,-1.],[-1.,1.]])"
+      "input": "X = [[0, 2], [1, 1], [2, 0]]",
+      "output": "[[1.0, -1.0], [-1.0, 1.0]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "One feature remains a matrix",
-      "input": "[[1], [3], [5]]",
-      "output": "array([[4.]])"
+      "input": "X = [[1], [3], [5]]",
+      "output": "[[4.0]]\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

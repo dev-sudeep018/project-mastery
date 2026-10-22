@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Discard second coordinate",
-      "input": "[[3,8],[5,9]], [1,2], [[1,0]]",
-      "output": "{'scores':array([[2],[4]]),'reconstruction':array([[3,2],[5,2]])}"
+      "input": "X = [[3, 8], [5, 9]]\nmean = [1, 2]\ncomponents = [[1, 0]]",
+      "output": "{'scores': [[2], [4]], 'reconstruction': [[3, 2], [5, 2]]}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Complete basis",
-      "input": "[[2,3]], [1,1], [[0,1],[1,0]]",
-      "output": "{'scores':array([[2,1]]),'reconstruction':array([[2,3]])}"
+      "input": "X = [[2, 3]]\nmean = [1, 1]\ncomponents = [[0, 1], [1, 0]]",
+      "output": "{'scores': [[2, 1]], 'reconstruction': [[2, 3]]}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Negative direction",
-      "input": "[[4]], [1], [[-1]]",
-      "output": "{'scores':array([[-3]]),'reconstruction':array([[4]])}"
+      "input": "X = [[4]]\nmean = [1]\ncomponents = [[-1]]",
+      "output": "{'scores': [[-3]], 'reconstruction': [[4]]}\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

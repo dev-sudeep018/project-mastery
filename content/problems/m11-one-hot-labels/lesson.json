@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Repeated classes",
-      "input": "[2,0,2], 3",
-      "output": "array([[0,0,1],[1,0,0],[0,0,1]])"
+      "input": "labels = [2, 0, 2]\nnum_classes = 3",
+      "output": "[[0, 0, 1], [1, 0, 0], [0, 0, 1]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Missing batch classes",
-      "input": "[1], 4",
-      "output": "array([[0,1,0,0]])"
+      "input": "labels = [1]\nnum_classes = 4",
+      "output": "[[0, 1, 0, 0]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Single-class vocabulary",
-      "input": "[0,0], 1",
-      "output": "np.ones((2,1))"
+      "input": "labels = [0, 0]\nnum_classes = 1",
+      "output": "[[1.0], [1.0]]\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

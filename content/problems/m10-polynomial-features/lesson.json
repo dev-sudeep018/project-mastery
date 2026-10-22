@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Quadratic features",
-      "input": "[-2, 0, 3], 2",
-      "output": "array([[1,-2,4],[1,0,0],[1,3,9]])"
+      "input": "x = [-2, 0, 3]\ndegree = 2",
+      "output": "[[1, -2, 4], [1, 0, 0], [1, 3, 9]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Linear features",
-      "input": "[.5, -1], 1",
-      "output": "array([[1,.5],[1,-1]])"
+      "input": "x = [0.5, -1]\ndegree = 1",
+      "output": "[[1.0, 0.5], [1.0, -1.0]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Cubic sign changes",
-      "input": "[-2], 3",
-      "output": "array([[1,-2,4,-8]])"
+      "input": "x = [-2]\ndegree = 3",
+      "output": "[[1, -2, 4, -8]]\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

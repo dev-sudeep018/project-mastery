@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Equal priors",
-      "input": "[[0]], [.5,.5], [[0],[2]], [[1],[1]]",
-      "output": "{'log_joint':array([[-1.612085713764618,-3.612085713764618]]),'predictions':array([0])}"
+      "input": "X = [[0]]\npriors = [0.5, 0.5]\nmeans = [[0], [2]]\nvariances = [[1], [1]]",
+      "output": "{'log_joint': [[-1.61208571, -3.61208571]],\n 'predictions': [0]}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Prior decides identical likelihoods",
-      "input": "[[0]], [.25,.75], [[0],[0]], [[1],[1]]",
-      "output": "{'log_joint':array([[-2.305232894324563,-1.206620605656454]]),'predictions':array([1])}"
+      "input": "X = [[0]]\npriors = [0.25, 0.75]\nmeans = [[0], [0]]\nvariances = [[1], [1]]",
+      "output": "{'log_joint': [[-2.30523289, -1.20662061]],\n 'predictions': [1]}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Variance changes peak density",
-      "input": "[[0]], [.5,.5], [[0],[0]], [[1],[4]]",
-      "output": "{'log_joint':array([[-1.612085713764618,-2.305232894324563]]),'predictions':array([0])}"
+      "input": "X = [[0]]\npriors = [0.5, 0.5]\nmeans = [[0], [0]]\nvariances = [[1], [4]]",
+      "output": "{'log_joint': [[-1.61208571, -2.30523289]],\n 'predictions': [0]}\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

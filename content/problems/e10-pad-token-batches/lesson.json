@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Different lengths",
-      "input": "[[2,3],[4]], 0",
-      "output": "{'tokens':array([[2,3],[4,0]]),'mask':array([[True,True],[True,False]])}"
+      "input": "sequences = [[2, 3], [4]]\npad_id = 0",
+      "output": "{'tokens': [[2, 3], [4, 0]],\n 'mask': [[True, True], [True, False]]}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Real token equals padding",
-      "input": "[[0],[]], 0",
-      "output": "{'tokens':array([[0],[0]]),'mask':array([[True],[False]])}"
+      "input": "sequences = [[0], []]\npad_id = 0",
+      "output": "{'tokens': [[0], [0]], 'mask': [[True], [False]]}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "All-empty batch",
-      "input": "[[],[]], 9",
-      "output": "{'tokens':np.empty((2,0),dtype=int),'mask':np.empty((2,0),dtype=bool)}"
+      "input": "sequences = [[], []]\npad_id = 9",
+      "output": "{'tokens': [[], []], 'mask': [[], []]}\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

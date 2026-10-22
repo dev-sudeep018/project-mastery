@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Position zero",
-      "input": "1, 4",
-      "output": "array([[0,1,0,1]])"
+      "input": "length = 1\ndimensions = 4",
+      "output": "[[0, 1, 0, 1]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "One frequency pair",
-      "input": "2, 2",
-      "output": "array([[0,1],[0.8414709848078965,0.5403023058681398]])"
+      "input": "length = 2\ndimensions = 2",
+      "output": "[[0.0, 1.0], [0.84147098, 0.54030231]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Two frequencies",
-      "input": "2, 4",
-      "output": "array([[0,1,0,1],[0.8414709848078965,0.5403023058681398,0.009999833334166664,0.9999500004166653]])"
+      "input": "length = 2\ndimensions = 4",
+      "output": "[[0.0, 1.0, 0.0, 1.0],\n [0.84147098, 0.54030231, 0.00999983, 0.99995]]\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Horizontal edge response",
-      "input": "[[2,2,5,5]], [[1,-1]]",
-      "output": "array([[0,-3,0]])"
+      "input": "image = [[2, 2, 5, 5]]\nkernel = [[1, -1]]",
+      "output": "[[0, -3, 0]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Asymmetric filter",
-      "input": "[[1,2],[3,4]], [[1,2],[0,-1]]",
-      "output": "array([[1]])"
+      "input": "image = [[1, 2], [3, 4]]\nkernel = [[1, 2], [0, -1]]",
+      "output": "[[1]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "One-pixel kernel",
-      "input": "[[1,-2],[3,0]], [[2]]",
-      "output": "array([[2,-4],[6,0]])"
+      "input": "image = [[1, -2], [3, 0]]\nkernel = [[2]]",
+      "output": "[[2, -4], [6, 0]]\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

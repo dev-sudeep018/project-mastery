@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Two occupied bins",
-      "input": "[0,0,1,1], [.1,.3,.7,.9], 2",
-      "output": "{'counts':array([2,2]),'mean_probability':array([.2,.8]),'positive_fraction':array([0,1]),'ece':.2}"
+      "input": "labels = [0, 0, 1, 1]\nprobabilities = [0.1, 0.3, 0.7, 0.9]\nnum_bins = 2",
+      "output": "{'counts': [2, 2],\n 'mean_probability': [0.2, 0.8],\n 'positive_fraction': [0, 1],\n 'ece': 0.2}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Boundary and probability one",
-      "input": "[0,1,1], [0,.5,1], 2",
-      "output": "{'counts':array([1,2]),'mean_probability':array([0,.75]),'positive_fraction':array([0,1]),'ece':1/6}"
+      "input": "labels = [0, 1, 1]\nprobabilities = [0, 0.5, 1]\nnum_bins = 2",
+      "output": "{'counts': [1, 2],\n 'mean_probability': [0.0, 0.75],\n 'positive_fraction': [0, 1],\n 'ece': 0.16666667}\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Empty bins",
-      "input": "[1], [.8], 4",
-      "output": "{'counts':array([0,0,0,1]),'mean_probability':array([0,0,0,.8]),'positive_fraction':array([0,0,0,1]),'ece':.2}"
+      "input": "labels = [1]\nprobabilities = [0.8]\nnum_bins = 4",
+      "output": "{'counts': [0, 0, 0, 1],\n 'mean_probability': [0.0, 0.0, 0.0, 0.8],\n 'positive_fraction': [0, 0, 0, 1],\n 'ece': 0.2}\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

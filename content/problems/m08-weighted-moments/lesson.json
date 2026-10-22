@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Reliability changes the mean",
-      "input": "[1, 5], [3, 1]",
-      "output": "{'mean':2., 'variance':3.}"
+      "input": "x = [1, 5]\nweights = [3, 1]",
+      "output": "{'mean': 2.0, 'variance': 3.0}"
     },
     {
       "name": "Ignore zero-weight outlier",
-      "input": "[2, 100], [1, 0]",
-      "output": "{'mean':2., 'variance':0.}"
+      "input": "x = [2, 100]\nweights = [1, 0]",
+      "output": "{'mean': 2.0, 'variance': 0.0}"
     },
     {
       "name": "Equal weights",
-      "input": "[-2, 0, 2], [1, 1, 1]",
-      "output": "{'mean':0., 'variance':8/3}"
+      "input": "x = [-2, 0, 2]\nweights = [1, 1, 1]",
+      "output": "{'mean': 0.0, 'variance': 2.66666667}\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [

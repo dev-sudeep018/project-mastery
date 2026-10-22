@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Perfect probabilities",
-      "input": "[0,1], [0,1]",
-      "output": "0."
+      "input": "labels = [0, 1]\nprobabilities = [0, 1]",
+      "output": "0.0"
     },
     {
       "name": "Confidently wrong",
-      "input": "[0,1], [1,0]",
-      "output": "1."
+      "input": "labels = [0, 1]\nprobabilities = [1, 0]",
+      "output": "1.0"
     },
     {
       "name": "Uncertain forecasts",
-      "input": "[0,1,1], [.5,.5,.5]",
-      "output": ".25"
+      "input": "labels = [0, 1, 1]\nprobabilities = [0.5, 0.5, 0.5]",
+      "output": "0.25"
     }
   ],
   "hints": [

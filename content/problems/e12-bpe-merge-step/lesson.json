@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Two separate matches",
-      "input": "['a','b','a','b'], ('a','b')",
-      "output": "['ab','ab']"
+      "input": "tokens = ['a', 'b', 'a', 'b']\npair = ('a', 'b')",
+      "output": "['ab', 'ab']"
     },
     {
       "name": "Overlapping candidates",
-      "input": "['a','a','a'], ('a','a')",
-      "output": "['aa','a']"
+      "input": "tokens = ['a', 'a', 'a']\npair = ('a', 'a')",
+      "output": "['aa', 'a']"
     },
     {
       "name": "Token boundaries matter",
-      "input": "['ab','c'], ('a','b')",
-      "output": "['ab','c']"
+      "input": "tokens = ['ab', 'c']\npair = ('a', 'b')",
+      "output": "['ab', 'c']"
     }
   ],
   "hints": [

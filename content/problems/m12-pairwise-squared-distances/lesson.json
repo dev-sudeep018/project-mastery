@@ -11,18 +11,18 @@
   "examples": [
     {
       "name": "Rectangular comparison",
-      "input": "[[0,0],[3,4]], [[0,0],[1,0],[3,4]]",
-      "output": "array([[0,1,25],[25,20,0]])"
+      "input": "X = [[0, 0], [3, 4]]\nY = [[0, 0], [1, 0], [3, 4]]",
+      "output": "[[0, 1, 25], [25, 20, 0]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Single feature",
-      "input": "[[-1],[2]], [[1]]",
-      "output": "array([[4],[1]])"
+      "input": "X = [[-1], [2]]\nY = [[1]]",
+      "output": "[[4], [1]]\n(Numeric values rounded to 8 decimal places where needed.)"
     },
     {
       "name": "Shared translation",
-      "input": "[[10,20]], [[13,24]]",
-      "output": "array([[25]])"
+      "input": "X = [[10, 20]]\nY = [[13, 24]]",
+      "output": "[[25]]\n(Numeric values rounded to 8 decimal places where needed.)"
     }
   ],
   "hints": [
