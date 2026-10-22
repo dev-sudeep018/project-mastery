@@ -1,0 +1,46 @@
+{
+  "intro": "Repeated query terms can signal relevance, but long documents should not win simply because they contain more words.",
+  "task": "Compute BM25 scores from a document-term count matrix and a query count vector using the specified positive-IDF convention.",
+  "signature": "bm25_scores(counts, query, k1, b)",
+  "requirements": [
+    "counts is a nonempty finite matrix of nonnegative integer values; query is a matching vector of nonnegative integer counts.",
+    "k1 is finite and strictly positive. b is finite in [0,1]. Document length is its row sum; average length includes empty rows.",
+    "Use idf = log(1 + (N - df + 0.5)/(df + 0.5)) and term factor tf*(k1+1)/(tf+k1*(1-b+b*length/average_length)). Multiply by query counts and sum terms. An all-empty corpus returns a zero vector.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Saturating repetition without length penalty",
+      "input": "[[1],[3]], [1], 1, 0",
+      "output": "array([np.log(1.2),1.5*np.log(1.2)])"
+    },
+    {
+      "name": "Term discrimination",
+      "input": "[[1,0],[0,1]], [1,0], 1, 1",
+      "output": "array([np.log(2),0])"
+    },
+    {
+      "name": "Empty row in average length",
+      "input": "[[0],[2]], [1], 1, 1",
+      "output": "array([0,np.log(2)])"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute df with (counts > 0).sum(axis=0), and lengths with row sums."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Use masked division for zero-frequency terms in empty rows; their contribution is zero."
+    }
+  ],
+  "explanation": [
+    "BM25 saturates term frequency: later repetitions contribute less than the first ones. Document-length normalization adjusts that contribution relative to the collection’s average length.",
+    "Document frequency counts rows containing a term, not total occurrences. This exercise uses Lucene’s positive IDF expression and explicitly includes the conventional k1 + 1 numerator factor.",
+    "Set b to zero and compare short and long documents with equal term counts. Then increase k1. Explain how these controls separately change length normalization and repetition saturation."
+  ],
+  "formula": "score(d,q) = Σt queryₜ · idfₜ · tfdt(k₁+1)/(tfdt+k₁(1−b+b·lengthd/avgLength))",
+  "test_count": 12,
+  "sample_count": 3
+}

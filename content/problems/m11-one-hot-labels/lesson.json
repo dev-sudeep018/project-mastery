@@ -1,0 +1,46 @@
+{
+  "intro": "Class identifiers are names, but an ordinary numeric feature can make class two appear twice as large as class one.",
+  "task": "Convert class labels to one-hot rows with a fixed, explicitly supplied number of classes.",
+  "signature": "one_hot(labels, num_classes)",
+  "requirements": [
+    "labels is a nonempty finite vector of integer values from zero through num_classes - 1.",
+    "num_classes is a positive integer, excluding booleans. Unobserved classes still get columns.",
+    "Return a NumPy array with one at each label column and zero elsewhere.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Repeated classes",
+      "input": "[2,0,2], 3",
+      "output": "array([[0,0,1],[1,0,0],[0,0,1]])"
+    },
+    {
+      "name": "Missing batch classes",
+      "input": "[1], 4",
+      "output": "array([[0,1,0,0]])"
+    },
+    {
+      "name": "Single-class vocabulary",
+      "input": "[0,0], 1",
+      "output": "np.ones((2,1))"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Allocate zeros with shape (number of labels, num_classes), then index by row and label."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Validate integrality before casting; silently truncating 1.7 would change the category."
+    }
+  ],
+  "explanation": [
+    "One-hot encoding preserves category identity without assigning a distance along a single number line. Each observation selects exactly one coordinate.",
+    "The number of columns comes from the declared vocabulary, not the largest label in this batch. A missing class must not change the representation used by the model.",
+    "Try two batches that contain different subsets of labels. Explain why inferring the output width independently would break a shared classifier."
+  ],
+  "formula": "Yᵢc = 1 when labelᵢ = c, otherwise 0",
+  "test_count": 12,
+  "sample_count": 3
+}

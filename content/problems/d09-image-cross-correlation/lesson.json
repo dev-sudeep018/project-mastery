@@ -1,0 +1,46 @@
+{
+  "intro": "An edge detector combines nearby pixels. Trace the local multiply-and-sum operation before introducing a convolution library.",
+  "task": "Return valid two-dimensional cross-correlation of an image with a supplied kernel, at stride one and with no padding.",
+  "signature": "cross_correlate(image, kernel)",
+  "requirements": [
+    "image and kernel are nonempty finite two-dimensional arrays. The kernel must fit within the image on both axes.",
+    "Multiply each image window by the kernel as supplied; do not flip the kernel.",
+    "Return a NumPy array with shape (image_height - kernel_height + 1, image_width - kernel_width + 1).",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Horizontal edge response",
+      "input": "[[2,2,5,5]], [[1,-1]]",
+      "output": "array([[0,-3,0]])"
+    },
+    {
+      "name": "Asymmetric filter",
+      "input": "[[1,2],[3,4]], [[1,2],[0,-1]]",
+      "output": "array([[1]])"
+    },
+    {
+      "name": "One-pixel kernel",
+      "input": "[[1,-2],[3,0]], [[2]]",
+      "output": "array([[2,-4],[6,0]])"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Allocate the smaller output first, then visit each valid top-left window position."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Use an asymmetric kernel to check that you have not accidentally flipped it."
+    }
+  ],
+  "explanation": [
+    "A local filter shares the same weights across positions. Cross-correlation takes a weighted sum of each local image window, making the operation sensitive to spatial patterns.",
+    "The kernel stays in its supplied orientation. Many neural-network convolution layers use this cross-correlation convention; mathematical convolution would reverse the kernel.",
+    "Try the kernel [1, -1] on a constant row and on a step. Explain why the response is zero in flat regions and changes sign when you reverse the edge."
+  ],
+  "formula": "Yᵢⱼ = Σa,b imageᵢ₊a,j₊b × kernelₐb",
+  "test_count": 11,
+  "sample_count": 3
+}

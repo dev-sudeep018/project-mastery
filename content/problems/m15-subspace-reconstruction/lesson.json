@@ -1,0 +1,46 @@
+{
+  "intro": "A low-dimensional representation saves space by discarding directions. Reconstruct it to see which information survives.",
+  "task": "Center observations using a supplied mean, project onto supplied orthonormal component rows, and reconstruct in the original feature space.",
+  "signature": "project_reconstruct(X, mean, components)",
+  "requirements": [
+    "X is a nonempty finite (n,d) matrix. mean has shape (d,). components has shape (k,d), with 1 <= k <= d.",
+    "Component rows must be orthonormal: components @ components.T equals identity within absolute tolerance 1e-7 and relative tolerance zero.",
+    "Return scores (n,k) and reconstruction (n,d) in a dictionary. Use the supplied mean; do not fit a new mean or components.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Discard second coordinate",
+      "input": "[[3,8],[5,9]], [1,2], [[1,0]]",
+      "output": "{'scores':array([[2],[4]]),'reconstruction':array([[3,2],[5,2]])}"
+    },
+    {
+      "name": "Complete basis",
+      "input": "[[2,3]], [1,1], [[0,1],[1,0]]",
+      "output": "{'scores':array([[2,1]]),'reconstruction':array([[2,3]])}"
+    },
+    {
+      "name": "Negative direction",
+      "input": "[[4]], [1], [[-1]]",
+      "output": "{'scores':array([[-3]]),'reconstruction':array([[4]])}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "The forward multiplication is (X - mean) @ components.T."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "A learned mean is part of a fitted transform. Refitting it on these observations changes the representation."
+    }
+  ],
+  "explanation": [
+    "Projection takes dot products with basis directions. Orthonormal rows ensure each score measures a coordinate without counting the same direction twice.",
+    "Multiplying scores by the components returns to feature space; adding the supplied mean reverses centering. Missing directions cannot be recovered from the scores.",
+    "Compare a one-component reconstruction with a complete orthonormal basis. The full basis recovers every input; the smaller basis exposes the discarded residual."
+  ],
+  "formula": "Z = (X − μ)Cᵀ; X̂ = ZC + μ",
+  "test_count": 11,
+  "sample_count": 3
+}

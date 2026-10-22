@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "d09",
+  "slug": "image-cross-correlation",
+  "version": 1,
+  "title": "Slide a Filter over an Image",
+  "summary": "An edge detector combines nearby pixels. Trace the local multiply-and-sum operation before introducing a convolution library.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Convolutions", "Image filters"],
+  "prerequisites": ["d02"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "cross_correlate",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Loop adapted from Dive into Deep Learning corr2d, revision 23d7a5aecceee57d1292c56e90cce307f183bb0a, MIT-0: https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_convolutional-neural-networks/conv-layer.md",
+      "Original upstream notice: https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE-SAMPLECODE; preserved in THIRD_PARTY_NOTICE.md and solution.py.",
+      "Lesson prose, examples, tests, and validation authored by Project Mastery contributors.",
+    ],
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "m10",
+  "slug": "polynomial-features",
+  "version": 1,
+  "title": "Expand a Linear Model\u2019s Features",
+  "summary": "A straight-line model misses a curved trend. Change its feature representation while keeping prediction linear in the learned weights.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Feature engineering", "Polynomial models"],
+  "prerequisites": ["m03"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "polynomial_features",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://numpy.org/doc/stable/reference/generated/numpy.vander.html",
+    ],
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e12",
+  "slug": "bpe-merge-step",
+  "version": 1,
+  "title": "Apply One Subword Merge",
+  "summary": "A chosen subword pair must be replaced consistently without consuming the same original token twice.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Tokenization", "BPE merges"],
+  "prerequisites": ["e11"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "merge_token_pair",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://huggingface.co/learn/llm-course/chapter6/5",
+    ],
+}

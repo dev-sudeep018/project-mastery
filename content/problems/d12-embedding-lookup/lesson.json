@@ -1,0 +1,46 @@
+{
+  "intro": "A token identifier selects a learned vector; its numeric magnitude should not scale that vector.",
+  "task": "Return embedding rows in the exact order of a supplied token-ID vector, preserving repeated tokens.",
+  "signature": "embedding_lookup(table, token_ids)",
+  "requirements": [
+    "table is a nonempty finite (vocabulary, dimensions) matrix. token_ids is a nonempty vector of nonnegative integer values below the vocabulary size.",
+    "Return a NumPy matrix of shape (number of tokens, dimensions).",
+    "Repeated identifiers repeat rows. Output must be an independent copy so later edits cannot change the table.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Repeated tokens",
+      "input": "[[1,2],[3,4],[5,6]], [2,0,2]",
+      "output": "array([[5,6],[1,2],[5,6]])"
+    },
+    {
+      "name": "One token",
+      "input": "[[-1,.5]], [0]",
+      "output": "array([[-1,.5]])"
+    },
+    {
+      "name": "Order matters",
+      "input": "[[10],[20]], [1,0]",
+      "output": "array([[20],[10]])"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Use the token vector as row indices after validating its bounds and integrality."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Do not deduplicate token IDs; sequence order and multiplicity are meaningful."
+    }
+  ],
+  "explanation": [
+    "An embedding table associates an integer vocabulary index with a dense feature vector. Lookup selects a row rather than performing arithmetic on the index.",
+    "Repeated tokens share parameters but occupy separate positions in the output sequence. Their outputs initially match because they read the same row.",
+    "Compare lookup with multiplying a one-hot matrix by the table. Explain why the direct indexing representation avoids allocating mostly zero entries."
+  ],
+  "formula": "outputᵢ = table[token_idᵢ]",
+  "test_count": 12,
+  "sample_count": 3
+}

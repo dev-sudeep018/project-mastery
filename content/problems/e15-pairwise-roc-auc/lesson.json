@@ -1,0 +1,46 @@
+{
+  "intro": "Changing a decision threshold changes accuracy. Measure instead how often a positive example receives a higher score than a negative one.",
+  "task": "Return binary ROC AUC as the fraction of positive-negative pairs ranked correctly, with half credit for tied scores.",
+  "signature": "pairwise_auc(labels, scores)",
+  "requirements": [
+    "labels is a nonempty vector containing only zero and one; both classes must appear. scores is a same-length finite real vector.",
+    "Higher scores indicate stronger evidence for class one. Scores need not be probabilities.",
+    "Compare every positive-negative pair. A higher positive score earns one, an exact tie earns one half, and a lower positive score earns zero. Return a scalar.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Perfect ordering",
+      "input": "[0,1,0,1], [.1,.9,.2,.8]",
+      "output": "1."
+    },
+    {
+      "name": "All scores tied",
+      "input": "[0,1,0], [3,3,3]",
+      "output": ".5"
+    },
+    {
+      "name": "Partially correct order",
+      "input": "[0,1,0,1], [0,1,2,3]",
+      "output": ".75"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Separate positive and negative scores, then broadcast them into a pair table."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Divide by positive_count * negative_count, not by the number of observations."
+    }
+  ],
+  "explanation": [
+    "AUC measures ranking discrimination across thresholds. The pairwise view asks whether a randomly chosen positive example outranks a randomly chosen negative one.",
+    "Exact ties receive half credit, corresponding to no preference between the two examples. A one-class sample has no positive-negative pairs and cannot define this metric.",
+    "Apply a strictly increasing transformation to every score and compare AUC. Explain why the ranking stays fixed even though the values may no longer be calibrated probabilities."
+  ],
+  "formula": "AUC = mean(positive_score > negative_score) + ½ mean(equal scores)",
+  "test_count": 12,
+  "sample_count": 3
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e17",
+  "slug": "calibration-bins",
+  "version": 1,
+  "title": "Compare Forecasts with Observed Frequencies",
+  "summary": "A probability of 0.8 should correspond to a similar observed positive fraction across many comparable forecasts. Inspect that agreement in bins.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Calibration", "Evaluation diagnostics"],
+  "prerequisites": ["e16"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "calibration_bins",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://scikit-learn.org/stable/modules/calibration.html",
+    ],
+}

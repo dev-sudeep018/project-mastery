@@ -69,7 +69,9 @@ test("three learning entry points, filters, and experiments connect", async ({
   await angle.press("End");
   await expect(page.locator(".measurement")).toHaveText("-1.000");
   await page.getByRole("link", { name: "Lesson library", exact: true }).click();
-  await page.getByRole("textbox", { name: "Search lessons" }).fill("attention");
+  await page
+    .getByRole("textbox", { name: "Search lessons" })
+    .fill("masked attention");
   await expect(page.locator(".lesson-row")).toHaveCount(1);
   await page
     .getByRole("combobox", { name: "Topic", exact: true })

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "m17",
+  "slug": "stratified-index-split",
+  "version": 1,
+  "title": "Keep Classes in Both Data Splits",
+  "summary": "A naive slice can put every rare-class example into one split. Allocate indices within each class before evaluating a model.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Data splitting", "Evaluation boundaries"],
+  "prerequisites": ["m05", "m11"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "stratified_indices",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://scikit-learn.org/stable/modules/cross_validation.html#stratification",
+    ],
+}

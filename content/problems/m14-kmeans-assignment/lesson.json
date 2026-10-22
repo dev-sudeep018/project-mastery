@@ -1,0 +1,46 @@
+{
+  "intro": "A clustering iteration needs both a group assignment and a measure of how tightly the observations fit the current prototypes.",
+  "task": "Assign each row to its nearest supplied center and return labels plus total squared-distance inertia.",
+  "signature": "assign_clusters(X, centers)",
+  "requirements": [
+    "X and centers are nonempty finite matrices with matching positive feature counts.",
+    "Each label is the index of the nearest center. Equal distances choose the lowest center index.",
+    "Return a dictionary with labels as a NumPy vector and inertia as the sum of squared distances to assigned centers. Do not update centers.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Two groups",
+      "input": "[[0],[2],[9]], [[0],[10]]",
+      "output": "{'labels':array([0,0,1]), 'inertia':5.}"
+    },
+    {
+      "name": "Tie chooses first center",
+      "input": "[[1]], [[0],[2]]",
+      "output": "{'labels':array([0]), 'inertia':1.}"
+    },
+    {
+      "name": "Squared rather than raw distance",
+      "input": "[[3,4]], [[0,0]]",
+      "output": "{'labels':array([0]), 'inertia':25.}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Build the observation-by-center squared-distance matrix."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "np.argmin chooses the first equal minimum; select each row’s minimum before summing."
+    }
+  ],
+  "explanation": [
+    "The assignment step minimizes each observation’s squared distance while holding centers fixed. Center indices are cluster identities, not target classes.",
+    "Inertia sums squared distances, rather than averaging or taking square roots. Duplicating the dataset therefore doubles inertia without changing individual assignments.",
+    "Add a center exactly on a distant observation. Can inertia increase? Explain why a smaller training inertia alone does not tell you the best number of clusters."
+  ],
+  "formula": "inertia = Σᵢ minⱼ ‖xᵢ − cⱼ‖²",
+  "test_count": 11,
+  "sample_count": 3
+}

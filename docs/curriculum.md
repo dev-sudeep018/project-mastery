@@ -49,10 +49,11 @@ IDs support more than two digits. A capacity test validates 2,000 distinct IDs
 and a connected prerequisite graph. This is a structural test, not a claim that
 2,000 complete lessons or their production build performance have been tested.
 
-The current published set contains twenty-one lessons, four interactive experiments,
+The current published set contains fifty-one lessons, four interactive experiments,
 and one retrieval project with a Python integration checkpoint. Two lessons start
 with explicitly flawed code for debugging investigations. See [the second batch](curriculum-depth.md)
-for its nine objectives, conventions, and verification strategy. Expanding the
+for its nine objectives and [batch three](curriculum-batch-03.md) for thirty more,
+including source provenance, explicit conventions, and verification strategy. Expanding the
 topic coverage, adding debugging and replication formats, and reviewing each
 new batch remain active work.
 

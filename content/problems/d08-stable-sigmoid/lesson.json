@@ -1,0 +1,46 @@
+{
+  "intro": "A gate should approach zero or one for strong evidence without overflowing its exponential calculation.",
+  "task": "Return sigmoid output and its elementwise derivative for a finite input vector, including inputs as large as plus or minus 1000.",
+  "signature": "sigmoid_with_gradient(x)",
+  "requirements": [
+    "x is a nonempty finite one-dimensional numeric vector.",
+    "Return a dictionary with output and derivative as NumPy arrays matching x.",
+    "Use a stable branch or equivalent expression that avoids exponential overflow. Derivative is output * (1 - output).",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Center of the gate",
+      "input": "[0]",
+      "output": "{'output':array([.5]),'derivative':array([.25])}"
+    },
+    {
+      "name": "Extreme scores",
+      "input": "[-1000,1000]",
+      "output": "{'output':array([0.,1.]),'derivative':array([0.,0.])}"
+    },
+    {
+      "name": "Known odds",
+      "input": "[-np.log(3),np.log(3)]",
+      "output": "{'output':array([.25,.75]),'derivative':array([.1875,.1875])}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Use separate positive and negative slices; np.where may evaluate both exponential branches."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Compute the derivative from the already stable output."
+    }
+  ],
+  "explanation": [
+    "Sigmoid maps a real-valued score into the interval from zero to one. Its slope is largest at zero and shrinks as the gate saturates.",
+    "For a positive input, exp(-x) is safe. For a negative input, exp(x)/(1+exp(x)) gives the same function without forming an enormous exponential.",
+    "Inspect the derivative at zero and at large magnitudes. Explain how saturated gates can weaken gradients even when the forward result is numerically valid."
+  ],
+  "formula": "σ(x) = 1 / (1 + exp(−x)); σ′(x) = σ(x)(1 − σ(x))",
+  "test_count": 10,
+  "sample_count": 3
+}

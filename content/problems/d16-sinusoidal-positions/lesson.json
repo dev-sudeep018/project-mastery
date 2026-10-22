@@ -1,0 +1,46 @@
+{
+  "intro": "Attention over token vectors needs a way to distinguish where those tokens occur. Build deterministic signals at several frequencies.",
+  "task": "Return sinusoidal positional encodings with sine in even dimensions and cosine in the following odd dimensions.",
+  "signature": "sinusoidal_positions(length, dimensions)",
+  "requirements": [
+    "length is a positive integer. dimensions is a positive even integer. Booleans are invalid.",
+    "Positions start at zero. A dimension pair 2i and 2i+1 shares frequency 10000**(-2i/dimensions).",
+    "Return a NumPy array of shape (length, dimensions). Use radians and a base of 10000.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Position zero",
+      "input": "1, 4",
+      "output": "array([[0,1,0,1]])"
+    },
+    {
+      "name": "One frequency pair",
+      "input": "2, 2",
+      "output": "array([[0,1],[0.8414709848078965,0.5403023058681398]])"
+    },
+    {
+      "name": "Two frequencies",
+      "input": "2, 4",
+      "output": "array([[0,1,0,1],[0.8414709848078965,0.5403023058681398,0.009999833334166664,0.9999500004166653]])"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Build a position column and a vector of frequencies for indices 0,2,4,…."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Assign sine to columns 0::2 and cosine to columns 1::2."
+    }
+  ],
+  "explanation": [
+    "Every position receives a vector of oscillations at several frequencies. Fast channels distinguish nearby positions while slow channels change over a wider span.",
+    "Each sine/cosine pair uses the same angle. At position zero the sine channels are zero and cosine channels are one, providing a useful convention check.",
+    "Plot one fast pair and one slow pair over a longer sequence. Explain why repeating one frequency across all channels would provide less varied positional structure."
+  ],
+  "formula": "PE(p,2i)=sin(p/10000^(2i/d)); PE(p,2i+1)=cos(p/10000^(2i/d))",
+  "test_count": 10,
+  "sample_count": 3
+}

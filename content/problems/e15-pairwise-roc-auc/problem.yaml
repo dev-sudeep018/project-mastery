@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e15",
+  "slug": "pairwise-roc-auc",
+  "version": 1,
+  "title": "Evaluate a Ranking without a Threshold",
+  "summary": "Changing a decision threshold changes accuracy. Measure instead how often a positive example receives a higher score than a negative one.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Evaluation", "ROC AUC"],
+  "prerequisites": ["e14"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "pairwise_auc",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html",
+    ],
+}

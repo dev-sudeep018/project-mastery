@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "d14",
+  "slug": "momentum-update",
+  "version": 1,
+  "title": "Carry Gradient History with Momentum",
+  "summary": "An optimizer can remember earlier gradients instead of reacting only to the current minibatch.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Optimization", "Momentum"],
+  "prerequisites": ["d07"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "momentum_step",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://d2l.ai/chapter_optimization/momentum.html",
+    ],
+}

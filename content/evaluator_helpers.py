@@ -14,6 +14,8 @@ def assert_close(actual, expected, atol=1e-7, rtol=1e-6):
     elif isinstance(expected, np.ndarray):
         assert isinstance(actual, np.ndarray), "Return a NumPy array."
         assert actual.shape == expected.shape, f"Expected shape {expected.shape}, got {actual.shape}."
+        if expected.dtype == np.dtype(bool):
+            assert actual.dtype == np.dtype(bool), "Return a boolean mask, not numeric zeros and ones."
         assert np.all(np.isfinite(actual)), "Result contains NaN or infinity."
         assert np.allclose(actual, expected, atol=atol, rtol=rtol), f"Expected {expected}, got {actual}."
     elif isinstance(expected, (list, tuple)):

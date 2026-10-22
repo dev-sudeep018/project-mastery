@@ -1,0 +1,46 @@
+{
+  "intro": "Multiplying many small feature likelihoods can erase a useful class comparison. Work with their logarithms instead.",
+  "task": "Return class log-joint scores and predicted classes from supplied Gaussian naive Bayes parameters.",
+  "signature": "gaussian_log_joint(X, priors, means, variances)",
+  "requirements": [
+    "X is a nonempty finite (n,d) matrix; means and variances have shape (classes,d). Priors is a positive vector summing to one within 1e-7.",
+    "Every variance is strictly positive. Use the conditional-independence Gaussian likelihood, including its normalizing constant.",
+    "Return log_joint as an (n,classes) NumPy array and predictions as a NumPy integer vector. Ties choose the first class.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Equal priors",
+      "input": "[[0]], [.5,.5], [[0],[2]], [[1],[1]]",
+      "output": "{'log_joint':array([[-1.612085713764618,-3.612085713764618]]),'predictions':array([0])}"
+    },
+    {
+      "name": "Prior decides identical likelihoods",
+      "input": "[[0]], [.25,.75], [[0],[0]], [[1],[1]]",
+      "output": "{'log_joint':array([[-2.305232894324563,-1.206620605656454]]),'predictions':array([1])}"
+    },
+    {
+      "name": "Variance changes peak density",
+      "input": "[[0]], [.5,.5], [[0],[0]], [[1],[4]]",
+      "output": "{'log_joint':array([[-1.612085713764618,-2.305232894324563]]),'predictions':array([0])}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Broadcast observations against class means to obtain an (n,classes,d) array."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Include log(2π variance), not just the squared deviation term."
+    }
+  ],
+  "explanation": [
+    "Naive Bayes assumes features are conditionally independent given the class. That assumption turns a joint likelihood into a product of individual densities.",
+    "Logarithms turn the product into a sum. Adding log priors produces log-joint scores; normalizing them into probabilities is unnecessary for choosing the largest score.",
+    "Hold the feature parameters equal and change the priors. Then hold priors equal and change a variance. Explain why a broad Gaussian can be less confident near its mean but assign more density far away."
+  ],
+  "formula": "log p(c,x) = log πc − ½Σj [log(2πσ²cj) + (xj − μcj)²/σ²cj]",
+  "test_count": 11,
+  "sample_count": 3
+}

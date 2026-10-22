@@ -1,0 +1,46 @@
+{
+  "intro": "A sensor summary should reflect reliability weights without treating a weight as another measured feature.",
+  "task": "Return a dictionary with weighted mean and population variance for a one-dimensional measurement vector.",
+  "signature": "weighted_moments(x, weights)",
+  "requirements": [
+    "x and weights are nonempty finite vectors of equal length. Weights are nonnegative and their sum is positive.",
+    "Normalize by total weight for both mean and variance; this is population variance, with no sample correction.",
+    "Return Python numeric scalars under keys mean and variance. Zero-weight observations contribute nothing.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Reliability changes the mean",
+      "input": "[1, 5], [3, 1]",
+      "output": "{'mean':2., 'variance':3.}"
+    },
+    {
+      "name": "Ignore zero-weight outlier",
+      "input": "[2, 100], [1, 0]",
+      "output": "{'mean':2., 'variance':0.}"
+    },
+    {
+      "name": "Equal weights",
+      "input": "[-2, 0, 2], [1, 1, 1]",
+      "output": "{'mean':0., 'variance':8/3}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Divide weights by their sum before taking the dot product with measurements."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "A single positive weight gives zero variance even when other observations are far away."
+    }
+  ],
+  "explanation": [
+    "Weights define how much each observation contributes to the summary. Normalizing by their sum makes a weight of two mean twice the influence, regardless of the overall scale.",
+    "Compute the mean first, then the weighted average of squared deviations. Centering before squaring also avoids subtracting two large nearly equal second moments.",
+    "Try multiplying every weight by ten. The summary must stay fixed. Then give an extreme observation zero weight and explain why it should have no effect."
+  ],
+  "formula": "μ = Σwᵢxᵢ / Σwᵢ; variance = Σwᵢ(xᵢ − μ)² / Σwᵢ",
+  "test_count": 12,
+  "sample_count": 3
+}

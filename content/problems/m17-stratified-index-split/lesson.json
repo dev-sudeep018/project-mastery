@@ -1,0 +1,46 @@
+{
+  "intro": "A naive slice can put every rare-class example into one split. Allocate indices within each class before evaluating a model.",
+  "task": "Return deterministic train and test index lists using a separate allocation for each class.",
+  "signature": "stratified_indices(labels, train_fraction)",
+  "requirements": [
+    "labels is a nonempty vector of nonnegative integer values. Every observed class has at least two rows. train_fraction is finite and strictly between zero and one.",
+    "For a class with n rows, put its first min(n-1, max(1, floor(n*train_fraction))) indices in train and the rest in test.",
+    "Return a dictionary with train and test as ascending Python index lists. This deterministic exercise does not shuffle observations.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Interleaved classes",
+      "input": "[0,1,0,1,0,1], .5",
+      "output": "{'train':[0,1], 'test':[2,3,4,5]}"
+    },
+    {
+      "name": "Protect tiny test split",
+      "input": "[0,0,1,1], .99",
+      "output": "{'train':[0,2], 'test':[1,3]}"
+    },
+    {
+      "name": "Protect tiny training split",
+      "input": "[0,0,0,0], .01",
+      "output": "{'train':[0], 'test':[1,2,3]}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Collect original indices for each unique label, then compute its clipped training count."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Sort the combined index lists after assigning classes; class order should not reorder the dataset."
+    }
+  ],
+  "explanation": [
+    "Stratification allocates examples within classes so a small class is not accidentally absent from evaluation. Clipping the allocation leaves at least one row of each observed class on each side.",
+    "Split indices before fitting transforms, then fit preprocessing on training rows only. The returned indices preserve original order for transparent inspection.",
+    "This deterministic policy is an exercise in allocation, not a universal sampling strategy. If rows are time-ordered or grouped by person, explain why random or stratified row splitting can still produce misleading evaluation."
+  ],
+  "formula": "ntrain,c = min(nc − 1, max(1, floor(f × nc)))",
+  "test_count": 12,
+  "sample_count": 3
+}
