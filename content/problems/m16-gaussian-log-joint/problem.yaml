@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "m16",
+  "slug": "gaussian-log-joint",
+  "version": 1,
+  "title": "Score a Gaussian Classifier in Log Space",
+  "summary": "Multiplying many small feature likelihoods can erase a useful class comparison. Work with their logarithms instead.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Naive Bayes", "Log likelihood"],
+  "prerequisites": ["m08"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "gaussian_log_joint",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://scikit-learn.org/stable/modules/naive_bayes.html#gaussian-naive-bayes",
+    ],
+}

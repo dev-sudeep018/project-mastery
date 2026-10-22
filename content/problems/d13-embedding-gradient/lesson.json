@@ -1,0 +1,46 @@
+{
+  "intro": "A repeated token reads the same parameters at several positions. Its backward pass must collect contributions from every occurrence.",
+  "task": "Scatter token-position gradients into a zero-initialized embedding-table gradient, adding repeated indices.",
+  "signature": "embedding_gradient(token_ids, upstream, vocab_size)",
+  "requirements": [
+    "vocab_size is a positive integer excluding booleans. token_ids is a nonempty vector of integer values in vocabulary range.",
+    "upstream is a finite matrix with one row per token and at least one feature.",
+    "Return a NumPy array of shape (vocab_size, features). Unused token rows are zero; repeated rows sum rather than overwrite.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Repeated index accumulates",
+      "input": "token_ids = [1, 0, 1]\nupstream = [[1, 2], [3, 4], [5, 6]]\nvocab_size = 3",
+      "output": "[[3, 4], [6, 8], [0, 0]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Contributions cancel",
+      "input": "token_ids = [0, 0]\nupstream = [[2, -3], [-2, 3]]\nvocab_size = 1",
+      "output": "[[0.0, 0.0]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Unused vocabulary rows",
+      "input": "token_ids = [2]\nupstream = [[7]]\nvocab_size = 4",
+      "output": "[[0], [0], [7], [0]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Allocate zeros with vocabulary rows, then add each position’s upstream vector."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "np.add.at handles repeated indices; advanced-indexed += may not accumulate them as intended."
+    }
+  ],
+  "explanation": [
+    "Lookup copies a shared parameter row into each token position. By the chain rule, all paths from that shared parameter to the loss contribute to its gradient.",
+    "Scatter-add reverses gather: each upstream row adds into its token’s row. Ordinary assignment loses earlier contributions for repeated tokens.",
+    "Give two occurrences equal and opposite gradients. Predict the shared row’s update, then explain why counting occurrences alone cannot determine a gradient."
+  ],
+  "formula": "dTable[v] = Σᵢ:tokenᵢ=v upstreamᵢ",
+  "test_count": 11,
+  "sample_count": 3
+}

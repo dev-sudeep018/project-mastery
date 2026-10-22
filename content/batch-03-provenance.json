@@ -1,0 +1,246 @@
+{
+  "batch": "03",
+  "authored_on": "2026-10-23",
+  "items": [
+    {
+      "id": "m08",
+      "origin": "original",
+      "reference": "https://numpy.org/doc/stable/reference/generated/numpy.average.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "m09",
+      "origin": "original",
+      "reference": "https://numpy.org/doc/stable/reference/generated/numpy.cov.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "m10",
+      "origin": "original",
+      "reference": "https://numpy.org/doc/stable/reference/generated/numpy.vander.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "m11",
+      "origin": "original",
+      "reference": "https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "m12",
+      "origin": "original",
+      "reference": "https://numpy.org/doc/stable/user/basics.broadcasting.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "m13",
+      "origin": "original",
+      "reference": "https://scikit-learn.org/stable/modules/neighbors.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "m14",
+      "origin": "original",
+      "reference": "https://scikit-learn.org/stable/modules/clustering.html#k-means",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "m15",
+      "origin": "original",
+      "reference": "https://scikit-learn.org/stable/modules/decomposition.html#pca",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "m16",
+      "origin": "original",
+      "reference": "https://scikit-learn.org/stable/modules/naive_bayes.html#gaussian-naive-bayes",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "m17",
+      "origin": "original",
+      "reference": "https://scikit-learn.org/stable/modules/cross_validation.html#stratification",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "d08",
+      "origin": "original",
+      "reference": "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "d09",
+      "origin": "code-adaptation",
+      "reference": "https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html",
+      "adapted_files": ["solution.py"],
+      "upstream_revision": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+      "notice": "content/problems/d09-image-cross-correlation/THIRD_PARTY_NOTICE.md"
+    },
+    {
+      "id": "d10",
+      "origin": "original",
+      "reference": "https://d2l.ai/chapter_convolutional-neural-networks/pooling.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "d11",
+      "origin": "original",
+      "reference": "https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "d12",
+      "origin": "original",
+      "reference": "https://pytorch.org/docs/stable/generated/torch.nn.Embedding.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "d13",
+      "origin": "original",
+      "reference": "https://numpy.org/doc/stable/reference/generated/numpy.ufunc.at.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "d14",
+      "origin": "original",
+      "reference": "https://d2l.ai/chapter_optimization/momentum.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "d15",
+      "origin": "original",
+      "reference": "https://d2l.ai/chapter_optimization/adam.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "d16",
+      "origin": "original",
+      "reference": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "d17",
+      "origin": "original",
+      "reference": "https://pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "e08",
+      "origin": "original",
+      "reference": "https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "e09",
+      "origin": "original",
+      "reference": "https://lucene.apache.org/core/9_12_1/core/org/apache/lucene/search/similarities/BM25Similarity.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "e10",
+      "origin": "original",
+      "reference": "https://huggingface.co/docs/transformers/pad_truncation",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "e11",
+      "origin": "original",
+      "reference": "https://huggingface.co/learn/llm-course/chapter6/5",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "e12",
+      "origin": "original",
+      "reference": "https://huggingface.co/learn/llm-course/chapter6/5",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "e13",
+      "origin": "original",
+      "reference": "https://huggingface.co/learn/llm-course/chapter5/6",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "e14",
+      "origin": "original",
+      "reference": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "e15",
+      "origin": "original",
+      "reference": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "e16",
+      "origin": "original",
+      "reference": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.brier_score_loss.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    },
+    {
+      "id": "e17",
+      "origin": "original",
+      "reference": "https://scikit-learn.org/stable/modules/calibration.html",
+      "adapted_files": [],
+      "upstream_revision": null,
+      "notice": null
+    }
+  ]
+}

@@ -8,8 +8,10 @@ internet or a claim that all upstream exercises have been reviewed or executed.
 
 The machine-readable [source registry](../content/sources.json) records URLs,
 Git revisions where available, license evidence, topics, runtime fit, and a reuse
-decision for each source. No third-party lessons or datasets have been imported
-in this batch; the registry does not increase the published problem count.
+decision for each source. No third-party lessons or datasets were imported
+during that initial survey; the registry does not increase the published problem count.
+The [23 October batch](curriculum-batch-03.md) uses these findings for 30 new
+activities, including one credited D2L code adaptation with its original notice.
 
 ## Best starting points
 

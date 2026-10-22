@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e13",
+  "slug": "context-budget-selection",
+  "version": 1,
+  "title": "Fit Evidence into a Context Budget",
+  "summary": "Retrieved passages compete for a limited context window. A long high-scoring passage can leave room for only a few others.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["RAG", "Context budgeting"],
+  "prerequisites": ["e06"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "select_context",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://huggingface.co/learn/llm-course/chapter5/6",
+    ],
+}

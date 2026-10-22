@@ -1,0 +1,46 @@
+{
+  "intro": "A nearest-neighbor system needs a query-by-candidate distance table. Its orientation determines which axis can be ranked.",
+  "task": "Return squared Euclidean distances between every row of X and every row of Y.",
+  "signature": "pairwise_squared_distances(X, Y)",
+  "requirements": [
+    "X and Y are nonempty finite matrices with the same positive number of features.",
+    "Return a NumPy array of shape (len(X), len(Y)); do not take square roots.",
+    "Identical rows have zero distance; feature order must agree in both inputs.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Rectangular comparison",
+      "input": "X = [[0, 0], [3, 4]]\nY = [[0, 0], [1, 0], [3, 4]]",
+      "output": "[[0, 1, 25], [25, 20, 0]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Single feature",
+      "input": "X = [[-1], [2]]\nY = [[1]]",
+      "output": "[[4], [1]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Shared translation",
+      "input": "X = [[10, 20]]\nY = [[13, 24]]",
+      "output": "[[25]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "X[:, None, :] and Y[None, :, :] align rows while retaining the feature axis."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Reduce axis=-1, not either observation axis."
+    }
+  ],
+  "explanation": [
+    "Broadcasting a query axis against a candidate axis exposes all pairwise differences. Summing only the feature axis leaves the required query-by-candidate table.",
+    "Squared distance preserves nearest-neighbor ordering and avoids a square root. Its numeric values are not ordinary Euclidean distances, so a distance threshold must use matching units.",
+    "Translate both matrices by the same vector and compare results. Then translate only one. Use that experiment to explain why shared preprocessing matters."
+  ],
+  "formula": "Dᵢⱼ = Σk (Xᵢk − Yⱼk)²",
+  "test_count": 11,
+  "sample_count": 3
+}

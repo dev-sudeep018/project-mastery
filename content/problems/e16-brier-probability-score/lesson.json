@@ -1,0 +1,46 @@
+{
+  "intro": "Two models can make identical class decisions while assigning very different probabilities. Evaluate the probabilities themselves.",
+  "task": "Return the binary Brier score: the mean squared difference between predicted class-one probabilities and binary outcomes.",
+  "signature": "brier_score(labels, probabilities)",
+  "requirements": [
+    "labels and probabilities are nonempty same-length finite vectors. Labels contain only zero and one.",
+    "Probabilities are in [0,1], including both endpoints.",
+    "Return mean((probabilities - labels)**2), with no square root, extra factor, or thresholding. Smaller is better.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Perfect probabilities",
+      "input": "labels = [0, 1]\nprobabilities = [0, 1]",
+      "output": "0.0"
+    },
+    {
+      "name": "Confidently wrong",
+      "input": "labels = [0, 1]\nprobabilities = [1, 0]",
+      "output": "1.0"
+    },
+    {
+      "name": "Uncertain forecasts",
+      "input": "labels = [0, 1, 1]\nprobabilities = [0.5, 0.5, 0.5]",
+      "output": "0.25"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Subtract labels from probabilities before squaring elementwise."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Do not convert probabilities into class predictions; that removes the confidence information."
+    }
+  ],
+  "explanation": [
+    "The Brier score measures squared error of probability forecasts. A confident wrong forecast receives a larger penalty than an uncertain wrong forecast.",
+    "This binary convention uses a single probability for class one. It is not the sum of squared errors over two one-hot class columns, which would double the result.",
+    "Compare forecasts of 0.51 and 0.99 when the outcome is zero. Both cross a 0.5 decision threshold, but their losses differ. Explain what that adds beyond accuracy."
+  ],
+  "formula": "Brier = (1/n) Σᵢ (pᵢ − yᵢ)²",
+  "test_count": 13,
+  "sample_count": 3
+}

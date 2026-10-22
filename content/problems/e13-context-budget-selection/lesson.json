@@ -1,0 +1,46 @@
+{
+  "intro": "Retrieved passages compete for a limited context window. A long high-scoring passage can leave room for only a few others.",
+  "task": "Select candidate indices greedily by descending relevance score, accepting each only if its token cost fits the remaining budget.",
+  "signature": "select_context(costs, scores, budget)",
+  "requirements": [
+    "costs is a nonempty vector of positive integer values. scores is a same-length finite nonnegative vector. budget is a nonnegative integer excluding booleans.",
+    "Rank by descending score, breaking ties by original index. Skip a candidate that does not fit and continue scanning later candidates.",
+    "Return selected indices as a Python list in selection order. This is a relevance-first greedy policy, not an optimal knapsack solver or score-per-token ranking.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Skip oversized best passage",
+      "input": "costs = [8, 3, 2]\nscores = [10, 8, 7]\nbudget = 5",
+      "output": "[1, 2]"
+    },
+    {
+      "name": "Relevance beats score per token",
+      "input": "costs = [5, 2, 2]\nscores = [9, 6, 5]\nbudget = 5",
+      "output": "[0]"
+    },
+    {
+      "name": "Stable score ties",
+      "input": "costs = [3, 3, 2]\nscores = [5, 5, 5]\nbudget = 5",
+      "output": "[0, 2]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Sort indices by (-score, original index), then maintain a remaining budget."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "An oversized candidate means continue, not break; a later smaller one may fit."
+    }
+  ],
+  "explanation": [
+    "A context budget turns retrieval ranking into a selection problem. Relevance order alone is insufficient because every selected passage consumes capacity.",
+    "This simple policy preserves relevance priority and skips oversized candidates. It is deterministic and easy to inspect, but can miss combinations with higher total relevance.",
+    "Construct two medium passages whose combined score exceeds one large passage. Explain when you might prefer a different selection policy, and where you would reserve tokens for the prompt and generated answer."
+  ],
+  "formula": "Σselected token_cost ≤ budget",
+  "test_count": 12,
+  "sample_count": 3
+}

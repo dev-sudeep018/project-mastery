@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "d16",
+  "slug": "sinusoidal-positions",
+  "version": 1,
+  "title": "Give a Sequence Position Signals",
+  "summary": "Attention over token vectors needs a way to distinguish where those tokens occur. Build deterministic signals at several frequencies.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Transformers", "Positional encoding"],
+  "prerequisites": ["d04"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "sinusoidal_positions",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html",
+    ],
+}

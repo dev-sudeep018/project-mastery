@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e08",
+  "slug": "document-term-counts",
+  "version": 1,
+  "title": "Build a Shared Document Vocabulary",
+  "summary": "Document vectors are comparable only when the same column means the same token in every row.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Text representation", "Vocabulary"],
+  "prerequisites": ["e05"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "document_term_counts",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction",
+    ],
+}

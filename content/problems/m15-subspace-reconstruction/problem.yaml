@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "m15",
+  "slug": "subspace-reconstruction",
+  "version": 1,
+  "title": "Measure What a Projection Loses",
+  "summary": "A low-dimensional representation saves space by discarding directions. Reconstruct it to see which information survives.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Dimensionality reduction", "Reconstruction"],
+  "prerequisites": ["m09"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "project_reconstruct",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://scikit-learn.org/stable/modules/decomposition.html#pca",
+    ],
+}

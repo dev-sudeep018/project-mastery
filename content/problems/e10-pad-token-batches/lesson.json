@@ -1,0 +1,46 @@
+{
+  "intro": "Variable-length sequences need a rectangular batch, but the padding value alone cannot tell you which positions were originally present.",
+  "task": "Right-pad a batch of token-ID lists to the longest sequence and return both tokens and a boolean presence mask.",
+  "signature": "pad_token_batch(sequences, pad_id)",
+  "requirements": [
+    "sequences is a nonempty list of lists of nonnegative integer values. Empty sequences are allowed. pad_id is a nonnegative integer excluding booleans.",
+    "Return tokens and mask as NumPy arrays with shape (batch, longest_length). mask is boolean and True for original positions.",
+    "A real token may equal pad_id; determine the mask from lengths. An all-empty batch has arrays of shape (batch,0).",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Different lengths",
+      "input": "sequences = [[2, 3], [4]]\npad_id = 0",
+      "output": "{'tokens': [[2, 3], [4, 0]],\n 'mask': [[True, True], [True, False]]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Real token equals padding",
+      "input": "sequences = [[0], []]\npad_id = 0",
+      "output": "{'tokens': [[0], [0]], 'mask': [[True], [False]]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "All-empty batch",
+      "input": "sequences = [[], []]\npad_id = 9",
+      "output": "{'tokens': [[], []], 'mask': [[], []]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Find the maximum input length, fill the token matrix with pad_id, and initialize a false mask."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Copy each sequence into its prefix and mark that prefix true."
+    }
+  ],
+  "explanation": [
+    "Padding makes sequence shapes compatible for batch operations. The presence mask records which entries have semantic content and which exist only to fill the rectangle.",
+    "Comparing token values with the padding identifier is insufficient when that identifier can also occur in real input. Length information preserves the distinction.",
+    "Use zero as both a real token and the padding value. Trace which positions a loss function should include and explain the error caused by masking every zero."
+  ],
+  "formula": "mask[b,p] = p < original_length[b]",
+  "test_count": 11,
+  "sample_count": 3
+}

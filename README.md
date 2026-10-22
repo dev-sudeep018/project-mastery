@@ -2,7 +2,7 @@
 
 Free, open-source AI learning for Python programmers. Follow connected paths, investigate interactive experiments, or start with a retrieval project and learn the concepts as you build.
 
-The current curriculum contains 21 original lessons, 4 interactive experiments, and a retrieval project with a Python integration checkpoint. Two lessons begin with deliberately flawed code to investigate and repair. The [2,000-problem curriculum plan](docs/curriculum.md) separates the expansion target from published content.
+The current curriculum contains 51 lessons, 4 interactive experiments, and a retrieval project with a Python integration checkpoint. Two lessons begin with deliberately flawed code to investigate and repair. The [latest 30-activity batch](docs/curriculum-batch-03.md) expands numerical methods, neural-network operations, tokenization, retrieval, and evaluation. The [2,000-problem curriculum plan](docs/curriculum.md) separates the expansion target from published content.
 
 ![Connected learning home in black and light grey](docs/images/learning-home.jpg)
 
@@ -48,8 +48,8 @@ The [design record](DESIGN.md) describes the implemented palette, layout, contro
 - `apps/web`: Next.js learning workspace.
 - `apps/runner`: sandbox frame and disposable Python workers on an isolated origin.
 - `packages`: versioned problem schema and validated message protocol.
-- `content/problems`: original problem statements, starter code, tests, and reference solutions.
+- `content/problems`: lesson statements, starter code, tests, reference solutions, and applicable source notices.
 - `scripts`: validation, runtime preparation, and local development servers.
 - `tests`: schema, evaluator, browser, and isolation checks.
 
-Original software and Python examples: Apache-2.0. Original educational prose: CC BY-SA 4.0. Third-party dependencies retain their own licenses. See LICENSE and content/LICENSE.
+Original software and Python examples: Apache-2.0. Original educational prose: CC BY-SA 4.0. Third-party material retains its applicable terms; the D2L filter adaptation preserves its [MIT-0 notice](content/problems/d09-image-cross-correlation/THIRD_PARTY_NOTICE.md). See LICENSE, content/LICENSE, and [batch provenance](content/batch-03-provenance.json).

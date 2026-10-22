@@ -1,0 +1,46 @@
+{
+  "intro": "Adam’s moving averages start at zero. Without bias correction, their early values depend strongly on how many steps have occurred.",
+  "task": "Return an Adam update with first and second moments, bias correction at step t, and epsilon outside the square root.",
+  "signature": "adam_step(parameters, gradient, m, v, t, learning_rate, beta1, beta2, epsilon)",
+  "requirements": [
+    "parameters, gradient, m, and v are nonempty finite vectors of identical shape. v is nonnegative.",
+    "t is a positive integer excluding booleans. learning_rate and epsilon are positive finite scalars; beta1 and beta2 are finite in [0,1).",
+    "Update moments first, divide them by 1 - beta1**t and 1 - beta2**t, then update parameters. Return parameters, m, and v; store uncorrected new moments.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Bias-corrected first step",
+      "input": "parameters = [1, 2]\ngradient = [2, -4]\nm = [0, 0]\nv = [0, 0]\nt = 1\nlearning_rate = 0.3\nbeta1 = 0.5\nbeta2 = 0.5\nepsilon = 1",
+      "output": "{'parameters': [0.8, 2.24], 'm': [1, -2], 'v': [2, 8]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Second step with constant gradient",
+      "input": "parameters = [1]\ngradient = [2]\nm = [1]\nv = [2]\nt = 2\nlearning_rate = 0.3\nbeta1 = 0.5\nbeta2 = 0.5\nepsilon = 1",
+      "output": "{'parameters': [0.8], 'm': [1.5], 'v': [3]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Zero gradient and moments",
+      "input": "parameters = [3]\ngradient = [0]\nm = [0]\nv = [0]\nt = 1\nlearning_rate = 0.1\nbeta1 = 0.9\nbeta2 = 0.99\nepsilon = 0.001",
+      "output": "{'parameters': [3], 'm': [0], 'v': [0]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Keep raw new moments separate from the corrected values used by this update."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "The denominator is sqrt(v_hat) + epsilon; epsilon is not inside sqrt."
+    }
+  ],
+  "explanation": [
+    "Adam tracks a moving average of gradients and of squared gradients. The second moment provides a separate adaptive scale for each coordinate.",
+    "Zero initialization shrinks early moment estimates. Bias correction divides by one minus the decay raised to the step count, while the stored state remains uncorrected.",
+    "For a constant gradient and zero initial moments, compare the corrected first and second moments over successive steps. Then explain why returning corrected moments as optimizer state would apply correction twice."
+  ],
+  "formula": "m = β₁m + (1−β₁)g; v = β₂v + (1−β₂)g²; θ ← θ − ηm̂/(√v̂ + ε)",
+  "test_count": 11,
+  "sample_count": 3
+}

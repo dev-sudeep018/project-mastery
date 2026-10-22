@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "d08",
+  "slug": "stable-sigmoid",
+  "version": 1,
+  "title": "Keep Sigmoid Stable at Extreme Inputs",
+  "summary": "A gate should approach zero or one for strong evidence without overflowing its exponential calculation.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Activations", "Numerical stability"],
+  "prerequisites": ["d01"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "sigmoid_with_gradient",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://d2l.ai/chapter_multilayer-perceptrons/mlp.html",
+    ],
+}

@@ -1,0 +1,46 @@
+{
+  "intro": "A subword tokenizer learns useful adjacent pairs from a corpus. Frequent words must contribute more evidence than rare words.",
+  "task": "Count weighted adjacent token-pair occurrences across supplied word segmentations.",
+  "signature": "bpe_pair_counts(words, frequencies)",
+  "requirements": [
+    "words is a nonempty list of token lists containing nonempty strings; individual token lists may be empty.",
+    "frequencies is a matching vector of nonnegative integer values. Count every adjacent occurrence, including overlapping occurrences.",
+    "Return a Python dictionary with two-string tuple keys and integer counts. Omit zero-total pairs. Do not join separate words.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Weighted repeated words",
+      "input": "words = [['a', 'b'], ['a', 'b', 'c']]\nfrequencies = [3, 2]",
+      "output": "{('a', 'b'): 5, ('b', 'c'): 2}"
+    },
+    {
+      "name": "Overlapping pair observations",
+      "input": "words = [['a', 'a', 'a']]\nfrequencies = [2]",
+      "output": "{('a', 'a'): 4}"
+    },
+    {
+      "name": "Respect word boundaries",
+      "input": "words = [['a'], ['b']]\nfrequencies = [10, 10]",
+      "output": "{}"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Visit each word with its frequency and zip the token list with itself shifted by one."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Accumulate tuple keys directly; concatenated strings can confuse different token boundaries."
+    }
+  ],
+  "explanation": [
+    "Byte-pair encoding repeatedly merges a frequent adjacent token pair. Pair statistics are weighted by word frequency so the model reflects the corpus, not merely a list of unique words.",
+    "Counting and merging have different overlap rules. The sequence a,a,a contains two adjacent a,a observations, even though a single left-to-right merge can consume only one of them.",
+    "Compare a common short word with a rare long word. Explain why unweighted pair counts can choose a different merge and produce a different vocabulary."
+  ],
+  "formula": "count(a,b) = Σwords frequency(word) × adjacent_occurrences(a,b)",
+  "test_count": 11,
+  "sample_count": 3
+}

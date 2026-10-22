@@ -1,0 +1,46 @@
+{
+  "intro": "A model can fail before learning starts when padding, stride, and dilation produce an unexpected spatial shape.",
+  "task": "Compute the two spatial output dimensions for a convolution with per-axis kernel, stride, symmetric padding, and dilation.",
+  "signature": "conv_output_shape(shape, kernel, stride, padding, dilation)",
+  "requirements": [
+    "Each argument is a two-element list or tuple of integers; booleans are invalid.",
+    "Input shape, kernel, stride, and dilation are positive. Padding is nonnegative and applied on both sides of its axis.",
+    "Use the effective kernel dilation * (kernel - 1) + 1. Reject a kernel that cannot fit after padding; return a Python tuple.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Valid convolution",
+      "input": "shape = (5, 7)\nkernel = (3, 3)\nstride = (1, 1)\npadding = (0, 0)\ndilation = (1, 1)",
+      "output": "(3, 5)"
+    },
+    {
+      "name": "Padding preserves shape",
+      "input": "shape = (5, 7)\nkernel = (3, 3)\nstride = (1, 1)\npadding = (1, 1)\ndilation = (1, 1)",
+      "output": "(5, 7)"
+    },
+    {
+      "name": "Dilation expands the kernel",
+      "input": "shape = (7, 9)\nkernel = (3, 3)\nstride = (2, 2)\npadding = (0, 0)\ndilation = (2, 2)",
+      "output": "(2, 3)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute effective kernel size before considering the stride."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Padding contributes twice its value; a partially fitting final window is discarded."
+    }
+  ],
+  "explanation": [
+    "Dilation spaces kernel taps apart, increasing the effective receptive field without increasing the number of weights. Padding adds available positions on both sides.",
+    "After subtracting effective kernel size from the padded input, integer division by stride counts complete shifts. Add one for the starting position.",
+    "Compare a three-tap kernel at dilation one and two. Explain why both have three weights while their required input span differs."
+  ],
+  "formula": "out = floor((in + 2p − d(k − 1) − 1) / s) + 1",
+  "test_count": 11,
+  "sample_count": 3
+}

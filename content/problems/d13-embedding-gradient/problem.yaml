@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "d13",
+  "slug": "embedding-gradient",
+  "version": 1,
+  "title": "Accumulate Gradients for Repeated Tokens",
+  "summary": "A repeated token reads the same parameters at several positions. Its backward pass must collect contributions from every occurrence.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Backpropagation", "Scatter add"],
+  "prerequisites": ["d12", "d05"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "embedding_gradient",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://numpy.org/doc/stable/reference/generated/numpy.ufunc.at.html",
+    ],
+}

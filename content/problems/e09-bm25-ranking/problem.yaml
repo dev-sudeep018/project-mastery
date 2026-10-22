@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "e09",
+  "slug": "bm25-ranking",
+  "version": 1,
+  "title": "Balance Term Frequency and Document Length",
+  "summary": "Repeated query terms can signal relevance, but long documents should not win simply because they contain more words.",
+  "domain": "engineering",
+  "difficulty": "intermediate",
+  "skills": ["Retrieval", "BM25"],
+  "prerequisites": ["e08"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "bm25_scores",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://lucene.apache.org/core/9_12_1/core/org/apache/lucene/search/similarities/BM25Similarity.html",
+    ],
+}

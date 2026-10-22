@@ -1,0 +1,46 @@
+{
+  "intro": "Nearby examples can disagree. Make the distance ordering and voting tie rules explicit before trusting a nearest-neighbor prediction.",
+  "task": "Return one predicted integer label per query using unweighted k-nearest-neighbor classification.",
+  "signature": "knn_predict(train, labels, queries, k)",
+  "requirements": [
+    "train and queries are nonempty finite matrices with matching positive feature counts. labels has one nonnegative integer value per training row.",
+    "k is an integer from 1 through the number of training rows, excluding booleans.",
+    "Rank by squared distance, breaking distance ties by original training index. Vote among k neighbors; class ties select the smallest label. Return a NumPy vector.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Neighborhood majority",
+      "input": "train = [[0], [1], [2]]\nlabels = [0, 1, 1]\nqueries = [[0.1]]\nk = 3",
+      "output": "[1]\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Stable distance tie",
+      "input": "train = [[-1], [1]]\nlabels = [9, 2]\nqueries = [[0]]\nk = 1",
+      "output": "[9]\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Class vote tie",
+      "input": "train = [[0], [1]]\nlabels = [9, 2]\nqueries = [[0]]\nk = 2",
+      "output": "[2]\n(Numeric values rounded to 8 decimal places where needed.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute one distance per training row for each query, then use a stable sort."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Count labels only after selecting neighbors. The closest individual label does not always win."
+    }
+  ],
+  "explanation": [
+    "Nearest-neighbor classification stores examples instead of fitting a coefficient vector. The metric and feature scale become part of the model.",
+    "Neighbor selection and class voting have separate ties. Stable distance ordering determines membership at the cutoff, then the smallest class wins a tied vote.",
+    "Change k for a query near a class boundary. Explain why increasing the neighborhood can reduce sensitivity to a single example while also hiding local structure."
+  ],
+  "formula": "prediction(q) = majority label among k nearest rows",
+  "test_count": 11,
+  "sample_count": 3
+}

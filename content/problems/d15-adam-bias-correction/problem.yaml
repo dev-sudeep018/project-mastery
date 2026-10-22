@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "d15",
+  "slug": "adam-bias-correction",
+  "version": 1,
+  "title": "Correct Adam\u2019s Early Moment Estimates",
+  "summary": "Adam\u2019s moving averages start at zero. Without bias correction, their early values depend strongly on how many steps have occurred.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Optimization", "Adaptive moments"],
+  "prerequisites": ["d14"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "adam_step",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://d2l.ai/chapter_optimization/adam.html",
+    ],
+}

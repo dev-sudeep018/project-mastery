@@ -1,0 +1,46 @@
+{
+  "intro": "A probability of 0.8 should correspond to a similar observed positive fraction across many comparable forecasts. Inspect that agreement in bins.",
+  "task": "Group binary forecasts into equal-width probability bins and return counts, mean probabilities, positive fractions, and weighted absolute calibration error.",
+  "signature": "calibration_bins(labels, probabilities, num_bins)",
+  "requirements": [
+    "labels and probabilities are nonempty same-length finite vectors. Labels are zero or one and probabilities lie in [0,1]. num_bins is a positive integer excluding booleans.",
+    "Bin index is min(floor(probability * num_bins), num_bins - 1). Boundaries enter the bin on their right, except probability one stays in the final bin.",
+    "Return counts, mean_probability, and positive_fraction as NumPy vectors plus ece as a scalar. Empty bins have zero means and fractions and contribute zero error.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Two occupied bins",
+      "input": "labels = [0, 0, 1, 1]\nprobabilities = [0.1, 0.3, 0.7, 0.9]\nnum_bins = 2",
+      "output": "{'counts': [2, 2],\n 'mean_probability': [0.2, 0.8],\n 'positive_fraction': [0, 1],\n 'ece': 0.2}\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Boundary and probability one",
+      "input": "labels = [0, 1, 1]\nprobabilities = [0, 0.5, 1]\nnum_bins = 2",
+      "output": "{'counts': [1, 2],\n 'mean_probability': [0.0, 0.75],\n 'positive_fraction': [0, 1],\n 'ece': 0.16666667}\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Empty bins",
+      "input": "labels = [1]\nprobabilities = [0.8]\nnum_bins = 4",
+      "output": "{'counts': [0, 0, 0, 1],\n 'mean_probability': [0.0, 0.0, 0.0, 0.8],\n 'positive_fraction': [0, 0, 0, 1],\n 'ece': 0.2}\n(Numeric values rounded to 8 decimal places where needed.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Assign each probability to a bin, explicitly clipping probability one to the final index."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Accumulate counts and two sums, divide only occupied bins, then weight absolute gaps by counts/n."
+    }
+  ],
+  "explanation": [
+    "A reliability table groups forecasts with similar predicted probabilities and compares their mean forecast with the observed fraction of positive outcomes.",
+    "The requested error weights each bin’s absolute gap by its share of observations. Empty bins carry no evidence and no weight; their zero values are placeholders.",
+    "Change the number of bins on a small sample. Explain why the estimate changes, why a low binned error is not proof of calibration, and why this diagnostic should accompany discrimination metrics."
+  ],
+  "formula": "ECE = Σbins (count/n) · |mean_probability − positive_fraction|",
+  "test_count": 12,
+  "sample_count": 3
+}

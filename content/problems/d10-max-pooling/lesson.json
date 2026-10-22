@@ -1,0 +1,46 @@
+{
+  "intro": "Pooling reduces spatial resolution by retaining the strongest activation inside each local window.",
+  "task": "Return two-dimensional max pooling for a supplied window shape and shared integer stride, with no padding.",
+  "signature": "max_pool(image, window, stride)",
+  "requirements": [
+    "image is a nonempty finite matrix. window is a two-element list or tuple of positive integers that fits inside the image.",
+    "stride is a positive integer. Boolean window sizes and strides are invalid.",
+    "Only full windows count; discard incomplete trailing windows. Return a NumPy matrix. Negative maxima must remain negative.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Non-overlapping blocks",
+      "input": "image = [[1, 4, 2, 3], [5, 0, 9, 1]]\nwindow = (2, 2)\nstride = 2",
+      "output": "[[5, 9]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Negative activations",
+      "input": "image = [[-4, -2], [-7, -3]]\nwindow = (2, 2)\nstride = 1",
+      "output": "[[-2]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Drop trailing partial window",
+      "input": "image = [[1, 2, 3, 4, 99]]\nwindow = (1, 2)\nstride = 2",
+      "output": "[[2, 4]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "For each axis the output count is floor((input - window) / stride) + 1."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Take the actual window maximum, even when every entry is below zero."
+    }
+  ],
+  "explanation": [
+    "Max pooling keeps a local extreme while discarding precise within-window position. This changes the representation and spatial resolution without learning a kernel.",
+    "Output positions begin at zero and advance by stride while the complete window fits. Initializing a maximum to zero would incorrectly erase all-negative windows.",
+    "Move the largest pixel within a non-overlapping window and compare outputs. Then move it across a window boundary to identify the limit of this local invariance."
+  ],
+  "formula": "Yᵢⱼ = max(image[i·s:i·s+h, j·s:j·s+w])",
+  "test_count": 11,
+  "sample_count": 3
+}

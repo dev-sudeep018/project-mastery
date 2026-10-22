@@ -1,0 +1,46 @@
+{
+  "intro": "A gate should approach zero or one for strong evidence without overflowing its exponential calculation.",
+  "task": "Return sigmoid output and its elementwise derivative for a finite input vector, including inputs as large as plus or minus 1000.",
+  "signature": "sigmoid_with_gradient(x)",
+  "requirements": [
+    "x is a nonempty finite one-dimensional numeric vector.",
+    "Return a dictionary with output and derivative as NumPy arrays matching x.",
+    "Use a stable branch or equivalent expression that avoids exponential overflow. Derivative is output * (1 - output).",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Center of the gate",
+      "input": "x = [0]",
+      "output": "{'output': [0.5], 'derivative': [0.25]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Extreme scores",
+      "input": "x = [-1000, 1000]",
+      "output": "{'output': [0.0, 1.0], 'derivative': [0.0, 0.0]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Known odds",
+      "input": "x = [-np.log(3), np.log(3)]",
+      "output": "{'output': [0.25, 0.75], 'derivative': [0.1875, 0.1875]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Use separate positive and negative slices; np.where may evaluate both exponential branches."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Compute the derivative from the already stable output."
+    }
+  ],
+  "explanation": [
+    "Sigmoid maps a real-valued score into the interval from zero to one. Its slope is largest at zero and shrinks as the gate saturates.",
+    "For a positive input, exp(-x) is safe. For a negative input, exp(x)/(1+exp(x)) gives the same function without forming an enormous exponential.",
+    "Inspect the derivative at zero and at large magnitudes. Explain how saturated gates can weaken gradients even when the forward result is numerically valid."
+  ],
+  "formula": "σ(x) = 1 / (1 + exp(−x)); σ′(x) = σ(x)(1 − σ(x))",
+  "test_count": 10,
+  "sample_count": 3
+}

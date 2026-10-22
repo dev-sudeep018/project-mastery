@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "m12",
+  "slug": "pairwise-squared-distances",
+  "version": 1,
+  "title": "Compare Every Pair of Observations",
+  "summary": "A nearest-neighbor system needs a query-by-candidate distance table. Its orientation determines which axis can be ranked.",
+  "domain": "foundations",
+  "difficulty": "intermediate",
+  "skills": ["Distance geometry", "Broadcasting"],
+  "prerequisites": ["m01"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "pairwise_squared_distances",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://numpy.org/doc/stable/user/basics.broadcasting.html",
+    ],
+}

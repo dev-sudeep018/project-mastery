@@ -1,0 +1,46 @@
+{
+  "intro": "An optimizer can remember earlier gradients instead of reacting only to the current minibatch.",
+  "task": "Return a momentum optimizer step using velocity_new = beta * velocity + gradient and parameters_new = parameters - learning_rate * velocity_new.",
+  "signature": "momentum_step(parameters, gradient, velocity, learning_rate, beta)",
+  "requirements": [
+    "parameters, gradient, and velocity are nonempty finite vectors with identical shapes.",
+    "learning_rate is finite and positive. beta is finite with 0 <= beta < 1.",
+    "Return a dictionary with parameters and velocity as new NumPy arrays. This convention has no (1 - beta) factor or Nesterov lookahead.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "First step",
+      "input": "parameters = [1, 2]\ngradient = [2, -4]\nvelocity = [0, 0]\nlearning_rate = 0.1\nbeta = 0.9",
+      "output": "{'parameters': [0.8, 2.4], 'velocity': [2, -4]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "History moves without a new gradient",
+      "input": "parameters = [1]\ngradient = [0]\nvelocity = [2]\nlearning_rate = 0.1\nbeta = 0.5",
+      "output": "{'parameters': [0.9], 'velocity': [1]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Opposite gradients cancel",
+      "input": "parameters = [1]\ngradient = [-1]\nvelocity = [2]\nlearning_rate = 0.1\nbeta = 0.5",
+      "output": "{'parameters': [1], 'velocity': [0]}\n(Numeric values rounded to 8 decimal places where needed.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Compute the new velocity before the new parameter vector."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "Do not silently change the convention to an exponential average scaled by 1 - beta."
+    }
+  ],
+  "explanation": [
+    "Momentum keeps a decayed sum of previous gradients. Consistent gradients reinforce one another, while alternating gradients can partially cancel.",
+    "Optimizer conventions differ. Here the current gradient enters unscaled, and the learning rate is applied only when updating parameters.",
+    "Set beta to zero to recover a plain gradient step. Then use a zero current gradient with nonzero velocity and explain why the parameters can still move."
+  ],
+  "formula": "vₜ = βvₜ₋₁ + gₜ; θₜ = θₜ₋₁ − ηvₜ",
+  "test_count": 11,
+  "sample_count": 3
+}

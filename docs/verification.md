@@ -1,8 +1,44 @@
 # Verification record
 
+## Thirty-activity curriculum batch — 23 October 2026
+
+The third batch adds 30 distinct learning activities and 339 public cases. There
+are now 51 lessons plus one project checkpoint, 637 public cases, and 17 lessons
+per guided path. [The batch record](curriculum-batch-03.md) documents objectives,
+conventions, source use, and verification scope.
+
+Local `pnpm check` passed metadata/prerequisite validation for 52 packages,
+TypeScript, ESLint, formatting, 16 Vitest tests, 22 Python test methods, and the
+64-page production export. Ten new Python methods include independent numerical
+properties, embedding finite differences, optimizer trajectories, source-notice
+preservation, and 30 plausible misconceptions. Every misconception fails an
+assertion on valid input. Intentional invalid starter/mutant executions can emit
+NumPy warnings; these do not represent reference failures.
+
+The browser suite discovers 67 tests per engine, including all 52 published
+references. All 30 new references passed in local Chromium. The navigation test
+initially used a phrase absent from the actual lesson title; its corrected search
+passed on a focused rerun. Desktop BM25 content at 1440 pixels and mobile Gaussian
+content at 390 pixels were inspected, with no document overflow or page errors.
+Worked examples now display named inputs and numeric results instead of NumPy
+constructor expressions. Metadata validation and the production build also cover
+that presentation update. GitHub runs the complete suite in Chromium, Firefox, and
+WebKit; the pull-request checks record the exact tested commit and results.
+The existing Windows Firefox and physical-device limitations below still apply.
+
+The D2L cross-correlation adaptation retains its upstream MIT-0 notice in both
+the repository and browser-delivered reference. The other 29 activities have
+original prose/code with concept references. The provenance manifest distinguishes
+these cases. No additional runtime dependency, dataset, or external model service
+was introduced. Source reuse and passing tests do not establish teaching quality;
+independent review and learner feedback remain necessary.
+
+The preceding batch's final GitHub quality, Chromium, Firefox, and WebKit checks
+passed at `8a72bc41779d1e21d9f64f3e0f9ce5b1df2c3fc2`; PR #13 is ready for review.
+
 ## Curriculum depth, semantic colors, and source survey — 22 October 2026
 
-The current branch adds nine distinct lessons, bringing the catalog to 21 lessons
+That batch added nine distinct lessons, bringing the catalog to 21 lessons
 plus one retrieval checkpoint and 298 public cases. Seven new Python test methods
 check independent numerical properties and reject nine plausible conceptual
 mistakes. They cover training-only scaling, ridge gradients, ReLU, dropout,

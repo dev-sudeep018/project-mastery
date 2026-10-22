@@ -1,0 +1,46 @@
+{
+  "intro": "A batched decoder must hide future tokens and padding. These are separate constraints that need to hold at the same time.",
+  "task": "Return a boolean allowed-attention mask for batches of variable sequence lengths with a fixed padded length.",
+  "signature": "causal_padding_mask(lengths, max_length)",
+  "requirements": [
+    "max_length is a positive integer excluding booleans. lengths is a nonempty vector of integer values from zero through max_length.",
+    "Return a boolean NumPy array with shape (batch, max_length, max_length), with query rows and key columns.",
+    "True means allowed: both positions are below that batch item’s length and key_position <= query_position. Padded query rows are entirely False.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Short padded sequence",
+      "input": "lengths = [2]\nmax_length = 3",
+      "output": "[[[True, False, False],\n  [True, True, False],\n  [False, False, False]]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Empty sequence is fully masked",
+      "input": "lengths = [0]\nmax_length = 2",
+      "output": "[[[False, False], [False, False]]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    },
+    {
+      "name": "Mixed batch lengths",
+      "input": "lengths = [1, 2]\nmax_length = 2",
+      "output": "[[[True, False], [False, False]],\n [[True, False], [True, True]]]\n(Numeric values rounded to 8 decimal places where needed.)"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Build a lower-triangular position comparison, then intersect query-valid and key-valid comparisons."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "This function returns True for allowed attention; some library APIs use the opposite convention."
+    }
+  ],
+  "explanation": [
+    "A causal mask stops a decoder position from reading future keys. A padding mask removes positions that do not represent real tokens in shorter sequences.",
+    "Combining the constraints also masks padded queries here. Such rows contain no allowed keys and must be handled deliberately by a downstream softmax implementation.",
+    "Inspect a sequence of length two in a padded length of four. Explain why masking only key columns leaves meaningless query rows, and why a mask convention must be documented before connecting APIs."
+  ],
+  "formula": "allowed[b,q,k] = (q < length[b]) ∧ (k < length[b]) ∧ (k ≤ q)",
+  "test_count": 11,
+  "sample_count": 3
+}

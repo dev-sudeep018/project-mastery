@@ -1,0 +1,46 @@
+{
+  "intro": "A chosen subword pair must be replaced consistently without consuming the same original token twice.",
+  "task": "Apply one left-to-right, non-overlapping BPE pair merge to a token list and return a new list.",
+  "signature": "merge_token_pair(tokens, pair)",
+  "requirements": [
+    "tokens is a list of nonempty strings and may be empty. pair is a two-element list or tuple of nonempty strings.",
+    "When consecutive original tokens match pair, concatenate them with no separator and advance by two. Otherwise copy one token.",
+    "Do not recursively merge newly formed tokens during this pass. Preserve all other tokens and their order.",
+    "Do not modify inputs. Raise ValueError for the invalid shapes, ranges, or non-finite numeric inputs described above. Numerical checks use moderate finite values unless stated otherwise."
+  ],
+  "examples": [
+    {
+      "name": "Two separate matches",
+      "input": "tokens = ['a', 'b', 'a', 'b']\npair = ('a', 'b')",
+      "output": "['ab', 'ab']"
+    },
+    {
+      "name": "Overlapping candidates",
+      "input": "tokens = ['a', 'a', 'a']\npair = ('a', 'a')",
+      "output": "['aa', 'a']"
+    },
+    {
+      "name": "Token boundaries matter",
+      "input": "tokens = ['ab', 'c']\npair = ('a', 'b')",
+      "output": "['ab', 'c']"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Choose the representation",
+      "body": "Maintain a position index and advance it by two after a match, otherwise by one."
+    },
+    {
+      "title": "Check the boundary",
+      "body": "A newly created token belongs in output only; do not put it back into the input scan."
+    }
+  ],
+  "explanation": [
+    "A BPE merge replaces a selected pair of adjacent tokens with one token. It operates on token boundaries rather than arbitrary substrings inside a token.",
+    "A left-to-right pass makes overlapping matches deterministic. Consuming a matched pair advances two positions, so neither original token is reused.",
+    "Compare the pair count for a,a,a with the number of replacements in one pass. Explain why pair statistics can count overlaps even though a concrete segmentation cannot contain overlapping tokens."
+  ],
+  "formula": null,
+  "test_count": 11,
+  "sample_count": 3
+}

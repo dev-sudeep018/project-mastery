@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "d17",
+  "slug": "causal-padding-mask",
+  "version": 1,
+  "title": "Combine Causality with Padding",
+  "summary": "A batched decoder must hide future tokens and padding. These are separate constraints that need to hold at the same time.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Attention masks", "Variable-length sequences"],
+  "prerequisites": ["d04"],
+  "assumed_knowledge": ["Python functions", "NumPy indexing and array shapes"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "causal_padding_mask",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "kind": "lesson",
+  "attribution":
+    [
+      "Concept reference; original lesson and implementation: https://pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html",
+    ],
+}
