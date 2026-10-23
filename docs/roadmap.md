@@ -12,6 +12,11 @@ The working branch adds twelve original lessons, three guided paths, four intera
 
 The third curriculum batch extends the three paths to 17 lessons each, adding 30 distinct learning activities. There are 51 lessons plus one project checkpoint, with 637 public cases. Two existing lessons are debugging investigations. The interface retains semantic feedback and syntax colors on black/grey surfaces. Full verification is recorded in verification.md.
 
+The retrieval project now connects the document-term, BM25 and context-budget
+lessons to inspectable scores and evidence selection. Its version 2 report
+includes all source data and selection decisions. This is a deeper project flow,
+not an increase in the lesson count; see retrieval-project.md.
+
 1. Expand the authored curriculum toward 2,000 problems across the topic map in curriculum.md. Review distinct learning objectives; do not count number-swapped variants as new material.
 2. Extend learning formats with debugging investigations, research replication, and larger projects.
 3. Add optional account synchronization with tested database authorization and explicit local/cloud merging. Anonymous learning remains complete without an account.

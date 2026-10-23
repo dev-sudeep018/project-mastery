@@ -2,23 +2,43 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowRight, ChevronRight, Download } from "lucide-react";
-import { dataset, chunks, evaluateProject } from "@/lib/retrieval";
+import {
+  dataset,
+  chunks,
+  evaluateProject,
+  selectEvidence,
+  methodLabels,
+  retrievalMethods,
+  type LexicalMethod,
+  type RetrievalMethod,
+} from "@/lib/retrieval";
 import { itemHref } from "@/lib/curriculum";
 import { downloadJson } from "./learning";
+import { ScoreInspector, EvidenceBuilder } from "./retrieval-evidence";
 
 const NOTES_KEY = "mastery:project:mini-retrieval:v1";
 export function RetrievalProject() {
   const [k, setK] = useState(2),
     [weight, setWeight] = useState(0.5),
     [query, setQuery] = useState(0);
+  const [lexicalMethod, setLexicalMethod] = useState<LexicalMethod>("bm25"),
+    [k1, setK1] = useState(1.2),
+    [b, setB] = useState(0.75),
+    [budget, setBudget] = useState(70),
+    [evidenceMethod, setEvidenceMethod] = useState<RetrievalMethod>("hybrid");
   const [size, setSize] = useState(16),
     [overlap, setOverlap] = useState(4);
   const [notes, setNotes] = useState(""),
     [hydrated, setHydrated] = useState(false),
     [notice, setNotice] = useState("");
   const [noticeTone, setNoticeTone] = useState("info");
-  const report = evaluateProject(k, weight),
+  const report = evaluateProject(k, weight, lexicalMethod, k1, b),
     selected = report.rows[query];
+  const evidence = selectEvidence(
+    dataset.documents,
+    selected[evidenceMethod].slice(0, k),
+    budget,
+  );
   useEffect(() => {
     try {
       const saved = localStorage.getItem(NOTES_KEY);
@@ -125,8 +145,10 @@ export function RetrievalProject() {
         <p>
           Vector search uses cosine similarity. The keyword baseline counts
           distinct shared words after removing a small fixed stop-word list.
-          Hybrid search uses reciprocal rank fusion with constant 60. Equal
-          scores use document ID order.
+          BM25 accounts for term frequency, rarity, and document length. Hybrid
+          search fuses vector ranks with your chosen text method using
+          reciprocal rank fusion with constant 60. Equal scores use document ID
+          order.
         </p>
         <div className="experiment-controls">
           <label>
@@ -141,7 +163,7 @@ export function RetrievalProject() {
             />
           </label>
           <label>
-            Vector weight: {weight.toFixed(1)} · keyword:{" "}
+            Vector weight: {weight.toFixed(1)} · {methodLabels[lexicalMethod]}:{" "}
             {(1 - weight).toFixed(1)}
             <input
               aria-label="Vector weight"
@@ -154,6 +176,47 @@ export function RetrievalProject() {
             />
           </label>
         </div>
+        <label className="query-select">
+          Hybrid text method
+          <select
+            value={lexicalMethod}
+            onChange={(e) => setLexicalMethod(e.target.value as LexicalMethod)}
+          >
+            <option value="bm25">BM25</option>
+            <option value="lexical">Keyword baseline</option>
+          </select>
+        </label>
+        <div className="experiment-controls">
+          <label>
+            Term-frequency saturation (k₁): {k1.toFixed(1)}
+            <input
+              aria-label="BM25 k1"
+              type="range"
+              min="0.1"
+              max="3"
+              step="0.1"
+              value={k1}
+              onChange={(e) => setK1(Number(e.target.value))}
+            />
+          </label>
+          <label>
+            Length normalization (b): {b.toFixed(2)}
+            <input
+              aria-label="BM25 b"
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value={b}
+              onChange={(e) => setB(Number(e.target.value))}
+            />
+          </label>
+        </div>
+        <p className="muted small">
+          Lower k₁ saturates repeated terms sooner. At b = 0, document length
+          has no effect. BM25 settings also affect Hybrid when BM25 is its text
+          method.
+        </p>
         <div className="table-scroll">
           <table>
             <caption>Mean scores across all four teaching queries</caption>
@@ -165,15 +228,9 @@ export function RetrievalProject() {
               </tr>
             </thead>
             <tbody>
-              {(["vector", "lexical", "hybrid"] as const).map((method) => (
+              {retrievalMethods.map((method) => (
                 <tr key={method}>
-                  <th>
-                    {method === "lexical"
-                      ? "Keyword"
-                      : method === "vector"
-                        ? "Vector"
-                        : "Hybrid"}
-                  </th>
+                  <th>{methodLabels[method]}</th>
                   <td>{report[method].recall.toFixed(3)}</td>
                   <td>{report[method].mrr.toFixed(3)}</td>
                 </tr>
@@ -198,16 +255,10 @@ export function RetrievalProject() {
           Relevant IDs: {dataset.queries[query].relevant.join(", ")}. Relevance
           is a fixed teaching label, not an automatic judgement.
         </p>
-        <div className="rank-comparison">
-          {(["vector", "lexical", "hybrid"] as const).map((method) => (
+        <div className="rank-comparison retrieval-rankings">
+          {retrievalMethods.map((method) => (
             <div key={method}>
-              <h3>
-                {method === "lexical"
-                  ? "Keyword"
-                  : method === "vector"
-                    ? "Vector"
-                    : "Hybrid"}
-              </h3>
+              <h3>{methodLabels[method]}</h3>
               <ol>
                 {selected[method].slice(0, k).map((id) => (
                   <li key={id}>
@@ -235,12 +286,23 @@ export function RetrievalProject() {
           </Link>
         </div>
       </section>
+      <ScoreInspector key={selected.query} row={selected} />
+      <EvidenceBuilder
+        evidence={evidence}
+        method={evidenceMethod}
+        setMethod={setEvidenceMethod}
+        budget={budget}
+        setBudget={setBudget}
+        queryText={dataset.queries[query].text}
+        k={k}
+      />
       <section className="project-section">
-        <h2>3. Record the evidence</h2>
+        <h2>5. Record your findings</h2>
         <p>
           Which query changed when you adjusted the weights? Did recall and MRR
-          tell the same story? What would you need to test before trusting this
-          on a larger collection?
+          tell the same story? Which sources survived the budget, and what
+          useful evidence was left out? What would you test on a larger
+          collection?
         </p>
         <label className="reflection-label">
           Your findings
@@ -259,9 +321,15 @@ export function RetrievalProject() {
             onClick={() => {
               downloadJson("mini-retrieval-report.json", {
                 format: "project-mastery-retrieval-report",
-                version: 1,
+                version: 2,
                 provenance: dataset.provenance,
                 experiment: report,
+                dataset,
+                evidence: {
+                  query: selected.query,
+                  method: evidenceMethod,
+                  ...evidence,
+                },
                 preprocessing: {
                   size,
                   overlap,

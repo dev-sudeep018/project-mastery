@@ -1,5 +1,31 @@
 # Verification record
 
+## Retrieval scores and evidence — 23 October 2026
+
+The existing project now compares four retrieval methods, explains BM25 term
+contributions, selects whole sources under a word budget, and exports a version 2
+report containing its dataset and decisions. The catalog remains 51 lessons plus
+one project checkpoint. See [the project guide](retrieval-project.md).
+
+Local `pnpm check` passed metadata validation for 52 packages, types, lint,
+formatting, 26 Vitest tests, 22 Python test methods, and the 64-page export.
+After the final mobile-table guidance and focus treatment, the production build
+and ten focused browser checks passed across Chromium and WebKit: six new checks
+for scoring, selection, export and narrow layout, plus four existing project-note
+and mobile-navigation regressions. The browser test initially imported a bundled
+JSON module through Node without an import attribute; replacing that test-only
+dependency with independent report assertions fixed test discovery.
+
+Seven desktop/mobile captures were inspected. Measurements found no document
+overflow at 320, 390, 768, 1100 or 1440 pixels and no page errors. The independent
+finish reviewer returned `disposition: ship` with no material fixes. The extension
+keeps the existing visual system. The detector's typography advisories are
+recorded as incumbent design-record drift, not silently repaired.
+
+The complete browser suite now discovers 70 tests per engine. GitHub checks on
+the pull request record the tested revision and full-suite results. The Windows
+Firefox and physical-device limitations below still apply.
+
 ## Thirty-activity curriculum batch — 23 October 2026
 
 The third batch adds 30 distinct learning activities and 339 public cases. There
