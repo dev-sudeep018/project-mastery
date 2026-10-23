@@ -4,6 +4,10 @@ Free, open-source AI learning for Python programmers. Follow connected paths, in
 
 The current curriculum contains 51 lessons, 4 interactive experiments, and a retrieval project with a Python integration checkpoint. Two lessons begin with deliberately flawed code to investigate and repair. The [latest 30-activity batch](docs/curriculum-batch-03.md) expands numerical methods, neural-network operations, tokenization, retrieval, and evaluation. The [2,000-problem curriculum plan](docs/curriculum.md) separates the expansion target from published content.
 
+The [retrieval project](docs/retrieval-project.md) compares keyword, BM25, vector,
+and hybrid search. Inspect individual term scores, assemble evidence under a word
+budget, and export the dataset, settings, results, and findings together.
+
 ![Connected learning home in black and light grey](docs/images/learning-home.jpg)
 
 The screenshot records the connected-learning home. Coding lessons start with incomplete code or a clearly labelled debugging investigation. The current interface keeps the black/grey base and uses semantic colors for feedback and Python syntax.
