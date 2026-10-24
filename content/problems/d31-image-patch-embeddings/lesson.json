@@ -1,0 +1,46 @@
+{
+  "intro": "A vision transformer starts with a sequence of image patches. The order of pixels, channels and patches determines what each learned projection receives.",
+  "task": "Split channel-first images into non-overlapping square patches, flatten each patch in a specified order, and apply a supplied affine projection to obtain image tokens.",
+  "signature": "patch_embeddings(images, patch_size, weight, bias)",
+  "requirements": [
+    "images has nonempty shape (B,C,H,W). patch_size is a positive integer excluding booleans; H and W must both be divisible by it.",
+    "Order patches by image row, then column. Within each patch, flatten channel first, then patch row, then patch column.",
+    "weight has shape (embedding_dim,C*patch_size**2) and bias is (embedding_dim,), with embedding_dim positive. Return flattened_patches@weight.T+bias with shape (B,(H/patch_size)*(W/patch_size),embedding_dim).",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Single-pixel patches",
+      "input": "images=[[[[1,2],[3,4]]]], patch_size=1, weight=[[2]], bias=[1]",
+      "output": "[[[3],[5],[7],[9]]]"
+    },
+    {
+      "name": "Inspect a whole patch",
+      "input": "images=[[[[1,2],[3,4]]]], patch_size=2, weight=identity(4), bias=[0,0,0,0]",
+      "output": "[[[1,2,3,4]]]"
+    },
+    {
+      "name": "Combine channels",
+      "input": "images=[[[[1,2]],[[10,20]]]], patch_size=1, weight=[[1,1]], bias=[0]",
+      "output": "[[[11],[22]]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Expose the patch-grid axes",
+      "body": "Reshape the image into batch, channel, grid-row, patch-row, grid-column, patch-column axes."
+    },
+    {
+      "title": "Move grid axes before channel",
+      "body": "Before flattening each patch, place grid-row and grid-column immediately after batch, followed by channel and the two within-patch axes."
+    }
+  ],
+  "explanation": [
+    "Patch extraction changes layout; the learned projection then changes feature dimension. Keeping these operations conceptually separate makes ordering errors easier to spot.",
+    "A projection whose weight is an identity matrix exposes the extracted pixel order directly. This is useful when a plausible output shape hides a transposition error.",
+    "Adapted the upstream reshape/permute and affine projection to supplied NumPy weights. Rectangular images are supported; parameter initialization and autograd are omitted."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

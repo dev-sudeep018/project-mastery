@@ -1,0 +1,46 @@
+{
+  "intro": "A graph-level prediction needs one representation per graph even when graphs contain different numbers of nodes. Pooling combines node features while discarding their arbitrary order.",
+  "task": "Group node rows by graph ID and produce sum, mean or coordinate-wise maximum readouts. Explore how each choice responds when the same nodes are duplicated.",
+  "signature": "graph_readout(features, batch, mode='mean')",
+  "requirements": [
+    "features is a nonempty (N,D) matrix. batch is an integer vector of length N, excluding booleans, whose distinct IDs are exactly 0 through G-1 with no missing graph.",
+    "mode is 'sum', 'mean' or 'max'. Return a (G,D) NumPy array with one row per graph ID, even when node rows are interleaved.",
+    "Sum and mean reduce whole node rows; max is computed separately for each feature and must handle all-negative features. Reject empty input or gaps in graph IDs rather than inventing values for empty graphs.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Mean with interleaved nodes",
+      "input": "features=[[1,2],[9,8],[3,4]], batch=[0,1,0], mode='mean'",
+      "output": "[[2,3],[9,8]]"
+    },
+    {
+      "name": "Sum per graph",
+      "input": "features=[[1,2],[9,8],[3,4]], batch=[0,1,0], mode='sum'",
+      "output": "[[4,6],[9,8]]"
+    },
+    {
+      "name": "Negative maxima",
+      "input": "features=[[-2,-5],[-3,-1]], batch=[0,0], mode='max'",
+      "output": "[[-2,-1]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Use graph IDs, not row blocks",
+      "body": "Nodes belonging to one graph need not be adjacent in the input."
+    },
+    {
+      "title": "Think about duplication",
+      "body": "Duplicating every node changes sum pooling but leaves mean and maximum unchanged."
+    }
+  ],
+  "explanation": [
+    "Readout is invariant to node order within each graph. The three modes preserve different information: sums carry size, means average it away, and maxima emphasize the strongest value of each feature.",
+    "A maximum vector need not equal any particular node\u2019s feature vector because different coordinates may come from different nodes.",
+    "Ported the upstream sum, mean and max readouts to NumPy. Added contiguous-ID validation so empty groups cannot silently create NaN or negative-infinity outputs."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

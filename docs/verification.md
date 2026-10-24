@@ -1,5 +1,38 @@
 # Verification record
 
+## Second platform batch — 24 October 2026
+
+Twelve further licensed adaptations bring the catalog to 69 lessons plus one
+project checkpoint, with 854 public cases. The new material covers activations,
+gates, BatchNorm state, label smoothing, contrastive learning, graph operations,
+image patches, diffusion schedules, cached attention and decoding distributions.
+See [the batch record](platform-batch-02.md) for exact conventions and source use.
+
+Local `pnpm check` passed metadata/prerequisite validation for 70 packages, types,
+lint, formatting, 26 Vitest tests, 44 Python test methods and the 82-page export.
+The focused content command passed all twelve references and 144 public cases.
+Thirteen new Python methods include independent scalar and pixel-loop oracles,
+graph permutation/duplication checks, cached/full attention equivalence across
+three chunkings, and twelve conceptual mistakes rejected on valid input.
+
+After the general project-link wording change, the production build and 26 focused
+browser checks passed: all twelve new references plus the learning-entry-point,
+library-filter and experiment regression in both Chromium and WebKit.
+
+Four desktop/mobile captures of BatchNorm and cached-attention lessons were
+inspected. Description, hints and solution tabs worked; measurements found no
+document overflow at 320, 390 or 1440 pixels and no page errors. Twelve upstream
+task hashes and the license hash matched their pinned source snapshots. All
+twelve generated browser references exactly matched their credited source files,
+and both inspected solution views retained the full upstream notices.
+
+The full suite discovers 88 tests per engine; the GitHub pull-request
+checks record full-suite results at the tested commit. The Windows Firefox and
+physical-device limitations below still apply.
+
+The preceding platform pilot's GitHub quality and complete Chromium, Firefox and
+WebKit checks all passed at `1e4288a` (PR #16).
+
 ## Licensed platform adaptations — 24 October 2026
 
 Six Pyre-Code / TorchCode adaptations add RMS normalization, rotary embeddings,

@@ -1,0 +1,46 @@
+{
+  "intro": "Nodes with many neighbors can collect larger messages merely because of their degree. A graph convolution scales both ends of each edge before mixing node features.",
+  "task": "Add self connections, compute symmetric degree normalization, transform the aggregated node features and apply ReLU. Compare an isolated node with a connected pair.",
+  "signature": "gcn_layer(adjacency, features, weight)",
+  "requirements": [
+    "adjacency is a nonempty symmetric (N,N) real matrix with nonnegative weights and zero diagonal. features is (N,F) and weight is (F,O), with F,O positive.",
+    "Set A_tilde=adjacency+I and degree[i]=sum(A_tilde[i,:]). Normalize each entry as A_tilde[i,j]/sqrt(degree[i]*degree[j]).",
+    "Return maximum(A_normalized@features@weight,0) with shape (N,O). Isolated nodes keep their own transformed features through the added self connection.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Isolated node",
+      "input": "adjacency=[[0]], features=[[2,-1]], weight=[[1],[1]]",
+      "output": "[[1]]"
+    },
+    {
+      "name": "Connected pair",
+      "input": "adjacency=[[0,1],[1,0]], features=[[2],[4]], weight=[[1]]",
+      "output": "[[3],[3]]"
+    },
+    {
+      "name": "Apply ReLU after aggregation",
+      "input": "adjacency=[[0]], features=[[-2]], weight=[[1]]",
+      "output": "[[0]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Add identity before computing degrees",
+      "body": "Computing degree from the original graph would leave an isolated node with a zero divisor."
+    },
+    {
+      "title": "Scale rows and columns",
+      "body": "Row normalization alone is a different aggregation rule. Each entry uses both endpoint degrees."
+    }
+  ],
+  "explanation": [
+    "The self connection lets a node retain its own features while receiving neighbor messages. Symmetric normalization moderates contributions from high-degree endpoints.",
+    "Relabeling nodes and applying the same permutation to adjacency rows, adjacency columns and feature rows must only relabel the output rows. Node numbering has no learned meaning here.",
+    "Ported the upstream symmetric GCN equation with explicit undirected-graph, zero-diagonal and shape contracts. Inputs remain unchanged; no graph library is required."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

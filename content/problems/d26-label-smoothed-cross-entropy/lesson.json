@@ -1,0 +1,46 @@
+{
+  "intro": "A one-hot target puts all its mass on a single class. Label smoothing changes that target distribution, so even a confident correct prediction can still have a substantial loss.",
+  "task": "Construct a softened target and calculate its cross-entropy from stable log probabilities. Track exactly where the smoothing mass goes.",
+  "signature": "label_smoothed_loss(logits, targets, smoothing=0.1)",
+  "requirements": [
+    "logits is a nonempty (N,C) matrix with C>=2. targets is an integer vector of length N with labels in [0,C); boolean labels are invalid.",
+    "Require 0<=smoothing<=1. Assign 1-smoothing to the target class and smoothing/(C-1) to each other class.",
+    "Return the mean cross-entropy across examples as a scalar. Use stable log-softmax with no probability epsilon. This non-target-only convention differs from mixing a one-hot target with a uniform distribution over all C classes.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Uniform predictions",
+      "input": "logits=[[0,0]], targets=[0], smoothing=0.2",
+      "output": "0.69314718"
+    },
+    {
+      "name": "No smoothing",
+      "input": "logits=[[log(3),0]], targets=[0], smoothing=0",
+      "output": "0.28768207"
+    },
+    {
+      "name": "Confident correct prediction",
+      "input": "logits=[[1000,-1000]], targets=[0], smoothing=0.1",
+      "output": "200"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Check that each target sums to one",
+      "body": "There are C-1 non-target classes, not C, receiving the smoothing mass."
+    },
+    {
+      "title": "Work from shifted logits",
+      "body": "Compute log probabilities directly so extreme incorrect predictions keep a finite, uncapped loss."
+    }
+  ],
+  "explanation": [
+    "At smoothing zero the objective is ordinary multiclass cross-entropy. At smoothing one the originally correct class receives no mass; that boundary defines the formula rather than recommending a training choice.",
+    "The smoothing convention must be specified when comparing implementations. Assigning smoothing/C everywhere produces a different target and a different loss.",
+    "Ported the upstream non-target-only target distribution and stable log-softmax to NumPy. Added strict label/range validation and original fixtures."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

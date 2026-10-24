@@ -1,0 +1,46 @@
+{
+  "intro": "A diffusion schedule specifies how much signal is retained after repeated noise additions. Per-step retention and cumulative retention answer different questions.",
+  "task": "Build a linear sequence of beta values and the cumulative product of their complementary alpha values. Interpret the result as a schedule, without simulating a trained denoiser.",
+  "signature": "linear_noise_schedule(steps, beta_start=0.0001, beta_end=0.02)",
+  "requirements": [
+    "steps is an integer in [2,10000], excluding booleans. Require 0<beta_start<=beta_end<1.",
+    "Use steps equally spaced beta values including both endpoints. alpha[t]=1-beta[t], and alpha_bar[t] is the product of alpha[0] through alpha[t], inclusive.",
+    "Return a dictionary with betas and alpha_bar arrays of length steps. Index zero already includes the first noise step. Float64 underflow to zero in a long schedule is allowed.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Two different steps",
+      "input": "steps=2, beta_start=0.1, beta_end=0.2",
+      "output": "betas=[0.1,0.2], alpha_bar=[0.9,0.72]"
+    },
+    {
+      "name": "Constant half retention",
+      "input": "steps=3, beta_start=0.5, beta_end=0.5",
+      "output": "betas=[0.5,0.5,0.5], alpha_bar=[0.5,0.25,0.125]"
+    },
+    {
+      "name": "Constant smaller noise",
+      "input": "steps=2, beta_start=0.2, beta_end=0.2",
+      "output": "betas=[0.2,0.2], alpha_bar=[0.8,0.64]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Separate a step from its history",
+      "body": "The current alpha is one minus beta. The cumulative value multiplies all previous alphas too."
+    },
+    {
+      "title": "Check a constant schedule",
+      "body": "If beta is constant b, the retained signal at index t is (1-b)**(t+1)."
+    }
+  ],
+  "explanation": [
+    "In the usual forward-noising parameterization, sqrt(alpha_bar) scales the original signal and sqrt(1-alpha_bar) scales independent unit-variance noise. These squared coefficients add to one.",
+    "Changing the number of steps while keeping beta endpoints fixed changes cumulative retention. The schedule itself is not a claim about image quality or a trained generation system.",
+    "Adapted only the upstream linear-beta branch, with configurable endpoints and both per-step betas and cumulative retention returned. Cosine and sigmoid variants are deliberately outside this contract."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}
