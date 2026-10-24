@@ -1,0 +1,47 @@
+{
+  "intro": "An optimizer update and its learning-rate schedule solve different problems. Specify the boundary steps so warmup and decay join without a jump.",
+  "task": "Implement a linear warmup followed by cosine decay. Check the exact warmup boundary, midpoint, and final step rather than relying on a plot.",
+  "signature": "cosine_lr_schedule(step, total_steps, warmup_steps, max_lr, min_lr=0.0)",
+  "requirements": [
+    "step, total_steps and warmup_steps are integers, excluding booleans. Require step>=0, total_steps>0, and 0<=warmup_steps<total_steps.",
+    "Require finite real rates with 0<=min_lr<=max_lr. During step<warmup_steps, return max_lr*step/warmup_steps.",
+    "For warmup_steps<=step<total_steps use progress=(step-warmup_steps)/(total_steps-warmup_steps) and min_lr+0.5*(max_lr-min_lr)*(1+cos(pi*progress)). At or after total_steps return min_lr.",
+    "Return a numeric scalar. With no warmup, step zero starts at max_lr; with warmup, step zero starts at zero, even when min_lr is positive.",
+    "Inputs must be real numeric values with finite magnitude at most 1e30. Leave inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Start of warmup",
+      "input": "step=0, total_steps=10, warmup_steps=2, max_lr=1",
+      "output": "0"
+    },
+    {
+      "name": "End of warmup",
+      "input": "step=2, total_steps=10, warmup_steps=2, max_lr=1",
+      "output": "1"
+    },
+    {
+      "name": "Decay midpoint",
+      "input": "step=6, total_steps=10, warmup_steps=2, max_lr=1, min_lr=0.2",
+      "output": "0.6"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Handle intervals in order",
+      "body": "Deal with warmup and completed schedules before calculating the cosine progress."
+    },
+    {
+      "title": "Check the midpoint",
+      "body": "Halfway through the decay interval, the rate is the arithmetic mean of the peak and minimum."
+    }
+  ],
+  "explanation": [
+    "Warmup controls the initial ramp independently of the decay floor. The minimum rate is the floor for the decay phase, not for warmup.",
+    "The peak occurs exactly at warmup_steps. At total_steps the cosine reaches its minimum, and clamping subsequent steps avoids an unintended second rise.",
+    "The schedule is adapted from the upstream scalar function. Added validation rules remove ambiguous configurations such as a warmup that occupies the entire schedule."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

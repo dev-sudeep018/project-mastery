@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "d20",
+  "kind": "lesson",
+  "slug": "lora-linear-adapter",
+  "version": 1,
+  "title": "Add a Low-Rank Adapter to a Linear Layer",
+  "summary": "Fine-tuning can change a linear layer through two small matrices while retaining its original weights. Trace the base prediction and low-rank update separately.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Parameter-efficient adaptation", "Linear algebra"],
+  "prerequisites": ["d02"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "lora_linear",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors; adapted from Pyre-Code / TorchCode",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Adapted MIT-licensed implementation: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/lora.py",
+      "Upstream copyright (c) 2024 duoan and (c) 2024 kiren; full MIT notice retained in reference solution and THIRD_PARTY_NOTICE.md. Original additions: Apache-2.0; original lesson prose: CC-BY-SA-4.0.",
+    ],
+}

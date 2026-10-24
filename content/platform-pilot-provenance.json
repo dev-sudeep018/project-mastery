@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-23",
+  "source": "https://github.com/whwangovo/pyre-code",
+  "revision": "7ede95b47437798c74023a0ffae8fb33bbeebc2e",
+  "license": "MIT",
+  "upstream_license_sha256": "91a61cb1377cef47e1c6ec7dba42331f3070970f91e5ab1638fcc30add2f9138",
+  "items": [
+    {
+      "id": "d18",
+      "folder": "d18-rms-normalization",
+      "upstream_path": "torch_judge/tasks/rmsnorm.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/rmsnorm.py",
+      "upstream_sha256": "7ef4e29a1d7c01831c2a340bb1cffae74084dc5e67f4d320046dbd4a47ad4748",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 12,
+      "changes": "This NumPy adaptation keeps the upstream forward computation. It adds explicit input validation and independent examples; it does not implement PyTorch autograd.",
+      "notice": "content/problems/d18-rms-normalization/THIRD_PARTY_NOTICE.md"
+    },
+    {
+      "id": "d19",
+      "folder": "d19-rotary-position-embeddings",
+      "upstream_path": "torch_judge/tasks/rope.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/rope.py",
+      "upstream_sha256": "7b16a427fbbe67e55f1830dd4be298ffef46f5f7a1c8945ef9841d4ada9610b3",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 12,
+      "changes": "This adaptation ports the upstream paired rotation to NumPy and keeps its base of 10000. It omits gradient tracking and adds strict shapes and deterministic tests.",
+      "notice": "content/problems/d19-rotary-position-embeddings/THIRD_PARTY_NOTICE.md"
+    },
+    {
+      "id": "d20",
+      "folder": "d20-lora-linear-adapter",
+      "upstream_path": "torch_judge/tasks/lora.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/lora.py",
+      "upstream_sha256": "d89558a65559d85e8844e75e10ab88a2881feb25ced997dd04a54a2c3fdba228",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 12,
+      "changes": "The upstream class freezes its base layer and trains the adapter. This NumPy adaptation isolates the forward equation with supplied arrays; it does not simulate autograd or claim to verify training behavior.",
+      "notice": "content/problems/d20-lora-linear-adapter/THIRD_PARTY_NOTICE.md"
+    },
+    {
+      "id": "e18",
+      "folder": "e18-per-channel-int8-quantization",
+      "upstream_path": "torch_judge/tasks/int8_quantization.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/int8_quantization.py",
+      "upstream_sha256": "67e9437d9eaadd2d3ba366a9f921659b27d028b6167235e151c85bbfcf07901a",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 13,
+      "changes": "Ported to a NumPy forward function returning stored INT8 weights, per-channel scales and floating output. Uses a symmetric [-127,127] range, ties-to-even rounding and explicit scale one for zero rows instead of an epsilon denominator. Nonzero weight magnitudes below 1e-300 are rejected. This is not an integer kernel or a total-model memory benchmark.",
+      "notice": "content/problems/e18-per-channel-int8-quantization/THIRD_PARTY_NOTICE.md"
+    },
+    {
+      "id": "d21",
+      "folder": "d21-cosine-learning-rate-schedule",
+      "upstream_path": "torch_judge/tasks/cosine_lr.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/cosine_lr.py",
+      "upstream_sha256": "9f9307021e4e22ef7bb792602a4d664eff569133350c1f77b2201e3f9537ad46",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 12,
+      "changes": "The schedule is adapted from the upstream scalar function. Added validation rules remove ambiguous configurations such as a warmup that occupies the entire schedule.",
+      "notice": "content/problems/d21-cosine-learning-rate-schedule/THIRD_PARTY_NOTICE.md"
+    },
+    {
+      "id": "d22",
+      "folder": "d22-multiclass-focal-loss",
+      "upstream_path": "torch_judge/tasks/focal_loss.py",
+      "upstream_url": "https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/focal_loss.py",
+      "upstream_sha256": "2710ad4ee4c38631faca0dbdc6e2d54982ab4d87a29000928ee2d047f9ad1c50",
+      "use": "code-adaptation",
+      "status": "validated",
+      "public_cases": 12,
+      "changes": "Ported the forward objective to NumPy with stable log-softmax instead of log(probability + epsilon), avoiding an artificial loss cap. Added explicit validation, deterministic edge cases and the gamma-zero limit; no automatic gradients.",
+      "notice": "content/problems/d22-multiclass-focal-loss/THIRD_PARTY_NOTICE.md"
+    }
+  ]
+}

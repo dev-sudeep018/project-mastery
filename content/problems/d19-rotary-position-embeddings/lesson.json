@@ -1,0 +1,46 @@
+{
+  "intro": "Adding a position vector and rotating a feature pair encode position differently. RoPE rotates query and key pairs without changing their lengths.",
+  "task": "Rotate adjacent even/odd feature pairs in query and key tensors. Use the sequence index as the position and inspect the relative-position behavior of their dot products.",
+  "signature": "apply_rope(q, k)",
+  "requirements": [
+    "q and k have the same nonempty shape (batch, sequence, dimension); dimension must be even. Return a tuple (rotated_q, rotated_k) of new NumPy arrays.",
+    "For pair i and sequence position p, angle = p / 10000**(2*i/dimension). Positions start at zero for every batch.",
+    "Rotate (even, odd) into (even*cos(angle)-odd*sin(angle), even*sin(angle)+odd*cos(angle)). Keep adjacent pairs in their original order.",
+    "Inputs must be real numeric values with finite magnitude at most 1e30. Leave inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Position zero",
+      "input": "q=[[[3,4]]], k=[[[1,2]]]",
+      "output": "([[[3,4]]], [[[1,2]]])"
+    },
+    {
+      "name": "One-radian rotation",
+      "input": "q=[[[1,0],[1,0]]], k=[[[0,1],[0,1]]]",
+      "output": "([[[1,0],[0.54030231,0.84147098]]], [[[0,1],[-0.84147098,0.54030231]]])"
+    },
+    {
+      "name": "Zero vectors",
+      "input": "q=k=[[[0,0],[0,0]]]",
+      "output": "Both outputs are [[[0,0],[0,0]]]."
+    }
+  ],
+  "hints": [
+    {
+      "title": "Pair adjacent features",
+      "body": "Use slices 0::2 and 1::2, not the first and second halves of the vector."
+    },
+    {
+      "title": "Broadcast positions",
+      "body": "A sequence-by-half-dimension angle matrix broadcasts over the batch axis."
+    }
+  ],
+  "explanation": [
+    "Each pair undergoes a two-dimensional rotation, preserving its squared norm. Position zero is the identity transformation.",
+    "Applying the same positional shift to query and key changes each rotation but leaves their mutual dot product unchanged. The positional contribution depends on their relative separation, with content held fixed.",
+    "This adaptation ports the upstream paired rotation to NumPy and keeps its base of 10000. It omits gradient tracking and adds strict shapes and deterministic tests."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

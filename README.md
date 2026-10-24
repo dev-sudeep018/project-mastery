@@ -2,7 +2,7 @@
 
 Free, open-source AI learning for Python programmers. Follow connected paths, investigate interactive experiments, or start with a retrieval project and learn the concepts as you build.
 
-The current curriculum contains 51 lessons, 4 interactive experiments, and a retrieval project with a Python integration checkpoint. Two lessons begin with deliberately flawed code to investigate and repair. The [latest 30-activity batch](docs/curriculum-batch-03.md) expands numerical methods, neural-network operations, tokenization, retrieval, and evaluation. The [2,000-problem curriculum plan](docs/curriculum.md) separates the expansion target from published content.
+The current curriculum contains 57 lessons, 4 interactive experiments, and a retrieval project with a Python integration checkpoint. Two lessons begin with deliberately flawed code to investigate and repair. The [30-activity batch](docs/curriculum-batch-03.md) expands numerical methods, neural-network operations, tokenization, retrieval, and evaluation. Six more activities adapt MIT-licensed Pyre-Code exercises; see the [platform pilot](docs/platform-pilot.md). The [2,000-problem curriculum plan](docs/curriculum.md) separates the expansion target from published content.
 
 The [retrieval project](docs/retrieval-project.md) compares keyword, BM25, vector,
 and hybrid search. Inspect individual term scores, assemble evidence under a word
@@ -56,4 +56,4 @@ The [design record](DESIGN.md) describes the implemented palette, layout, contro
 - `scripts`: validation, runtime preparation, and local development servers.
 - `tests`: schema, evaluator, browser, and isolation checks.
 
-Original software and Python examples: Apache-2.0. Original educational prose: CC BY-SA 4.0. Third-party material retains its applicable terms; the D2L filter adaptation preserves its [MIT-0 notice](content/problems/d09-image-cross-correlation/THIRD_PARTY_NOTICE.md). See LICENSE, content/LICENSE, and [batch provenance](content/batch-03-provenance.json).
+Original software and Python additions: Apache-2.0. Original educational prose: CC BY-SA 4.0. Third-party material retains its applicable terms: the D2L filter adaptation preserves its [MIT-0 notice](content/problems/d09-image-cross-correlation/THIRD_PARTY_NOTICE.md), and six Pyre-Code adaptations retain full MIT notices in each package and browser reference. See LICENSE, content/LICENSE, [batch provenance](content/batch-03-provenance.json), and [platform provenance](content/platform-pilot-provenance.json).

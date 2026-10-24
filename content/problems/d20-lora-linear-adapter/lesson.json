@@ -1,0 +1,46 @@
+{
+  "intro": "Fine-tuning can change a linear layer through two small matrices while retaining its original weights. Trace the base prediction and low-rank update separately.",
+  "task": "Implement a LoRA forward pass using supplied base weights, bias and adapter matrices. Scale the adapter update by alpha divided by its rank.",
+  "signature": "lora_linear(x, weight, bias, a, b, alpha=1.0)",
+  "requirements": [
+    "x has shape (..., in_features) with every dimension positive. weight is (out_features, in_features), bias is (out_features,), a is (rank, in_features), b is (out_features, rank); rank is positive.",
+    "Return x @ weight.T + bias + (x @ a.T @ b.T) * (alpha/rank), with shape (..., out_features).",
+    "alpha is a nonnegative real scalar. Use the supplied matrices without initialization or updates. This forward-only function has no training or frozen-parameter API.",
+    "Inputs must be real numeric values with finite magnitude at most 1e30. Leave inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Base plus update",
+      "input": "x=[[1,2]], weight=[[3,4]], bias=[1], a=[[1,0]], b=[[2]], alpha=1",
+      "output": "[[14]]"
+    },
+    {
+      "name": "Disabled adapter",
+      "input": "same inputs, alpha=0",
+      "output": "[[12]]"
+    },
+    {
+      "name": "Rank scaling",
+      "input": "x=[2], weight=[[0]], bias=[1], a=[[1],[2]], b=[[3,4]], alpha=2",
+      "output": "[23]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Trace shapes",
+      "body": "First project input features into the rank-dimensional space with a, then back into output features with b."
+    },
+    {
+      "title": "Check a zero adapter",
+      "body": "When b is all zeros, the full output must equal the base linear output, including its bias."
+    }
+  ],
+  "explanation": [
+    "The adapter stores rank*(input_features+output_features) parameters. It can be smaller than a full weight update when the chosen rank is sufficiently low; this is not a universal saving for every shape.",
+    "The two multiplications compute the same output as adding (alpha/rank)*(b@a) to the base weight. A zero b initially leaves the base behavior unchanged.",
+    "The upstream class freezes its base layer and trains the adapter. This NumPy adaptation isolates the forward equation with supplied arrays; it does not simulate autograd or claim to verify training behavior."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

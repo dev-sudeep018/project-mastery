@@ -1,5 +1,10 @@
 # Free resources and a faster curriculum workflow
 
+The 23 October [exercise-platform follow-up](platform-pilot.md) adds TensorTonic,
+Deep-ML, Pyre-Code and HappyTorch to the registry, bringing it to 25 resources.
+Six Pyre-Code activities are adapted with MIT notices and original tests. That
+follow-up records which platforms permit our intended reuse and which stay external.
+
 Checked 22 October 2026. The first survey covers 21 sources: 18 GitHub
 repositories plus Google ML Crash Course, MIT OpenCourseWare, and a verified UCI
 dataset. Repository metadata, license files, and selected official course pages
