@@ -1,5 +1,38 @@
 # Verification record
 
+## Third platform batch — 24 October 2026
+
+Twelve further licensed adaptations bring the catalog to 81 lessons plus one
+project checkpoint, with 998 public cases. The paths contain 19 mathematics/ML,
+40 deep learning and 22 engineering lessons. See
+[the batch record](platform-batch-03.md) for the distinct objectives, changed
+interfaces and source provenance.
+
+Local `pnpm check` passed metadata/prerequisite validation for 82 packages, types,
+lint, formatting, 26 Vitest tests, 58 Python test methods and the 94-page export.
+The focused content check passed twelve references and 144 public cases, including
+starter, sample-count and trivial-wrong-answer checks. Fourteen added Python
+methods cover independent numerical oracles, geometric and objective identities,
+a synthetic diffusion trajectory, locality, expert dispatch, twelve plausible
+conceptual mistakes rejected on valid input, and retained upstream notices.
+
+All twelve new references and the learning-entry-point, library-filter and
+experiment navigation regression passed in both Chromium and WebKit:
+26 browser checks. The full browser suite discovers 100 tests per engine,
+300 total; GitHub checks record the complete-suite results at the tested commit.
+
+Five desktop/mobile captures of the policy-objective and expert-mixture lessons
+were inspected after the editor loaded. Examples, hints, solution credits and the
+mobile reading/editing switch worked. No document overflow was measured at 320,
+390 or 1440 pixels, and no page errors occurred in those checks. Twelve upstream
+task hashes and the license hash matched the pinned snapshots. All twelve
+generated browser references exactly matched their credited source files, and
+the two inspected solution views retained the full MIT notices.
+
+The preceding batch's eight GitHub push and pull-request checks all passed at
+`652cfda` (PR #17), including complete Chromium, Firefox and WebKit suites.
+The Windows Firefox, physical-device and learner-review limitations below remain.
+
 ## Second platform batch — 24 October 2026
 
 Twelve further licensed adaptations bring the catalog to 69 lessons plus one
