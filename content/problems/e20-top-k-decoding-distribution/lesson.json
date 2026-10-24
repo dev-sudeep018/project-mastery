@@ -1,0 +1,46 @@
+{
+  "intro": "Top-k decoding restricts which tokens can be sampled before renormalizing their probabilities. Looking at the distribution makes the effects of truncation, temperature and ties visible.",
+  "task": "Return the token probability vector after selecting exactly k candidates. Keep the operation deterministic so you can inspect the distribution without relying on a lucky random sample.",
+  "signature": "top_k_distribution(logits, k, temperature=1.0)",
+  "requirements": [
+    "logits is a nonempty one-dimensional real array. k is an integer in [1,len(logits)], excluding booleans. Require temperature>=1e-6.",
+    "Keep exactly the k largest logits. Resolve ties by lower original index first. Assign zero probability to every excluded token.",
+    "Apply a stable softmax to retained logits divided by temperature and return a new vector with the same shape as logits. This function returns probabilities; it neither samples a token nor applies nucleus/top-p filtering.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Keep one token",
+      "input": "logits=[1,3,2], k=1",
+      "output": "[0,1,0]"
+    },
+    {
+      "name": "Keep two tokens",
+      "input": "logits=[0,log(3),-10], k=2",
+      "output": "[0.25,0.75,0]"
+    },
+    {
+      "name": "Resolve ties",
+      "input": "logits=[2,2,2], k=2",
+      "output": "[0.5,0.5,0]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Select indices before normalizing",
+      "body": "The selected logits must be renormalized among themselves after the other candidates are excluded."
+    },
+    {
+      "title": "Specify tie behavior",
+      "body": "A value threshold can retain more than k tokens when several logits share the kth value. Stable sorting gives an exact candidate count."
+    }
+  ],
+  "explanation": [
+    "Temperature changes relative probabilities within the retained set. It does not change the ranking when positive, and k=1 always produces a one-hot distribution.",
+    "A smaller candidate set can remove plausible tokens. Returning the whole probability vector lets you see that tradeoff without interpreting individual random draws.",
+    "Adapted the upstream top-k and temperature steps while removing top-p filtering and random sampling. Unlike its threshold-based tie handling, this contract retains exactly k indices with stable index-order ties."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

@@ -1,0 +1,46 @@
+{
+  "intro": "ReLU discards every negative activation. GELU instead scales an input by a Gaussian cumulative probability, producing a smooth response with small negative outputs.",
+  "task": "Compute the exact error-function form of GELU. Compare equal positive and negative inputs and investigate why this function is neither ReLU nor an odd function.",
+  "signature": "gelu(x)",
+  "requirements": [
+    "x is a real NumPy-compatible array with at least one dimension and no empty axes. Return a new NumPy array of the same shape.",
+    "Use GELU(x) = 0.5*x*(1+erf(x/sqrt(2))). Python math.erf is available; no SciPy package is needed.",
+    "Use the error-function formula, not the tanh approximation. This lesson evaluates forward values, not automatic gradients.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "At the origin",
+      "input": "x=[0]",
+      "output": "[0]"
+    },
+    {
+      "name": "Opposite inputs",
+      "input": "x=[-1,1]",
+      "output": "[-0.15865525,0.84134475]"
+    },
+    {
+      "name": "Two-dimensional input",
+      "input": "x=[[-2,2]]",
+      "output": "[[-0.04550026,1.95449974]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Separate the probability from the input",
+      "body": "Compute the Gaussian CDF factor for each scalar before multiplying by x."
+    },
+    {
+      "title": "Inspect opposite inputs",
+      "body": "The Gaussian CDF satisfies Phi(-x)=1-Phi(x). Use this to predict GELU(x)-GELU(-x)."
+    }
+  ],
+  "explanation": [
+    "The factor Phi(x) approaches zero for large negative inputs and one for large positive inputs. Around zero the curve smoothly connects these regimes; negative inputs need not map to zero.",
+    "GELU(x)-GELU(-x)=x follows from Gaussian symmetry. This relation is a useful check without duplicating the implementation.",
+    "Adapted the upstream exact erf equation to NumPy arrays with math.erf. The original gradient-flow task is outside this forward-only lesson."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

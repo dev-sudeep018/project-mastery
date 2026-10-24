@@ -413,7 +413,7 @@ export function Workspace({ data }: { data: LearningItem }) {
                         className="text-link"
                         href="/projects/mini-retrieval/"
                       >
-                        Use this in the retrieval project
+                        Explore the retrieval project
                       </Link>
                     </p>
                   )}

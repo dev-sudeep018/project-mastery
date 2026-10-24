@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "d26",
+  "kind": "lesson",
+  "slug": "label-smoothed-cross-entropy",
+  "version": 1,
+  "title": "Distribute Target Mass with Label Smoothing",
+  "summary": "A one-hot target puts all its mass on a single class. Label smoothing changes that target distribution, so even a confident correct prediction can still have a substantial loss.",
+  "domain": "deep-learning",
+  "difficulty": "intermediate",
+  "skills": ["Classification losses", "Target distributions"],
+  "prerequisites": ["m02", "m11"],
+  "assumed_knowledge":
+    ["Python functions", "NumPy array shapes and broadcasting"],
+  "runtime": { "engine": "pyodide", "packages": ["numpy"] },
+  "evaluation":
+    {
+      "entrypoint": "label_smoothed_loss",
+      "absolute_tolerance": 1e-07,
+      "relative_tolerance": 1e-06,
+    },
+  "estimated_minutes": 30,
+  "status": "validated",
+  "author": "Project Mastery contributors; adapted from Pyre-Code / TorchCode",
+  "license": "CC-BY-SA-4.0",
+  "code_license": "Apache-2.0",
+  "attribution":
+    [
+      "Adapted MIT-licensed implementation: https://github.com/whwangovo/pyre-code/blob/7ede95b47437798c74023a0ffae8fb33bbeebc2e/torch_judge/tasks/label_smoothing.py",
+      "Upstream copyright (c) 2024 duoan and (c) 2024 kiren; full MIT notice retained in reference solution and THIRD_PARTY_NOTICE.md. Original additions: Apache-2.0; original prose: CC-BY-SA-4.0.",
+    ],
+}

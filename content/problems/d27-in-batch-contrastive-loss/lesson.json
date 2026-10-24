@@ -1,0 +1,46 @@
+{
+  "intro": "Paired representations identify one matching key per query. The other keys in the batch become negative candidates, so the loss depends on both pair alignment and batch composition.",
+  "task": "Compute one-directional InfoNCE with the diagonal query-key pairs as positives. Inspect how a smaller temperature changes separation when matches are correct or incorrect.",
+  "signature": "contrastive_loss(queries, keys, temperature=0.07)",
+  "requirements": [
+    "queries and keys have the same nonempty shape (N,D). Every row must have L2 norm one, checked with rtol=1e-6 and atol=1e-8. Do not silently normalize inputs.",
+    "Require a finite temperature >=1e-6. Scores are queries@keys.T/temperature; the positive score for row i is score[i,i].",
+    "Return mean(logsumexp(scores[i,:])-scores[i,i]) using shifted logits. This is one-directional in-batch InfoNCE, not a symmetric CLIP loss or the full SimCLR batching scheme.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "One pair",
+      "input": "queries=keys=[[1,0]], temperature=1",
+      "output": "0"
+    },
+    {
+      "name": "Two orthogonal matches",
+      "input": "queries=keys=[[1,0],[0,1]], temperature=1",
+      "output": "0.31326169"
+    },
+    {
+      "name": "Indistinguishable keys",
+      "input": "queries=keys=[[1,0],[1,0]], temperature=1",
+      "output": "0.69314718"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Build the whole comparison matrix",
+      "body": "Elementwise row dot products alone omit the negative candidates in the denominator."
+    },
+    {
+      "title": "Keep the diagonal aligned",
+      "body": "The same reordering of queries and keys preserves matches; reordering only one side generally does not."
+    }
+  ],
+  "explanation": [
+    "Duplicated keys create indistinguishable candidates. Identical unit vectors on both sides can therefore still have loss log(N); alignment alone does not guarantee a near-zero loss.",
+    "Lower temperature sharpens the distribution. It helps when the positive score is largest and can amplify an incorrect match, so it does not universally reduce loss.",
+    "Adapted the upstream one-directional objective with explicit unit-vector checks, a documented temperature floor and shifted log probabilities. No encoder training is simulated."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

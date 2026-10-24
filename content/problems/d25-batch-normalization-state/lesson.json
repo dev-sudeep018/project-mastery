@@ -1,0 +1,47 @@
+{
+  "intro": "During training, BatchNorm observes the current batch. During inference, it must use saved statistics. Confusing these modes makes one example depend on unrelated inference inputs.",
+  "task": "Return the normalized output and the next running statistics for a feature matrix. Make the training-to-inference state transition visible without mutating the caller\u2019s arrays.",
+  "signature": "batch_norm(x, gamma, beta, running_mean, running_var, training=True, momentum=0.1, eps=1e-5)",
+  "requirements": [
+    "x is a nonempty (N,D) matrix. gamma, beta, running_mean and running_var have shape (D,); running_var is nonnegative. training must be a boolean, 0<=momentum<=1, and eps>0.",
+    "Training uses the feature-wise batch mean and population variance (divide by N). Both next running statistics equal (1-momentum)*old + momentum*batch statistic.",
+    "Inference uses the supplied running statistics and returns unchanged copies of them. In both modes output=gamma*(x-mean)/sqrt(var+eps)+beta.",
+    "Return a dictionary with output, running_mean and running_var arrays. This educational convention updates running variance with population variance; it is not PyTorch BatchNorm\u2019s unbiased running-variance convention.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Training transition",
+      "input": "x=[[1],[3]], gamma=[1], beta=[0], running_mean=[0], running_var=[0], training=True, momentum=0.5, eps=3",
+      "output": "output=[[-0.5],[0.5]], running_mean=[1], running_var=[0.5]"
+    },
+    {
+      "name": "Inference state",
+      "input": "x=[[3]], gamma=[2], beta=[1], running_mean=[1], running_var=[3], training=False, eps=1",
+      "output": "output=[[3]], running_mean=[1], running_var=[3]"
+    },
+    {
+      "name": "One training example",
+      "input": "x=[[4]], gamma=[2], beta=[5], running_mean=[0], running_var=[2], training=True, momentum=1",
+      "output": "output=[[5]], running_mean=[4], running_var=[0]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Reduce over examples",
+      "body": "Each column is one feature. Reduce axis zero, leaving a vector that broadcasts across rows."
+    },
+    {
+      "title": "Keep the normalization and state update separate",
+      "body": "Training output uses current batch statistics, not the newly averaged running statistics."
+    }
+  ],
+  "explanation": [
+    "Training output centers each feature before applying gamma and beta. Running state accumulates information across batches; momentum here is the weight assigned to the newest batch.",
+    "Inference output for an example is independent of other rows in its batch when the saved state is fixed. This distinction matters when batch composition changes.",
+    "Adapted the upstream population-variance convention. Replaced in-place running-state updates with returned arrays and documented its difference from PyTorch\u2019s running variance estimator."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

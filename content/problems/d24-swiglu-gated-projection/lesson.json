@@ -1,0 +1,46 @@
+{
+  "intro": "A gated feed-forward block uses one projection to form values and another to control their contribution. SwiGLU applies a smooth SiLU gate before an output projection.",
+  "task": "Trace the value and gate branches separately, multiply them element by element, then project the gated features back to the output space.",
+  "signature": "swiglu(x, w_value, w_gate, w_out)",
+  "requirements": [
+    "x has nonempty shape (..., input_features). w_value and w_gate both have shape (input_features, hidden_features), and w_out has shape (hidden_features, output_features); every dimension is positive.",
+    "Let h=x@w_value and g=x@w_gate. Return (h*(g*sigmoid(g)))@w_out as a NumPy array with the leading shape of x and output_features last.",
+    "Use a stable sigmoid for large positive and negative g. There are no bias parameters or gradient updates in this contract.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Zero gate",
+      "input": "x=[2], w_value=[[3]], w_gate=[[0]], w_out=[[4]]",
+      "output": "[0]"
+    },
+    {
+      "name": "Unit gate",
+      "input": "x=[1], w_value=[[2]], w_gate=[[1]], w_out=[[3]]",
+      "output": "[4.38635147]"
+    },
+    {
+      "name": "Negative gate",
+      "input": "x=[-1], w_value=[[2]], w_gate=[[1]], w_out=[[3]]",
+      "output": "[1.61364853]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Keep the branches distinct",
+      "body": "Applying the sigmoid to h instead of g changes the model even when the matrix shapes still fit."
+    },
+    {
+      "title": "Avoid exp of a large positive number",
+      "body": "For negative g, use exp(g)/(1+exp(g)); for nonnegative g, use 1/(1+exp(-g))."
+    }
+  ],
+  "explanation": [
+    "The gate can be negative because SiLU(g)=g*sigmoid(g). Replacing it with sigmoid alone removes its amplitude and sign behavior.",
+    "A zero gate projection makes every output zero, while a nonzero value projection alone cannot restore the output. This exposes the multiplicative interaction.",
+    "Ported the upstream SwiGLU forward equation to NumPy and added stable sigmoid evaluation, explicit matrix conventions and immutable inputs."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

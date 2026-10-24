@@ -1,0 +1,46 @@
+{
+  "intro": "During decoding, past keys and values can be reused while queries are computed for new tokens. The causal mask must account for the cached prefix, especially when several new tokens arrive together.",
+  "task": "Append new keys and values to an optional cache and calculate causal single-head attention for only the new queries. Verify that chunked decoding matches a full causal pass.",
+  "signature": "cached_attention(queries, keys, values, cache=None)",
+  "requirements": [
+    "queries and keys are nonempty (S,D) matrices; values is (S,V), with D,V positive. cache is None or a tuple (past_keys,past_values) with shapes (P,D) and (P,V); P may be zero.",
+    "Append the new rows after the cached rows. New query i can attend to positions 0 through P+i inclusive. Scale scores by sqrt(D) and apply a stable softmax over allowed positions.",
+    "Return a dictionary containing output of shape (S,V), keys of shape (P+S,D), and values of shape (P+S,V). Supply the latter two as a tuple to the next call. This is a single-head attention operation on projected arrays, with no model weights or speed benchmark.",
+    "Numeric inputs must be real and finite with magnitude at most 1e30, in addition to the bounds above. Leave all inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "First token",
+      "input": "queries=keys=[[1]], values=[[7]], cache=None",
+      "output": "output=[[7]], keys=[[1]], values=[[7]]"
+    },
+    {
+      "name": "Two-token prefill",
+      "input": "queries=keys=[[0],[0]], values=[[2],[4]], cache=None",
+      "output": "output=[[2],[3]], keys=[[0],[0]], values=[[2],[4]]"
+    },
+    {
+      "name": "Continue a cached prefix",
+      "input": "queries=keys=[[0],[0]], values=[[20],[30]], cache=([[0]],[[10]])",
+      "output": "output=[[15],[20]], keys=[[0],[0],[0]], values=[[10],[20],[30]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Offset the causal boundary",
+      "body": "The first new query is at absolute position P, not zero. It can attend to every cached key and its own new key."
+    },
+    {
+      "title": "Compare different chunk sizes",
+      "body": "One full sequence, single-token calls and multi-token chunks should produce the same concatenated output."
+    }
+  ],
+  "explanation": [
+    "Caching avoids recomputing past projected keys and values in a full model, but the current query still compares against the growing history. This small NumPy exercise demonstrates correctness rather than optimized memory or runtime.",
+    "An unshifted triangular mask fails as soon as a cache exists. Omitting a mask for multi-token chunks leaks information from future tokens in that chunk.",
+    "Adapted the upstream cache concatenation and shifted causal mask. Removed learned projections, multiple heads and autograd so the cache state transition is directly inspectable."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}
