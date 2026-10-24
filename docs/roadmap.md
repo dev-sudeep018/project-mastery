@@ -10,7 +10,12 @@ The working branch adds twelve original lessons, three guided paths, four intera
 
 ## Continuing work
 
-The third curriculum batch extends the three paths to 17 lessons each, adding 30 distinct learning activities. There are 51 lessons plus one project checkpoint, with 637 public cases. Two existing lessons are debugging investigations. The interface retains semantic feedback and syntax colors on black/grey surfaces. Full verification is recorded in verification.md.
+The third curriculum batch added 30 distinct activities, followed by six MIT-licensed platform adaptations. There are now 57 lessons plus one project checkpoint, with 710 public cases. The three paths contain 17, 22 and 18 lessons. Two existing lessons are debugging investigations. The interface retains semantic feedback and syntax colors on black/grey surfaces. Full verification is recorded in verification.md.
+
+The [platform pilot](platform-pilot.md) adapts Pyre-Code exercises for RMSNorm,
+RoPE, LoRA, cosine scheduling, focal loss and INT8 quantization. Source revisions,
+hashes and upstream MIT notices are preserved. TensorTonic and Deep-ML remain
+external references under their inspected terms.
 
 The retrieval project now connects the document-term, BM25 and context-budget
 lessons to inspectable scores and evidence selection. Its version 2 report

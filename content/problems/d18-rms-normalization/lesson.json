@@ -1,0 +1,46 @@
+{
+  "intro": "A normalization layer need not subtract the mean. Inspect what happens to a constant nonzero activation when you scale by its root mean square instead.",
+  "task": "Implement RMS normalization along the last axis and apply one learned weight per feature. Compare the result with the centering operation in layer normalization.",
+  "signature": "rms_norm(x, weight, eps=1e-6)",
+  "requirements": [
+    "x has one or more dimensions, all nonempty; weight has shape (x.shape[-1],). Return a new NumPy array with the same shape as x.",
+    "Compute sqrt(mean(x**2, axis=-1, keepdims=True) + eps). Divide x by this denominator, then multiply by weight. Do not subtract a mean.",
+    "eps is a positive real scalar; epsilon belongs inside the square root.",
+    "Inputs must be real numeric values with finite magnitude at most 1e30. Leave inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Constant activations",
+      "input": "x=[2,2], weight=[1,1], eps=1",
+      "output": "[0.89442719, 0.89442719]"
+    },
+    {
+      "name": "Feature scaling",
+      "input": "x=[3,4], weight=[2,-1], eps=0.5",
+      "output": "[1.66410059, -1.10940039]"
+    },
+    {
+      "name": "Zero activations",
+      "input": "x=[[0,0]], weight=[3,4]",
+      "output": "[[0,0]]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Keep the reduced axis",
+      "body": "Retain a length-one last axis in the mean so the denominator broadcasts back over every feature."
+    },
+    {
+      "title": "Test a constant row",
+      "body": "A positive constant row should stay positive. Mean subtraction would turn it into zeros."
+    }
+  ],
+  "explanation": [
+    "RMS normalization controls activation scale while preserving a nonzero mean. For a row of identical positive values, the normalized result is close to one before applying weights.",
+    "The last-axis reduction treats each earlier index independently. A learned weight can change both magnitude and sign, so the weighted output need not have RMS one.",
+    "This NumPy adaptation keeps the upstream forward computation. It adds explicit input validation and independent examples; it does not implement PyTorch autograd."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

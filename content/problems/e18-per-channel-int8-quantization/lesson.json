@@ -1,0 +1,47 @@
+{
+  "intro": "One global quantization scale can waste resolution on smaller channels. Explore a separate symmetric INT8 scale for each row of a linear layer.",
+  "task": "Quantize the supplied weight rows, reconstruct them, and calculate a linear output. Return the stored integers and scales so the approximation is inspectable.",
+  "signature": "quantized_linear(x, weight, bias)",
+  "requirements": [
+    "Nonzero weights must have magnitude at least 1e-300 so their per-channel scales remain representable in float64.",
+    "x is a nonempty array with shape (..., in_features), weight is a nonempty (out_features, in_features) matrix, and bias has shape (out_features,).",
+    "For each weight row, scale = max(abs(row))/127. Use scale=1 for an all-zero row. Round weight/scale to nearest integer with ties to even, clip to [-127,127], then cast to np.int8.",
+    "Return a dictionary with weight_int8 (np.int8 matrix), scale (float array of shape (out_features,1)), and output = x @ (weight_int8.astype(float)*scale).T + bias.",
+    "Inputs must be real numeric values with finite magnitude at most 1e30. Leave inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Exactly represented row",
+      "input": "x=[[1,2]], weight=[[127,-127]], bias=[3]",
+      "output": "weight_int8=[[127,-127]], scale=[[1]], output=[[-124]]"
+    },
+    {
+      "name": "Independent channel scales",
+      "input": "x=[2], weight=[[127],[254]], bias=[0,1]",
+      "output": "weight_int8=[[127],[127]], scale=[[1],[2]], output=[254,509]"
+    },
+    {
+      "name": "Zero row",
+      "input": "x=[4,5], weight=[[0,0]], bias=[7]",
+      "output": "weight_int8=[[0,0]], scale=[[1]], output=[7]"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Keep one scale per output",
+      "body": "Reduce the absolute weights over input features and retain the singleton axis."
+    },
+    {
+      "title": "Define zero behavior",
+      "body": "An all-zero row cannot use zero as a divisor. Its stored integers stay zero when you choose scale one."
+    }
+  ],
+  "explanation": [
+    "The largest magnitude in each nonzero row maps to 127. Smaller weights share that row scale, so reconstruction introduces bounded rounding error.",
+    "The exercise uses a symmetric [-127,127] range and ties-to-even rounding. The upstream class clips to [-128,127] and adds a tiny denominator epsilon; this adaptation makes the zero-row behavior explicit instead.",
+    "Only weight storage is INT8 here. The forward pass reconstructs floating weights and performs a floating matmul. It is not an integer kernel or a demonstration of a fourfold total-model memory reduction."
+  ],
+  "formula": null,
+  "test_count": 13,
+  "sample_count": 3
+}

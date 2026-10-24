@@ -1,0 +1,47 @@
+{
+  "intro": "Ordinary cross-entropy can receive many small contributions from easy examples. Focal loss weights each contribution by how uncertain the correct-class prediction is.",
+  "task": "Compute a stable multiclass focal loss from logits and integer class labels. Compare gamma zero with positive gamma to isolate the focusing effect.",
+  "signature": "focal_loss(logits, targets, alpha=0.25, gamma=2.0)",
+  "requirements": [
+    "logits is a nonempty (N,C) real array and targets is an integer array of shape (N,) with labels in [0,C); booleans are not labels.",
+    "For each example, obtain the correct-class log probability using log-softmax. Return the batch mean of -alpha*(1-p_target)**gamma*log(p_target).",
+    "alpha is a nonnegative finite scalar and gamma is a nonnegative finite scalar. This scalar alpha weights every example equally; it is not a per-class balancing vector.",
+    "Do not add epsilon to the target probability. Compute its log directly from shifted logits so a wrong confident prediction can have a large finite loss.",
+    "Inputs must be real numeric values with finite magnitude at most 1e30. Leave inputs unchanged and raise ValueError for invalid inputs."
+  ],
+  "examples": [
+    {
+      "name": "Uniform binary prediction",
+      "input": "logits=[[0,0]], targets=[0], alpha=1, gamma=0",
+      "output": "0.69314718"
+    },
+    {
+      "name": "Focus the uniform prediction",
+      "input": "logits=[[0,0]], targets=[0], alpha=1, gamma=2",
+      "output": "0.17328680"
+    },
+    {
+      "name": "Confident wrong prediction",
+      "input": "logits=[[1000,-1000]], targets=[1], alpha=0.25, gamma=2",
+      "output": "500"
+    }
+  ],
+  "hints": [
+    {
+      "title": "Stay in log space",
+      "body": "Subtract the row maximum, then subtract log(sum(exp(shifted_logits))) to obtain log probabilities without taking log of an underflowed zero."
+    },
+    {
+      "title": "Recover just the needed probability",
+      "body": "Gather the target log probabilities first. Their exponentials provide p_target for the focusing factor."
+    }
+  ],
+  "explanation": [
+    "At gamma zero, the focusing factor is one and the loss is scalar-alpha-weighted cross-entropy. Larger gamma downweights easy examples more strongly, without proving better model performance.",
+    "The upstream implementation adds 1e-8 before taking the logarithm. This adaptation uses log-softmax instead, avoiding the artificial loss cap on extreme wrong predictions.",
+    "This exercise ports the upstream forward objective to NumPy. It adds explicit validation, deterministic edge cases and the gamma-zero limit; it does not provide automatic gradients."
+  ],
+  "formula": null,
+  "test_count": 12,
+  "sample_count": 3
+}

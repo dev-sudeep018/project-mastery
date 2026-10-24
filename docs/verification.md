@@ -1,5 +1,36 @@
 # Verification record
 
+## Licensed platform adaptations — 24 October 2026
+
+Six Pyre-Code / TorchCode adaptations add RMS normalization, rotary embeddings,
+LoRA, cosine scheduling, focal loss and per-channel INT8 weights. There are now
+57 lessons plus one project checkpoint, with 710 public cases. The source
+decisions and changed numerical conventions are recorded in
+[the platform pilot](platform-pilot.md).
+
+Local `pnpm check` passed metadata validation for 58 packages, types, lint,
+formatting, 26 Vitest tests, 30 Python test methods and the 70-page production
+export. The focused content command checked all six new references and 73 public
+cases. Eight new Python methods cover independent numerical invariants, valid-input
+misconceptions and retained notices. NumPy warnings from deliberate invalid inputs
+and wrong implementations are expected; the reference checks passed.
+
+All six references passed in Chromium and WebKit (12 browser checks). The learning
+entry-point, library-filter and experiment navigation regression also passed in
+both engines (two further checks). Desktop RoPE and mobile INT8 lesson captures
+were inspected; description, hints and solution tabs worked. Measurements found
+no document overflow at 320, 390 or 1440 pixels and no page errors in that check.
+
+SHA-256 checks matched the six pinned upstream task files and their license.
+All six generated browser reference payloads exactly matched the credited source
+files. Both inspected solution views displayed the complete MIT notices, including
+the two upstream copyright holders. No upstream setup scripts or programs were
+executed.
+
+The complete browser suite discovers 76 tests per engine. GitHub pull-request
+checks record full-suite results for the tested commit. The existing Windows
+Firefox and physical-device limitations below still apply.
+
 ## Retrieval scores and evidence — 23 October 2026
 
 The existing project now compares four retrieval methods, explains BM25 term
