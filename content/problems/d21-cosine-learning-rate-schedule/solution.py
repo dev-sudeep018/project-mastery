@@ -47,7 +47,10 @@ def _array(value):
 def _scalar(value):
     if isinstance(value, (bool, np.bool_)) or not isinstance(value, (int, float, np.integer, np.floating)):
         raise ValueError("Use a real scalar")
-    result = float(value)
+    try:
+        result = float(value)
+    except OverflowError as exc:
+        raise ValueError("Scalar must be finite with magnitude at most 1e30") from exc
     if not np.isfinite(result) or abs(result) > 1e30:
         raise ValueError("Scalar must be finite with magnitude at most 1e30")
     return result

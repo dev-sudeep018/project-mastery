@@ -95,6 +95,22 @@ class PlatformPilotTests(unittest.TestCase):
                 results=load(prefix,'tests_public.py')['run_tests']({entrypoint:wrong})
                 self.assertTrue(any(not row['passed'] and row['message'].startswith('AssertionError:') and not row['name'].startswith('Reject') for row in results),results)
 
+    def test_oversized_integer_scalars_raise_documented_value_error(self):
+        oversized = 2 ** 4096
+        calls = [
+            ('d18', 'rms_norm', ([1], [1], oversized)),
+            ('d20', 'lora_linear', ([1], [[1]], [0], [[1]], [[1]], oversized)),
+            ('d21', 'cosine_lr_schedule', (1, 10, 2, oversized)),
+            ('d21', 'cosine_lr_schedule', (1, 10, 2, 1, oversized)),
+            ('d21', 'cosine_lr_schedule', (oversized, 10, 2, 1)),
+            ('d22', 'focal_loss', ([[1, 2]], [0], oversized, 2)),
+            ('d22', 'focal_loss', ([[1, 2]], [0], 1, oversized)),
+        ]
+        for prefix, name, args in calls:
+            with self.subTest(activity=prefix, function=name):
+                with self.assertRaises(ValueError):
+                    load(prefix)[name](*args)
+
     def test_upstream_notices_survive_reference_packaging(self):
         manifest=json.loads((ROOT/'content/platform-pilot-provenance.json').read_text())
         self.assertEqual(len(manifest['items']),6)

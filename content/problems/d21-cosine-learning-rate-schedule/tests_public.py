@@ -11,6 +11,6 @@ def run_tests(namespace, mode="all"):
         ('Reject negative step', lambda f: rejects(f,-1,10,2,1)),
         ('Reject boolean step', lambda f: rejects(f,True,10,2,1)),
         ('Reject reversed rates', lambda f: rejects(f,1,10,2,1,2)),
-        ('Reject infinite rate', lambda f: rejects(f,1,10,2,np.inf))
+        ('Reject invalid rate', lambda f: [rejects(f,1,10,2,value) for value in (np.inf,2**4096)])
     ]
     return run_cases(namespace, 'cosine_lr_schedule', cases, mode)

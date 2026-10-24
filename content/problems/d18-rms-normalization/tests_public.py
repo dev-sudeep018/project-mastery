@@ -9,7 +9,7 @@ def run_tests(namespace, mode="all"):
         ('Reject mismatched weights', lambda f: rejects(f,[[1,2]],[1])),
         ('Reject empty axis', lambda f: rejects(f,np.empty((2,0)),[])),
         ('Reject zero epsilon', lambda f: rejects(f,[1],[1],0)),
-        ('Reject boolean epsilon', lambda f: rejects(f,[1],[1],True)),
+        ('Reject invalid epsilon', lambda f: [rejects(f,[1],[1],value) for value in (True,2**4096)]),
         ('Reject nonfinite input', lambda f: rejects(f,[np.inf],[1])),
         ('No mutation', lambda f: assert_close(unchanged(f,np.array([2.,2.]),np.ones(2),1),np.array([2,2])/np.sqrt(5)))
     ]

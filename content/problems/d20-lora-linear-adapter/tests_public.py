@@ -9,7 +9,7 @@ def run_tests(namespace, mode="all"):
         ('Reject incompatible rank', lambda f: rejects(f,[1],[[1]],[0],[[1]],[[1,2]])),
         ('Reject bias broadcast', lambda f: rejects(f,[1],[[1]],[0,0],[[1]],[[1]])),
         ('Reject empty rank', lambda f: rejects(f,[1],[[1]],[0],np.empty((0,1)),np.empty((1,0)))),
-        ('Reject negative alpha', lambda f: rejects(f,[1],[[1]],[0],[[1]],[[1]],-1)),
+        ('Reject invalid alpha', lambda f: [rejects(f,[1],[[1]],[0],[[1]],[[1]],value) for value in (-1,2**4096)]),
         ('Reject nonfinite weight', lambda f: rejects(f,[1],[[np.inf]],[0],[[1]],[[1]])),
         ('No mutation', lambda f: assert_close(unchanged(f,np.array([[1.,2.]]),np.array([[3.,4.]]),np.array([1.]),np.array([[1.,0.]]),np.array([[2.]])),np.array([[14]])))
     ]

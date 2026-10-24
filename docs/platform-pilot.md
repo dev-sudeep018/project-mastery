@@ -54,9 +54,9 @@ licenses/notices, port the required operation, and add independent numerical and
 misconception checks. Deduplicate forks. Keep framework-specific training tasks
 for a runtime that can execute them.
 
-Run `pnpm content:check d18 d19 d20 d21 d22 e18`, then `pnpm check`. Eight new Python
+Run `pnpm content:check d18 d19 d20 d21 d22 e18`, then `pnpm check`. Nine new Python
 methods check RMS energy, RoPE common-shift dot products, LoRA merged weights,
 quantization error, schedule monotonicity, focal-loss shift invariance, six
-plausible wrong implementations and retained notices. Browser reference tests
+plausible wrong implementations, oversized scalar rejection and retained notices. Browser reference tests
 discover the six packages automatically. See [verification.md](verification.md)
 for executed results and limitations.

@@ -9,11 +9,16 @@ decisions and changed numerical conventions are recorded in
 [the platform pilot](platform-pilot.md).
 
 Local `pnpm check` passed metadata validation for 58 packages, types, lint,
-formatting, 26 Vitest tests, 30 Python test methods and the 70-page production
+formatting, 26 Vitest tests, 31 Python test methods and the 70-page production
 export. The focused content command checked all six new references and 73 public
-cases. Eight new Python methods cover independent numerical invariants, valid-input
-misconceptions and retained notices. NumPy warnings from deliberate invalid inputs
+cases. Nine new Python methods cover independent numerical invariants, valid-input
+misconceptions, oversized scalar rejection and retained notices. NumPy warnings from deliberate invalid inputs
 and wrong implementations are expected; the reference checks passed.
+
+A regression initially reproduced six `OverflowError` failures when very large
+Python integer scalars were converted to float. The references now translate that
+conversion failure to the promised `ValueError`; relevant public invalid-input
+checks include the boundary.
 
 All six references passed in Chromium and WebKit (12 browser checks). The learning
 entry-point, library-filter and experiment navigation regression also passed in

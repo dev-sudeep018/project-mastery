@@ -9,7 +9,7 @@ def run_tests(namespace, mode="all"):
         ('Reject floating labels', lambda f: rejects(f,[[1,2]],[0.0])),
         ('Reject boolean labels', lambda f: rejects(f,[[1,2]],[True])),
         ('Reject unknown label', lambda f: rejects(f,[[1,2]],[2])),
-        ('Reject negative gamma', lambda f: rejects(f,[[1,2]],[0],1,-1)),
+        ('Reject invalid gamma', lambda f: [rejects(f,[[1,2]],[0],1,value) for value in (-1,2**4096)]),
         ('Reject empty batch', lambda f: rejects(f,np.empty((0,2)),np.array([],dtype=int))),
         ('No mutation', lambda f: assert_close(unchanged(f,np.zeros((1,2)),np.array([0]),1,0),np.log(2)))
     ]
