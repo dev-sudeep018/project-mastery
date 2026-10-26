@@ -10,7 +10,7 @@ The working branch adds twelve original lessons, three guided paths, four intera
 
 ## Continuing work
 
-The third curriculum batch added 30 distinct activities, followed by thirty MIT-licensed platform adaptations. There are now 81 lessons plus one project checkpoint, with 998 public cases. The three paths contain 19, 40 and 22 lessons. Two existing lessons are debugging investigations. The interface retains semantic feedback and syntax colors on black/grey surfaces. Full verification is recorded in verification.md.
+The [200-lesson expansion](curriculum-200.md) adds 119 distinct activities. There are now 200 lessons plus one project checkpoint, with 2,244 public cases. The three paths contain 59, 79 and 62 lessons. Two existing lessons are debugging investigations. The interface retains semantic feedback and syntax colors on black/grey surfaces. Full verification is recorded in verification.md.
 
 The [platform pilot](platform-pilot.md) adapts Pyre-Code exercises for RMSNorm,
 RoPE, LoRA, cosine scheduling, focal loss and INT8 quantization. Source revisions,
