@@ -21,9 +21,9 @@ export const paths = [
     slug: "mathematics-to-ml",
     title: "Mathematics to Machine Learning",
     description:
-      "Connect vectors, probabilities, gradients, preprocessing, and policy objectives to the behavior of a model.",
+      "Connect probability, statistics, linear algebra, and classical machine learning to the behavior of a model.",
     outcome:
-      "Build and evaluate numerical models, preserve evaluation boundaries, and compare policy and preference objectives.",
+      "Reason about uncertainty, build numerical models, inspect clustering and statistical estimates, and compare policy objectives.",
     items: [
       "m01",
       "m02",
@@ -44,15 +44,16 @@ export const paths = [
       "m17",
       "m18",
       "m19",
+      ...Array.from({ length: 40 }, (_, index) => `m${index + 20}`),
     ],
   },
   {
     slug: "deep-learning",
     title: "Deep Learning from First Principles",
     description:
-      "Check derivatives, trace activation gradients, and inspect the operations and controls used in neural networks.",
+      "Trace neural-network operations, recurrent state, structured predictions, generative models, and reinforcement learning.",
     outcome:
-      "Trace neural-network operations, inspect attention and graph representations, and follow generative-model steps.",
+      "Check forward and backward passes, inspect attention and graph representations, and follow generative and reinforcement-learning updates.",
     items: [
       "d01",
       "d02",
@@ -94,15 +95,16 @@ export const paths = [
       "d38",
       "d39",
       "d40",
+      ...Array.from({ length: 39 }, (_, index) => `d${index + 41}`),
     ],
   },
   {
     slug: "ai-engineering",
     title: "Practical AI Engineering",
     description:
-      "Turn documents into retrieval vectors, evaluate results, and inspect generation, caching, and expert routing.",
+      "Build text and retrieval operations, preserve data boundaries, evaluate uncertainty, and inspect inference and streaming systems.",
     outcome:
-      "Rank and select evidence, evaluate predictions, and trace decoding distributions, caches, and expert mixtures.",
+      "Evaluate evidence and predictions, detect distribution changes, and implement the small data and serving operations behind AI systems.",
     items: [
       "e01",
       "e02",
@@ -126,6 +128,7 @@ export const paths = [
       "e20",
       "e21",
       "e22",
+      ...Array.from({ length: 40 }, (_, index) => `e${index + 23}`),
     ],
   },
 ];

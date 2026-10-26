@@ -1,5 +1,39 @@
 # Verification record
 
+## 200-lesson expansion — 26 October 2026
+
+The catalog contains 200 published lessons plus one project checkpoint: 119 new
+lessons and 1,246 new public cases, for 2,244 cases overall. The paths contain
+59 mathematics/ML, 79 deep-learning, and 62 AI-engineering lessons. The
+[inventory](../content/curriculum-200-inventory.json) records every addition.
+
+Local `pnpm check` passed metadata and prerequisite validation for all 201
+packages, types, lint, formatting, 26 Vitest tests, 160 Python test methods,
+and the 213-page production export. The native evaluator gate also passed all
+2,244 reference cases, rejected unfinished starters and trivial wrong answers,
+and checked three sample cases per package.
+
+The five new Python suites add 95 methods. They check numerical derivatives,
+matrix identities, exhaustive sequence/alignment calculations, stateful and
+streaming invariants, probability conservation, terminal/cutoff boundaries,
+worked-example alignment, and rejection of canned example answers on valid
+inputs. Numerical review added regression cases for tiny probabilities,
+ill-conditioned systems, representable split thresholds, large score offsets,
+near-uniform distribution supports, and cancellation in value targets.
+
+All seven new adaptation source hashes and complete MIT notices were checked
+against the pinned Pyre-Code snapshot. The other 112 additions have original
+implementations and teaching material with conceptual readings distinguished
+from source adaptations.
+
+Local interface QA confirmed 200 unique lesson links across nine pages, the
+three topic counts, search for the last addition in each path, complete path
+coverage, and the home-page count. Desktop (1440px) and mobile (390px) views had
+no horizontal page overflow or page errors. The full browser suite discovers
+657 tests, 219 each for Chromium, Firefox, and WebKit. Each published reference
+is executed in the isolated evaluator; GitHub PR checks record the browser
+matrix conclusions against the shared tested build.
+
 ## Curriculum production workflow — 25 October 2026
 
 The published catalog remains 81 lessons plus one project checkpoint. This change

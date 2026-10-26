@@ -2,10 +2,10 @@
 
 Confirmed direction: 2,000 learning problems, approached through guided learning, project-first learning, and open exploration. The application supports understanding and building without a competitive coding queue.
 
-The initial workspace is merged in PR #1. Connected learning is ready for review in PR #12. Curriculum depth and semantic colors are ready in PR #13, whose GitHub quality and three browser checks passed. The next 30-activity batch is on `codex/curriculum-batch-03`, stacked on `codex/curriculum-depth`.
+The initial workspace is merged in PR #1. The connected-learning, curriculum, and production-workflow changes remain in the review stack beginning at PR #12. The 200-lesson expansion is on `codex/200-lesson-catalog`, based on `codex/faster-curriculum-pipeline`. See [verification](verification.md) for executed checks and [the expansion inventory](curriculum-200.md) for the new learning objectives.
 
 - [x] Per-item lesson packages and an explicitly allowlisted multi-item runner.
-- [x] Fifty-one lessons with explanations, examples, hints, references, and evaluated edge cases, including two debugging investigations.
+- [x] Two hundred lessons with explanations, examples, hints, references, and evaluated edge cases, including two debugging investigations.
 - [x] Meaningful status colors and differentiated Python syntax on the black/grey base.
 - [x] A 21-source reuse survey and fast selected-package authoring checks.
 - [x] A 30-activity source-informed batch with per-item provenance, a credited D2L code adaptation, and independent misconception checks.
