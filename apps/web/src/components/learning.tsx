@@ -9,7 +9,14 @@ import {
   Search,
   Upload,
 } from "lucide-react";
-import { catalog, domains, itemById, itemHref, paths } from "@/lib/curriculum";
+import {
+  beginnerTracks,
+  catalog,
+  domains,
+  itemById,
+  itemHref,
+  paths,
+} from "@/lib/curriculum";
 import {
   BackupSchema,
   completed,
@@ -43,6 +50,12 @@ export function LearningHome() {
       <p className="page-lead">
         A learning space for the ideas behind AI. Follow a sequence, work toward
         a useful system, or investigate a question that caught your attention.
+      </p>
+      <p className="beginner-link">
+        New to working with data and models?{" "}
+        <Link className="text-link" href="/paths/start-here/">
+          Follow the beginner route <ArrowRight size={16} />
+        </Link>
       </p>
       <section className="continue-learning">
         <div>
@@ -210,11 +223,98 @@ export function PathList({ slug }: { slug?: string }) {
   );
 }
 
-export function LessonCatalog() {
+export function BeginnerEntry() {
+  const count = catalog.filter((item) => item.difficulty === "beginner").length;
+  return (
+    <section className="beginner-entry" aria-labelledby="beginner-entry-title">
+      <div>
+        <h2 id="beginner-entry-title">
+          Build your foundations through useful problems.
+        </h2>
+        <p>
+          Start with records, arrays, and small model operations. These lessons
+          assume basic Python and explain the data and ML ideas as you go.
+        </p>
+      </div>
+      <div className="beginner-actions">
+        <Link className="primary" href="/paths/start-here/">
+          Explore the beginner route <ArrowRight size={16} />
+        </Link>
+        <Link className="text-link" href="/beginner/">
+          Browse {count} beginner lessons <ArrowRight size={16} />
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+export function BeginnerGuide() {
+  const state = useProgress();
+  return (
+    <>
+      {beginnerTracks.map((track) => (
+        <section className="learning-path" key={track.title}>
+          <div className="section-heading">
+            <div>
+              <h2>{track.title}</h2>
+              <p>{track.description}</p>
+            </div>
+            <span className="muted">
+              {track.items.filter((id) => completed(state, id)).length}/
+              {track.items.length} checked
+            </span>
+          </div>
+          <ol className="path-list">
+            {track.items.map((id) => {
+              const item = itemById(id);
+              if (!item) return null;
+              return (
+                <li key={id} className="available">
+                  {completed(state, id) ? (
+                    <CheckCircle2
+                      className="step-icon success-text"
+                      size={18}
+                    />
+                  ) : (
+                    <Circle className="step-icon" size={18} />
+                  )}
+                  <div>
+                    <span className="muted small">
+                      {item.estimated_minutes} min · {item.difficulty}
+                    </span>
+                    <h3>
+                      <Link href={itemHref(id)}>{item.title}</Link>
+                    </h3>
+                    <p>{item.summary}</p>
+                    <Link className="text-link" href={itemHref(id)}>
+                      {completed(state, id)
+                        ? "Revisit the idea"
+                        : "Open lesson"}
+                      <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
+      ))}
+      <Link className="primary" href="/beginner/">
+        Explore all beginner lessons <ArrowRight size={16} />
+      </Link>
+    </>
+  );
+}
+
+export function LessonCatalog({
+  initialLevel = "all",
+}: {
+  initialLevel?: string;
+}) {
   const state = useProgress();
   const [query, setQuery] = useState("");
   const [domain, setDomain] = useState("all");
-  const [level, setLevel] = useState("all");
+  const [level, setLevel] = useState(initialLevel);
   const [status, setStatus] = useState("all");
   const [page, setPage] = useState(1);
   const filtered = catalog.filter(

@@ -1921,6 +1921,39 @@ td {
 .retrieval-formula {
   font-variant-numeric: tabular-nums;
 }
+.beginner-link {
+  margin: 16px 0 28px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.beginner-entry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 0;
+  margin: 24px 0 8px;
+  border-block: 1px solid var(--border);
+}
+.beginner-entry > div:first-child {
+  flex: 1 1 340px;
+}
+.beginner-entry h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+.beginner-entry p {
+  max-width: 65ch;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.beginner-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
 .score-summary strong {
   font-family: Consolas, monospace;
 }
