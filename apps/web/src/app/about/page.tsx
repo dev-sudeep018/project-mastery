@@ -5,13 +5,13 @@ export default function About() {
   return (
     <Shell active="about">
       <header className="topbar">
-        <span>About Project Mastery</span>
+        <span>About ZeroShot</span>
         <span className="free-label">Built in the open</span>
       </header>
       <div className="page-content about-copy">
         <h1>AI skills should be accessible.</h1>
         <p className="page-lead">
-          Project Mastery is a free, open-source learning project for Python
+          ZeroShot is a free, open-source learning project for Python
           programmers who want to understand and build AI systems.
         </p>
         <h2>Learn, build, understand.</h2>
@@ -56,7 +56,7 @@ export default function About() {
         </p>
         <a
           className="primary"
-          href="https://github.com/dev-sudeep018/project-mastery"
+          href="https://github.com/dev-sudeep018/zeroshot"
           target="_blank"
           rel="noreferrer"
         >

@@ -1921,6 +1921,39 @@ td {
 .retrieval-formula {
   font-variant-numeric: tabular-nums;
 }
+.beginner-link {
+  margin: 16px 0 28px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.beginner-entry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 0;
+  margin: 24px 0 8px;
+  border-block: 1px solid var(--border);
+}
+.beginner-entry > div:first-child {
+  flex: 1 1 340px;
+}
+.beginner-entry h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+.beginner-entry p {
+  max-width: 65ch;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.beginner-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
 .score-summary strong {
   font-family: Consolas, monospace;
 }
@@ -2128,4 +2161,249 @@ textarea,
 }
 .project-progress p {
   margin: 12px 0 18px;
+}
+
+/* Personal practice rewards use the reading/workbench palette. */
+.momentum {
+  margin: 28px 0 40px;
+  padding: 26px 0;
+  border-block: 1px solid var(--border);
+}
+.momentum-heading,
+.momentum-summary,
+.momentum-quest {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.momentum-heading h2 {
+  margin: 0;
+}
+.momentum-toggle,
+.pace-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  cursor: pointer;
+}
+.momentum-toggle input,
+.pace-options input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent);
+}
+.momentum-summary {
+  margin-block: 24px;
+}
+.momentum-level {
+  display: flex;
+  gap: 14px;
+  flex: 1;
+}
+.momentum-level > div {
+  width: min(100%, 290px);
+}
+.momentum-level strong {
+  font-size: 19px;
+}
+.level-emblem {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.momentum p {
+  margin: 6px 0 12px;
+  max-width: 72ch;
+}
+.momentum-week {
+  flex: 1;
+  max-width: 440px;
+}
+.momentum progress {
+  display: block;
+  width: 100%;
+  height: 6px;
+  border: 0;
+  background: var(--hover);
+  border-radius: 3px;
+  overflow: hidden;
+  accent-color: var(--accent);
+}
+.momentum progress::-webkit-progress-bar {
+  background: var(--hover);
+}
+.momentum progress::-webkit-progress-value {
+  background: var(--accent);
+}
+.momentum progress::-moz-progress-bar {
+  background: var(--accent);
+}
+.pace-options {
+  border: 0;
+  padding: 0;
+  margin: 24px 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+.pace-options legend {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.momentum-quest {
+  padding: 24px 0;
+  margin-top: 20px;
+  border-top: 1px solid var(--border);
+  align-items: center;
+}
+.momentum-quest h3 {
+  margin: 0 0 10px;
+}
+.momentum-quest > div {
+  flex: 1;
+  min-width: 0;
+}
+.momentum-quest .primary {
+  max-width: 40%;
+  white-space: normal;
+  text-align: left;
+  flex-shrink: 0;
+}
+.momentum-quest .primary svg {
+  flex-shrink: 0;
+}
+.quest-select {
+  display: grid;
+  gap: 8px;
+  max-width: 480px;
+  color: var(--muted);
+}
+.quest-select select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+}
+.momentum-milestones {
+  padding-block: 20px;
+  border-top: 1px solid var(--border);
+}
+.momentum-milestones h3 {
+  margin: 0;
+}
+.momentum-milestones ul {
+  padding: 0;
+  margin: 16px 0 0;
+  list-style: none;
+}
+.momentum-milestones li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.momentum-milestones li > svg {
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.momentum-milestones li > div {
+  flex: 1;
+  min-width: 0;
+}
+.momentum-milestones li a {
+  font-weight: 600;
+}
+.momentum-milestones li p {
+  color: var(--muted);
+  margin: 3px 0 0;
+}
+.momentum-milestones li > span {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.momentum-rules {
+  margin: 4px 0 20px;
+}
+.momentum-rules summary {
+  cursor: pointer;
+  padding: 12px 0;
+}
+.momentum-rules p {
+  color: var(--muted);
+}
+.completion-reward {
+  display: flex;
+  gap: 12px;
+  margin: 14px 0;
+  padding: 16px;
+  border: 1px solid var(--success);
+  border-radius: var(--radius);
+}
+.completion-reward > svg {
+  color: var(--success);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.completion-reward strong {
+  color: var(--success);
+}
+.completion-reward p {
+  color: var(--muted);
+  margin: 6px 0 10px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .completion-reward {
+    animation: reward-arrive 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes reward-arrive {
+    from {
+      transform: translateY(5px);
+      opacity: 0.65;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+@media (max-width: 850px) {
+  .momentum-heading,
+  .momentum-summary,
+  .momentum-quest {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .momentum-level,
+  .momentum-week {
+    width: 100%;
+  }
+  .momentum-quest .primary {
+    max-width: 100%;
+  }
+}
+@media (max-width: 450px) {
+  .momentum-milestones li {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .momentum-milestones li > div {
+    flex-basis: calc(100% - 30px);
+  }
+  .momentum-milestones li > span {
+    padding-left: 30px;
+  }
 }

@@ -1,16 +1,18 @@
-# Project Mastery
+# ZeroShot
 
 Free, open-source AI learning for Python programmers. Follow connected paths, investigate interactive experiments, or start with a retrieval project and learn the concepts as you build.
 
-The current curriculum contains 200 lessons, 4 interactive experiments, and a retrieval project with a Python integration checkpoint. The [200-lesson expansion](docs/curriculum-200.md) adds 119 distinct activities across statistics, classical ML, neural networks, reinforcement learning, data processing, evaluation, and serving systems. Each lesson includes worked examples, hints, a reference implementation, and runnable checks. Two existing lessons begin with deliberately flawed code to investigate and repair. The [2,000-problem curriculum plan](docs/curriculum.md) separates the expansion target from published content.
+The current curriculum contains 450 lessons, including 205 beginner lessons, 4 interactive experiments, and a retrieval project with a Python integration checkpoint. The [450-question expansion](docs/curriculum-450.md) adds 250 distinct activities, including 195 substantive beginner lessons. Start with the beginner route or filter the library by difficulty. Each lesson includes worked examples, hints, a reference implementation, and runnable checks. Two existing lessons begin with deliberately flawed code to investigate and repair. The [2,000-problem curriculum plan](docs/curriculum.md) separates the expansion target from published content.
+
+Optional learning momentum adds practice XP, skill milestones, chosen learning quests, and flexible weekly goals. Quiet mode hides the game layer. The [research and implementation plan](docs/research/gamification-evidence.md) explains the decisions; the [TrenTorch review](docs/research/trentorch-review-2026-10-31.md) records the reference study. Existing progress and Project Mastery backups remain compatible with ZeroShot.
 
 The [retrieval project](docs/retrieval-project.md) compares keyword, BM25, vector,
 and hybrid search. Inspect individual term scores, assemble evidence under a word
 budget, and export the dataset, settings, results, and findings together.
 
-![Connected learning home in black and light grey](docs/images/learning-home.jpg)
+![Connected learning home in black and light grey](docs/images/zeroshot-home.jpg)
 
-The screenshot records the connected-learning home. Coding lessons start with incomplete code or a clearly labelled debugging investigation. The current interface keeps the black/grey base and uses semantic colors for feedback and Python syntax.
+The screenshot records the ZeroShot learning home with optional personal momentum. Coding lessons start with incomplete code or a clearly labelled debugging investigation. The current interface keeps the black/grey base and uses semantic colors for feedback and Python syntax.
 
 ![Semantic feedback and Python syntax colors](docs/images/semantic-workspace.jpg)
 
@@ -61,4 +63,4 @@ The [design record](DESIGN.md) describes the implemented palette, layout, contro
 - `scripts`: validation, runtime preparation, and local development servers.
 - `tests`: schema, evaluator, browser, and isolation checks.
 
-Original software and Python additions: Apache-2.0. Original educational prose: CC BY-SA 4.0. Third-party material retains its applicable terms: the D2L filter adaptation preserves its [MIT-0 notice](content/problems/d09-image-cross-correlation/THIRD_PARTY_NOTICE.md), and 37 Pyre-Code adaptations retain full MIT notices in each package and browser reference. See LICENSE, content/LICENSE, [batch provenance](content/batch-03-provenance.json), [pilot provenance](content/platform-pilot-provenance.json), [second platform batch provenance](content/platform-batch-02-provenance.json), [third platform batch provenance](content/platform-batch-03-provenance.json), and [the seven new adaptations](content/deep200-provenance.json).
+Original software and Python additions: Apache-2.0. Original educational prose: CC BY-SA 4.0. Third-party material retains its applicable terms: the D2L filter adaptation preserves its [MIT-0 notice](content/problems/d09-image-cross-correlation/THIRD_PARTY_NOTICE.md), and 37 Pyre-Code adaptations retain full MIT notices in each package and browser reference. See LICENSE, content/LICENSE, [batch provenance](content/batch-03-provenance.json), [pilot provenance](content/platform-pilot-provenance.json), [second platform batch provenance](content/platform-batch-02-provenance.json), [third platform batch provenance](content/platform-batch-03-provenance.json), and [the D41–D47 adaptations](content/deep200-provenance.json).

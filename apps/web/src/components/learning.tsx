@@ -9,7 +9,14 @@ import {
   Search,
   Upload,
 } from "lucide-react";
-import { catalog, domains, itemById, itemHref, paths } from "@/lib/curriculum";
+import {
+  beginnerTracks,
+  catalog,
+  domains,
+  itemById,
+  itemHref,
+  paths,
+} from "@/lib/curriculum";
 import {
   BackupSchema,
   completed,
@@ -19,6 +26,7 @@ import {
 } from "@/lib/progress";
 import { useProgress } from "@/lib/use-progress";
 import { Experiment } from "./experiment";
+import { MomentumPanel } from "./momentum";
 
 export function LearningHome() {
   const state = useProgress();
@@ -44,6 +52,12 @@ export function LearningHome() {
         A learning space for the ideas behind AI. Follow a sequence, work toward
         a useful system, or investigate a question that caught your attention.
       </p>
+      <p className="beginner-link">
+        New to working with data and models?{" "}
+        <Link className="text-link" href="/paths/start-here/">
+          Follow the beginner route <ArrowRight size={16} />
+        </Link>
+      </p>
       <section className="continue-learning">
         <div>
           <h2>{latest ? "Pick up the thread" : "Start with a useful idea"}</h2>
@@ -68,6 +82,7 @@ export function LearningHome() {
           <ArrowRight size={17} />
         </Link>
       </section>
+      <MomentumPanel compact />
       <div className="learning-entries">
         <section>
           <h2>Learn with a direction</h2>
@@ -210,11 +225,98 @@ export function PathList({ slug }: { slug?: string }) {
   );
 }
 
-export function LessonCatalog() {
+export function BeginnerEntry() {
+  const count = catalog.filter((item) => item.difficulty === "beginner").length;
+  return (
+    <section className="beginner-entry" aria-labelledby="beginner-entry-title">
+      <div>
+        <h2 id="beginner-entry-title">
+          Build your foundations through useful problems.
+        </h2>
+        <p>
+          Start with records, arrays, and small model operations. These lessons
+          assume basic Python and explain the data and ML ideas as you go.
+        </p>
+      </div>
+      <div className="beginner-actions">
+        <Link className="primary" href="/paths/start-here/">
+          Explore the beginner route <ArrowRight size={16} />
+        </Link>
+        <Link className="text-link" href="/beginner/">
+          Browse {count} beginner lessons <ArrowRight size={16} />
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+export function BeginnerGuide() {
+  const state = useProgress();
+  return (
+    <>
+      {beginnerTracks.map((track) => (
+        <section className="learning-path" key={track.title}>
+          <div className="section-heading">
+            <div>
+              <h2>{track.title}</h2>
+              <p>{track.description}</p>
+            </div>
+            <span className="muted">
+              {track.items.filter((id) => completed(state, id)).length}/
+              {track.items.length} checked
+            </span>
+          </div>
+          <ol className="path-list">
+            {track.items.map((id) => {
+              const item = itemById(id);
+              if (!item) return null;
+              return (
+                <li key={id} className="available">
+                  {completed(state, id) ? (
+                    <CheckCircle2
+                      className="step-icon success-text"
+                      size={18}
+                    />
+                  ) : (
+                    <Circle className="step-icon" size={18} />
+                  )}
+                  <div>
+                    <span className="muted small">
+                      {item.estimated_minutes} min · {item.difficulty}
+                    </span>
+                    <h3>
+                      <Link href={itemHref(id)}>{item.title}</Link>
+                    </h3>
+                    <p>{item.summary}</p>
+                    <Link className="text-link" href={itemHref(id)}>
+                      {completed(state, id)
+                        ? "Revisit the idea"
+                        : "Open lesson"}
+                      <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
+      ))}
+      <Link className="primary" href="/beginner/">
+        Explore all beginner lessons <ArrowRight size={16} />
+      </Link>
+    </>
+  );
+}
+
+export function LessonCatalog({
+  initialLevel = "all",
+}: {
+  initialLevel?: string;
+}) {
   const state = useProgress();
   const [query, setQuery] = useState("");
   const [domain, setDomain] = useState("all");
-  const [level, setLevel] = useState("all");
+  const [level, setLevel] = useState(initialLevel);
   const [status, setStatus] = useState("all");
   const [page, setPage] = useState(1);
   const filtered = catalog.filter(
@@ -416,7 +518,7 @@ export function ProgressView() {
     } catch {
       setNoticeTone("failure");
       setNotice(
-        "That file is not a supported Project Mastery backup, or exceeds 8 MB. Choose an exported JSON backup.",
+        "That file is not a supported ZeroShot backup, or exceeds 8 MB. Choose an exported JSON backup.",
       );
     }
   }
@@ -427,6 +529,9 @@ export function ProgressView() {
         {count} of {catalog.length} lessons checked. Revisit an idea whenever
         you need it; progress is a record of your work, not a ranking.
       </p>
+      <div id="momentum">
+        <MomentumPanel />
+      </div>
       <PathList />
       <section
         className="project-progress"
@@ -445,17 +550,19 @@ export function ProgressView() {
       <section className="backup-section">
         <h2>Keep a copy of your work</h2>
         <p>
-          Export lesson progress and code drafts to a file you control. Import
-          merges progress and fills missing drafts; existing code on this device
-          stays in place. Project notes and reports have their own export in the
-          project.
+          Export lesson progress, practice rewards, preferences, and code drafts
+          to a file you control. Import merges progress and fills missing
+          drafts; existing code on this device stays in place. Existing
+          preferences are preserved; a new device restores your saved choices.
+          Older Project Mastery backups still work. Project notes and reports
+          have their own export in the project.
         </p>
         <div className="button-row">
           <button
             className="secondary"
             onClick={() => {
               try {
-                downloadJson("project-mastery-backup.json", exportBackup());
+                downloadJson("zeroshot-backup.json", exportBackup());
                 setNoticeTone("success");
                 setNotice(
                   "Backup prepared with your lesson progress and code drafts.",

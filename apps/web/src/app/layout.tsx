@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 export const metadata: Metadata = {
-  title: "Project Mastery | Learn AI by building",
+  title: "ZeroShot | Learn AI by building",
   description:
     "Free, open-source AI practice. Implement, experiment, and understand, one connected skill at a time.",
 };

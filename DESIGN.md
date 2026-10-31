@@ -1,5 +1,5 @@
 ---
-name: Project Mastery
+name: ZeroShot
 description: A clear practice workbench for reading, coding, and interpreting feedback.
 colors:
   bg: "#0a0a0a"
@@ -89,7 +89,7 @@ components:
     padding: "25px"
 ---
 
-# Design System: Project Mastery
+# Design System: ZeroShot
 
 ## Overview
 
@@ -227,3 +227,7 @@ Run controls sit directly above diagnostic results. Individual test rows are exp
 - **Don't** replace the flat workbench with shadow-heavy floating cards.
 - **Don't** encode success or failure through color alone.
 - **Don't** apply dense toolbar typography to long instructional paragraphs.
+
+## Learning momentum
+
+Home and progress remain Operate/Read surfaces. Personal XP and practice levels use the existing black/grey palette; green signals earned milestones and first full-suite completion. Goals are optional and use native radio controls. A named select chooses a learning focus. Milestones are readable rows with explicit criteria and earned/incomplete labels, not decorative trophy walls. Quiet mode hides the game layer while keeping progress. Completion feedback stays inline and respects reduced motion.
