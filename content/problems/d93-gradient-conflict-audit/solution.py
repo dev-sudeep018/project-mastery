@@ -67,6 +67,14 @@ def _prob(x,ndim=2):
 
 
 def gradient_conflicts(gradients):
-    g=_m(gradients); norms=np.linalg.norm(g,axis=1); u=np.zeros_like(g); nonzero=norms>0
-    u[nonzero]=g[nonzero]/norms[nonzero,None]; cosine=np.clip(u@u.T,-1,1)
-    return dict(cosine=cosine,conflict=cosine<0)
+    g = _m(gradients)
+    scale = np.max(np.abs(g), axis=1)
+    nonzero = scale > 0
+    u = np.zeros_like(g)
+    scaled = g[nonzero] / scale[nonzero, None]
+    u[nonzero] = scaled / np.linalg.norm(scaled, axis=1, keepdims=True)
+    cosine = np.clip(u @ u.T, -1, 1)
+    # Dot-product reduction differs between native BLAS and WebAssembly.
+    # A documented zero band avoids assigning a direction to roundoff.
+    cosine[np.abs(cosine) <= 1e-12] = 0.0
+    return dict(cosine=cosine, conflict=cosine < 0)

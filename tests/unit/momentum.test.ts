@@ -230,16 +230,17 @@ describe("portable momentum", () => {
       },
     };
     const state = checked(["m01", "m02", "m03", "m04"]);
-    const merged = mergeMomentum(current, incoming, state, now);
+    const merged = mergeMomentum(current, incoming, state);
     expect(merged).toEqual({
       ...current,
       firstCompletions: {
         "m01:v1": "2026-10-20",
         "m02:v1": "2026-10-28",
         "m03:v1": "2026-10-29",
+        "m04:v1": "2026-11-01",
       },
     });
-    expect(mergeMomentum(merged, incoming, state, now)).toEqual(merged);
+    expect(mergeMomentum(merged, incoming, state)).toEqual(merged);
     expect(summarizeMomentum(state, merged, now).xp).toBe(40);
     expect(summarizeMomentum(state, merged, now).thisWeek).toBe(2);
     expect(current.firstCompletions["m01:v1"]).toBe("2026-10-30");
@@ -247,12 +248,7 @@ describe("portable momentum", () => {
 
   it("does not award current-week credit when an old backup contains only completions", () => {
     const state = checked(["m01"], now.getTime());
-    const merged = mergeMomentum(
-      defaultMomentum(),
-      defaultMomentum(),
-      state,
-      now,
-    );
+    const merged = mergeMomentum(defaultMomentum(), defaultMomentum(), state);
     expect(merged.firstCompletions).toEqual({});
     expect(summarizeMomentum(state, merged, now)).toMatchObject({
       xp: 10,

@@ -33,12 +33,17 @@ export function completed(state: LearningState, id: string) {
   return !!(item && state[keyFor(id, item.version)]?.completed);
 }
 export function readProgress(): LearningState {
+  let state: LearningState = {};
   try {
     const parsed = stateSchema.safeParse(
       JSON.parse(localStorage.getItem(LEARNING_KEY) ?? "{}"),
     );
-    const state = parsed.success ? parsed.data : {};
-    for (const item of catalog) {
+    if (parsed.success) state = parsed.data;
+  } catch {
+    // Completion markers remain useful if the aggregate cannot be decoded.
+  }
+  for (const item of catalog) {
+    try {
       const key = keyFor(item.id, item.version);
       if (
         localStorage.getItem(completionKey(item.id, item.version)) ===
@@ -48,11 +53,11 @@ export function readProgress(): LearningState {
           ...(state[key] ?? { updatedAt: 0, attempts: 0 }),
           completed: true,
         };
+    } catch {
+      // Preserve other readable records when a storage entry is unavailable.
     }
-    return state;
-  } catch {
-    return {};
   }
+  return state;
 }
 export function recordVisit(id: string, version: number, result?: boolean) {
   if (!catalog.some((item) => item.id === id && item.version === version))
@@ -88,12 +93,17 @@ export function recordVisit(id: string, version: number, result?: boolean) {
   return firstPass;
 }
 export function readMomentum(): Momentum {
+  let momentum = defaultMomentum();
   try {
     const parsed = MomentumSchema.safeParse(
       JSON.parse(localStorage.getItem(MOMENTUM_KEY) ?? "null"),
     );
-    const momentum = parsed.success ? parsed.data : defaultMomentum();
-    for (const item of catalog) {
+    if (parsed.success) momentum = parsed.data;
+  } catch {
+    // A malformed aggregate must not hide independent completion journals.
+  }
+  for (const item of catalog) {
+    try {
       const key = keyFor(item.id, item.version);
       const date = localStorage.getItem(
         firstCompletionKey(item.id, item.version),
@@ -108,11 +118,11 @@ export function readMomentum(): Momentum {
         const old = momentum.firstCompletions[key];
         momentum.firstCompletions[key] = old && old < date ? old : date;
       }
+    } catch {
+      // Keep the aggregate and any readable journal entries if storage fails.
     }
-    return momentum;
-  } catch {
-    return defaultMomentum();
   }
+  return momentum;
 }
 export function saveMomentumPreferences(
   preferences: Pick<Momentum, "enabled" | "weeklyTarget" | "track">,

@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "checked_on": "2026-10-31",
+  "checked_on": "2026-11-01",
   "previous_lessons": 200,
   "added_lessons": 250,
   "published_lessons": 450,
   "beginner_lessons": 205,
   "added_beginner_lessons": 195,
   "project_checkpoints": 1,
-  "public_cases": 4760,
-  "added_public_cases": 2516,
+  "public_cases": 4762,
+  "added_public_cases": 2518,
   "items": [
     {
       "id": "d100",
@@ -238,7 +238,7 @@
     {
       "id": "d115",
       "title": "Locate a Landmark from All Heatmap Mass",
-      "objective": "Return each heatmap’s total mass and mass-weighted center in zero-based row-column coordinates.",
+      "objective": "Return each heatmap\u2019s total mass and mass-weighted center in zero-based row-column coordinates.",
       "folder": "d115-heatmap-center-of-mass",
       "domain": "deep-learning",
       "difficulty": "beginner",
@@ -357,7 +357,7 @@
     },
     {
       "id": "d123",
-      "title": "Control a Linear Layer’s Maximum Gain",
+      "title": "Control a Linear Layer\u2019s Maximum Gain",
       "objective": "Scale a nonzero weight matrix so its largest singular value equals a requested positive bound.",
       "folder": "d123-spectral-weight-normalization",
       "domain": "deep-learning",
@@ -448,7 +448,7 @@
     {
       "id": "d129",
       "title": "Limit Outlier Influence with Huber Loss",
-      "objective": "Return each residual’s Huber loss and derivative, plus the mean loss and the gradient of that mean.",
+      "objective": "Return each residual\u2019s Huber loss and derivative, plus the mean loss and the gradient of that mean.",
       "folder": "d129-huber-residual-gradient",
       "domain": "deep-learning",
       "difficulty": "beginner",
@@ -492,7 +492,7 @@
     },
     {
       "id": "d82",
-      "title": "Trace a Stack’s Receptive Field",
+      "title": "Trace a Stack\u2019s Receptive Field",
       "objective": "Trace theoretical receptive-field span and input-space jump after every layer.",
       "folder": "d82-receptive-field-trace",
       "domain": "deep-learning",
@@ -658,12 +658,12 @@
     {
       "id": "d93",
       "title": "Detect Conflicting Task Gradients",
-      "objective": "Return cosine similarities and a boolean matrix identifying strictly negative cosine similarity.",
+      "objective": "Return cosine similarities and a boolean matrix identifying negative direction agreement, treating absolute cosine values at most 1e-12 as numerical zero.",
       "folder": "d93-gradient-conflict-audit",
       "domain": "deep-learning",
       "difficulty": "beginner",
       "prerequisites": [],
-      "public_cases": 10,
+      "public_cases": 12,
       "status": "validated",
       "attribution": [
         "Original ZeroShot lesson, implementation and test fixtures.",
@@ -703,7 +703,7 @@
     {
       "id": "d96",
       "title": "Reduce Learning Rate on a Validation Plateau",
-      "objective": "Return the learning rate to use after each epoch’s validation, including repeated reductions down to a floor.",
+      "objective": "Return the learning rate to use after each epoch\u2019s validation, including repeated reductions down to a floor.",
       "folder": "d96-plateau-learning-rate-trace",
       "domain": "deep-learning",
       "difficulty": "beginner",

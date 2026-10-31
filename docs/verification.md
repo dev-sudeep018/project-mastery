@@ -1,5 +1,11 @@
 # Verification record
 
+## Runtime portability and backup recovery — 1 November 2026
+
+The first full 450-lesson browser run passed 475 of 476 checks in each browser; D93 failed in all three because its native-generated expected boolean treated near-zero floating-point noise as a gradient conflict. D93 now specifies a 1e-12 numerical zero band and preserves tiny nonzero directions during normalization. Two new public cases bring the catalog to 4,762 cases. A new `pnpm test:wasm` quality gate runs all published references against the same pinned WebAssembly runtime and generated evaluators before browser checks. The full browser suite remains required.
+
+Backup merging now preserves valid source calendar dates even when a destination timezone is still on the previous day. Those dates receive no premature local-week credit. Per-item completion and date journals also recover work after malformed aggregate storage. Targeted regressions cover cross-timezone export/import/export/import and malformed aggregate JSON.
+
 ## ZeroShot: 450 lessons and personal learning momentum — 31 October 2026
 
 The current catalog contains 450 validated lessons (205 beginner) plus one retrieval project checkpoint, with 4,760 public cases. The expansion adds 250 distinct objectives, including 195 substantive beginner lessons. The three full paths contain 159 mathematics/ML, 129 deep-learning, and 162 engineering lessons. See the [inventory](../content/curriculum-450-inventory.json) and [curriculum record](curriculum-450.md).

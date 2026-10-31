@@ -24,9 +24,74 @@ beforeEach(() => {
   });
   vi.stubGlobal("window", new EventTarget());
 });
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => {
+  vi.unstubAllGlobals();
+  vi.useRealTimers();
+});
 
 describe("progress and reward persistence", () => {
+  it("recovers completion markers after malformed progress JSON without crediting a legacy pass again", () => {
+    localStorage.setItem(LEARNING_KEY, "broken");
+    localStorage.setItem("mastery:progress:m02:v1", "complete");
+    localStorage.setItem("mastery:progress:e01:v1", "complete");
+    localStorage.setItem("mastery:progress:m03:v1", "invalid");
+    expect(readProgress()).toEqual({
+      "m02:v1": { completed: true, updatedAt: 0, attempts: 0 },
+      "e01:v1": { completed: true, updatedAt: 0, attempts: 0 },
+    });
+    expect(recordVisit("m02", 1, true)).toBe(false);
+    expect(readMomentum().firstCompletions).toEqual({});
+    expect(summarizeMomentum(readProgress(), readMomentum())).toMatchObject({
+      xp: 20,
+      thisWeek: 0,
+    });
+    expect(readProgress()["e01:v1"].completed).toBe(true);
+  });
+
+  it("recovers completion journals when aggregate JSON is malformed", () => {
+    recordVisit("m02", 1, true);
+    recordVisit("e01", 1, true);
+    const dates = readMomentum().firstCompletions;
+    localStorage.setItem(MOMENTUM_KEY, "broken");
+    localStorage.setItem("zeroshot:first-completion:m03:v1", "2026-02-30");
+    expect(readMomentum().firstCompletions).toEqual(dates);
+    expect(summarizeMomentum(readProgress(), readMomentum())).toMatchObject({
+      xp: 20,
+      thisWeek: 2,
+    });
+  });
+
+  it("preserves a valid source date across timezone backup transfers until it becomes locally eligible", () => {
+    const previousTimezone = process.env.TZ;
+    vi.useFakeTimers();
+    try {
+      vi.setSystemTime(new Date("2026-11-01T19:00:00Z"));
+      process.env.TZ = "Asia/Kolkata";
+      recordVisit("m02", 1, true);
+      const backup = exportBackup();
+      process.env.TZ = "America/New_York";
+      localStorage.clear();
+      importBackup(backup);
+      expect(readMomentum().firstCompletions["m02:v1"]).toBe("2026-11-02");
+      expect(summarizeMomentum(readProgress(), readMomentum())).toMatchObject({
+        xp: 10,
+        thisWeek: 0,
+      });
+      const roundTrip = exportBackup();
+      localStorage.clear();
+      importBackup(roundTrip);
+      expect(readMomentum().firstCompletions["m02:v1"]).toBe("2026-11-02");
+      vi.setSystemTime(new Date("2026-11-02T17:00:00Z"));
+      expect(summarizeMomentum(readProgress(), readMomentum())).toMatchObject({
+        xp: 10,
+        thisWeek: 1,
+      });
+    } finally {
+      if (previousTimezone === undefined) delete process.env.TZ;
+      else process.env.TZ = previousTimezone;
+    }
+  });
+
   it("recovers both dated completions when a second tab overwrites the aggregate snapshot", () => {
     recordVisit("m02", 1, true);
     const staleProgress = localStorage.getItem(LEARNING_KEY)!;

@@ -112,6 +112,21 @@ class Deep450Oracles(unittest.TestCase):
         np.testing.assert_allclose(conflict['cosine'],[[1,0,-1],[0,0,0],[-1,0,1]])
         np.testing.assert_array_equal(conflict['conflict'],[[False,False,True],[False,False,False],[True,False,False]])
 
+    def test_conflict_zero_band_and_extreme_scale_are_portable(self):
+        audit = fn(93, 'gradient_conflicts')
+        mixed = audit([[1,1], [1,-1], [-2,-1]])
+        self.assertEqual(mixed['cosine'][0,1], 0)
+        self.assertFalse(mixed['conflict'][0,1])
+        near = audit([[1,0], [-1e-13,1], [-1e-8,1]])
+        self.assertFalse(near['conflict'][0,1])
+        self.assertTrue(near['conflict'][0,2])
+        original = np.array([[1.,0], [-1.,0], [0,1.]])
+        baseline = audit(original)
+        for scales in ([1e-200, 1e-150, 1e-100], [1e6, 1e-100, 1]):
+            actual = audit(original * np.array(scales)[:,None])
+            np.testing.assert_allclose(actual['cosine'], baseline['cosine'])
+            np.testing.assert_array_equal(actual['conflict'], baseline['conflict'])
+
     def test_ratios_and_stopping_ignore_unprocessed_epochs(self):
         ratios=fn(94,'update_ratios')([[3,4],[0,0]],[[.3,.4],[0,.2]],.1)
         np.testing.assert_allclose(ratios['ratio'],[.1,2])

@@ -1,6 +1,6 @@
 # The 450-question curriculum
 
-This expansion adds 250 distinct runnable lessons to the previous 200, including 195 new beginner lessons. The published catalog contains 450 lessons (205 beginner) and one retrieval project checkpoint, with 4,760 public cases (2,516 new). The three full paths contain 159 / 129 / 162 mathematics/ML, deep-learning, and engineering lessons respectively.
+This expansion adds 250 distinct runnable lessons to the previous 200, including 195 new beginner lessons. The published catalog contains 450 lessons (205 beginner) and one retrieval project checkpoint, with 4,762 public cases (2,518 new). The three full paths contain 159 / 129 / 162 mathematics/ML, deep-learning, and engineering lessons respectively.
 
 Beginner means approachable work with real arrays, records, measurements, model inputs, and training decisions. The exercises assume basic Python. They do not count print exercises, renamed framework ports, or number-swapped variants as new objectives. Each addition has three concrete examples, progressive hints, an explanation, a scaffolded incomplete starter, an inspectable reference, and public checks.
 
@@ -138,7 +138,7 @@ The long-term target remains 2,000 learning activities. This milestone does not 
 | D90  | [Explain a Neuron through Feature Contributions](../content/problems/d90-affine-feature-contributions/lesson.json)            | beginner     |    10 | —             |
 | D91  | [Trace a Class Score Back to Input Features](../content/problems/d91-linear-input-saliency/lesson.json)                       | beginner     |    10 | D90           |
 | D92  | [Clip Individual Gradients before Averaging](../content/problems/d92-per-example-gradient-clipping/lesson.json)               | intermediate |    10 | —             |
-| D93  | [Detect Conflicting Task Gradients](../content/problems/d93-gradient-conflict-audit/lesson.json)                              | beginner     |    10 | —             |
+| D93  | [Detect Conflicting Task Gradients](../content/problems/d93-gradient-conflict-audit/lesson.json)                              | beginner     |    12 | —             |
 | D94  | [Compare Update Size with Parameter Scale](../content/problems/d94-relative-parameter-update-audit/lesson.json)               | beginner     |    10 | —             |
 | D95  | [Stop Training after Sustained Validation Stalls](../content/problems/d95-early-stopping-trace/lesson.json)                   | beginner     |    10 | —             |
 | D96  | [Reduce Learning Rate on a Validation Plateau](../content/problems/d96-plateau-learning-rate-trace/lesson.json)               | beginner     |    10 | —             |

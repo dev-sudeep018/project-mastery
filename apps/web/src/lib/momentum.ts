@@ -115,10 +115,10 @@ export function mergeMomentum(
   current: Momentum,
   incoming: Momentum,
   validProgress: LearningState,
-  now = new Date(),
 ): Momentum {
   const firstCompletions: Record<string, string> = {};
-  const today = localDay(now);
+  // A source device may already be on tomorrow's calendar date. Preserve its
+  // valid history here; the summary decides when it belongs to the local week.
   for (const item of allItems) {
     const key = keyFor(item.id, item.version);
     if (!validProgress[key]?.completed) continue;
@@ -126,12 +126,7 @@ export function mergeMomentum(
       current.firstCompletions[key],
       incoming.firstCompletions[key],
     ]
-      .filter(
-        (date) =>
-          date !== undefined &&
-          daySchema.safeParse(date).success &&
-          date <= today,
-      )
+      .filter((date) => date !== undefined && daySchema.safeParse(date).success)
       .sort();
     if (dates.length) firstCompletions[key] = dates[0];
   }

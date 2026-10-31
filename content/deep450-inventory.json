@@ -160,9 +160,9 @@
     "slug": "gradient-conflict-audit",
     "title": "Detect Conflicting Task Gradients",
     "difficulty": "beginner",
-    "objective": "Return cosine similarities and a boolean matrix identifying strictly negative cosine similarity.",
+    "objective": "Return cosine similarities and a boolean matrix identifying negative direction agreement, treating absolute cosine values at most 1e-12 as numerical zero.",
     "prerequisites": [],
-    "public_cases": 10,
+    "public_cases": 12,
     "source": "https://arxiv.org/abs/2001.06782",
     "authorship": "Original prose, code, and fixtures; source is conceptual reading only.",
     "status": "validated"
