@@ -1,5 +1,5 @@
 import catalogData from "../generated/catalog.json";
-import type { Problem } from "@mastery/problem-schema";
+import type { Problem } from "@zeroshot/problem-schema";
 
 export const allItems = catalogData as unknown as Problem[];
 export const catalog = allItems

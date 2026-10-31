@@ -26,6 +26,7 @@ import {
 } from "@/lib/progress";
 import { useProgress } from "@/lib/use-progress";
 import { Experiment } from "./experiment";
+import { MomentumPanel } from "./momentum";
 
 export function LearningHome() {
   const state = useProgress();
@@ -81,6 +82,7 @@ export function LearningHome() {
           <ArrowRight size={17} />
         </Link>
       </section>
+      <MomentumPanel compact />
       <div className="learning-entries">
         <section>
           <h2>Learn with a direction</h2>
@@ -516,7 +518,7 @@ export function ProgressView() {
     } catch {
       setNoticeTone("failure");
       setNotice(
-        "That file is not a supported Project Mastery backup, or exceeds 8 MB. Choose an exported JSON backup.",
+        "That file is not a supported ZeroShot backup, or exceeds 8 MB. Choose an exported JSON backup.",
       );
     }
   }
@@ -527,6 +529,9 @@ export function ProgressView() {
         {count} of {catalog.length} lessons checked. Revisit an idea whenever
         you need it; progress is a record of your work, not a ranking.
       </p>
+      <div id="momentum">
+        <MomentumPanel />
+      </div>
       <PathList />
       <section
         className="project-progress"
@@ -545,17 +550,19 @@ export function ProgressView() {
       <section className="backup-section">
         <h2>Keep a copy of your work</h2>
         <p>
-          Export lesson progress and code drafts to a file you control. Import
-          merges progress and fills missing drafts; existing code on this device
-          stays in place. Project notes and reports have their own export in the
-          project.
+          Export lesson progress, practice rewards, preferences, and code drafts
+          to a file you control. Import merges progress and fills missing
+          drafts; existing code on this device stays in place. Existing
+          preferences are preserved; a new device restores your saved choices.
+          Older Project Mastery backups still work. Project notes and reports
+          have their own export in the project.
         </p>
         <div className="button-row">
           <button
             className="secondary"
             onClick={() => {
               try {
-                downloadJson("project-mastery-backup.json", exportBackup());
+                downloadJson("zeroshot-backup.json", exportBackup());
                 setNoticeTone("success");
                 setNotice(
                   "Backup prepared with your lesson progress and code drafts.",

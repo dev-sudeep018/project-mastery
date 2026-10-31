@@ -37,9 +37,7 @@ export function Shell({
             <Layers3 size={23} />
           </span>
           <span>
-            Project
-            <br />
-            <strong>Mastery</strong>
+            <strong>ZeroShot</strong>
           </span>
         </Link>
         <div className="sidebar-body">
@@ -111,7 +109,7 @@ export function Shell({
         </div>
         <a
           className="github-link"
-          href="https://github.com/dev-sudeep018/project-mastery"
+          href="https://github.com/dev-sudeep018/zeroshot"
           target="_blank"
           rel="noreferrer"
         >

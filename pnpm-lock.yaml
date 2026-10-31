@@ -53,16 +53,16 @@ importers:
 
   apps/runner:
     dependencies:
-      '@mastery/runner-protocol':
+      '@zeroshot/runner-protocol':
         specifier: workspace:*
         version: link:../../packages/runner-protocol
 
   apps/web:
     dependencies:
-      '@mastery/problem-schema':
+      '@zeroshot/problem-schema':
         specifier: workspace:*
         version: link:../../packages/problem-schema
-      '@mastery/runner-protocol':
+      '@zeroshot/runner-protocol':
         specifier: workspace:*
         version: link:../../packages/runner-protocol
       '@monaco-editor/react':
